@@ -67,11 +67,13 @@ public class StockManagerServiceImpl implements StockManagerService {
     //更新单个股票信息
     private void updateOrInsertStockInfo(String codeStr,String code,String name,String nowPrice,String openPrice,String yesClosePrice,String maxPrice,String minPrice,
                                          String tunRate,String vol,String peRate,String totalValue){
-        System.out.println("执行:"+name+"("+code+")");
+
         int count=stockMapper.queryStockCountByCode(code);
         if(count>0){//已经存在,执行更新就行了
+            System.out.println("执行更新:"+name+"("+code+")");
             stockMapper.updateOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate);
         }else{//不存在，需要新增
+            System.out.println("新增:"+name+"("+code+")");
             stockMapper.insertOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate);
         }
     }
