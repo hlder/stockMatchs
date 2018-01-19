@@ -1,0 +1,30 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.hld.stockserver.mapper.StockMapper">-->
+    <!--<resultMap id="queryStockResultMap" type="com.hld.stockserver.bean.StockBean">-->
+        <!--<id column="id" property="id" jdbcType="BIGINT" />-->
+        <!--<result column="stock_name" property="stock_name" jdbcType="VARCHAR" />-->
+        <!--<result column="stock_code" property="stock_code" jdbcType="VARCHAR" />-->
+        <!--<result column="stock_code_str" property="stock_code_str" jdbcType="VARCHAR" />-->
+        <!--<result column="now_price" property="now_price" jdbcType="VARCHAR" />-->
+        <!--<result column="last_price" property="last_price" jdbcType="VARCHAR" />-->
+        <!--<result column="stock_status" property="stock_status" jdbcType="INTEGER" />-->
+    <!--</resultMap>-->
+    <!--<sql id="baseSelect" >-->
+        <!--id,stock_name,stock_code,stock_code_str,now_price,last_price,stock_status-->
+    <!--</sql>-->
+    <!--<select id="queryStock" resultMap="queryStockResultMap" parameterType="java.lang.String">-->
+      <!--SELECT <include refid="baseSelect" /> from stock_info-->
+        <!--where stock_name like concat(concat('%',#{0}),'%') or stock_code like concat(concat('%',#{0}),'%')-->
+    <!--</select>-->
+    <!--<select id="queryStockCountByCode" resultType="java.lang.Integer" parameterType="java.lang.String">-->
+      <!--select count(1) FROM stock_info where stock_code=#{0};-->
+    <!--</select>-->
+
+    <!--<insert id="insertOneStock">-->
+        <!--insert into stock_info(stock_name,stock_code,stock_code_str,now_price,last_price,stock_status,open_price,max_price,min_price,total_value,tun_rate,vol,pe_rate) value (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7},#{8},#{9},#{10},#{11},#{12})-->
+    <!--</insert>-->
+    <!--<update id="updateOneStock">-->
+        <!--update stock_info set stock_name=#{0},stock_code=#{1},stock_code_str=#{2},now_price=#{3},last_price=#{4},stock_status=#{5},open_price=#{6},max_price=#{7},min_price=#{8},total_value=#{9},tun_rate=#{10},vol=#{11},pe_rate=#{12} where stock_code=#{1}-->
+    <!--</update>-->
+<!--</mapper>-->
