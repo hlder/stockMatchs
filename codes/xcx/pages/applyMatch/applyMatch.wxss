@@ -1,1 +1,74 @@
 /* pages/applyMatch/applyMatch.wxss */
+
+.btn-send-auth-code{
+  font-size: 20rpx;
+  text-align: right;
+  padding-top: 10rpx;
+  color: #f95220;
+}
+.form-infos{
+  padding-left: 10%;
+  padding-right: 10%;
+  
+}
+.submitButton{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 40rpx;
+  color: #fff0ed;
+  background-color: #f95220;
+  padding: 20rpx;
+  text-align: center;
+}
+.text-title{
+  text-align: center;
+  padding: 40rpx;
+  font-size: 30rpx;
+  color: #d35a3f;
+}
+.image-top{
+  width: 100%;
+}
+.placeholder-apply{
+  color: #c5c5c5;
+}
+
+.flex-wrp{
+  display:flex;
+  padding: 10rpx;
+}
+.view-line{
+  width: 100%;
+  height: 1rpx;
+  background-color: #c5c5c5;
+}
+.view-line-h{
+  width: 1rpx;
+  height: 100;
+  background-color: #c5c5c5;
+}
+.flex-item{
+  width: 100rpx;
+}
+.flex-item-text{
+  width: 100rpx;
+  text-align: right;
+  padding-left: 10rpx;
+  padding-right: 20rpx;
+  padding-top: 4rpx;
+  font-size: 30rpx;
+  color: #323232;
+}
+.flex-item-input{
+  width: 70%;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  
+}
+
+.flex-item-V{
+  margin: 0 auto;
+  width: 300rpx;
+  height: 200rpx;
+  
+}
