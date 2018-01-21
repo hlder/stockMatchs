@@ -39,7 +39,8 @@ public class LoginServiceImpl implements LoginService {
         //生成token
         String token=MD5Util.getMD5(userInfo.getId()+""+userInfo.getWx_union_id()+"");
         userInfo.setToken(token);
-        redisService.set(token,userInfo.getId()+"");//将token存在redis
+
+        redisService.set("loginTokenUserId"+userInfo.getId(),token+"");//将token存在redis
         return userInfo;
     }
 

@@ -10,7 +10,7 @@ Page({
     bannerWidth:200,
     bannerHeigth:150,
     bannerImgUrl:"",
-    isShowProfession:false,//是否要输入职业
+    isShowProfession:true,//是否要输入职业
     isShowClass:true,//是否要输入班级
     isShowStuNum:true//是否要输入学号
   },
