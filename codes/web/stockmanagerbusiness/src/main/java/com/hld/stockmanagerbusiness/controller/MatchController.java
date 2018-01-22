@@ -20,9 +20,6 @@ public class MatchController extends BaseController {
     @ResponseBody
     public Map<String,Object> applyMatch(String token,String userId,String matchId,String name,String phoneNum,String authNum,String profession,String stuClass,String stuNum,
     boolean isShowProfession,boolean isShowClass,boolean isShowStuNum){
-//    isShowProfession: that.data.isShowProfession,//是否要输入职业
-//    isShowClass: that.data.isShowClass,//是否要输入班级
-//    isShowStuNum: that.data.isShowStuNum//是否要输入学号
         Map<String,Object> checkMap=checkToken(token,userId+"");
         if(checkMap!=null){
             return checkMap;

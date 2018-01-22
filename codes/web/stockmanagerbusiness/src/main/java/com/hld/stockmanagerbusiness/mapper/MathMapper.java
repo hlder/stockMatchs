@@ -14,4 +14,5 @@ public interface MathMapper {
     @Select("select * from match_info where id=#{matchId}")
     MatchInfo queryApplyMatchInfo(@Param("matchId") String matchId);
 
+
 }

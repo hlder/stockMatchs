@@ -1,4 +1,8 @@
 // pages/applyMatch/applyMatch.js
+const httpUtil = require('../../utils/httpUtil.js')
+const appParams = require('../../utils/appParams.js')
+
+
 Page({
 
   /**
@@ -38,7 +42,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    httpUtil.doPost({
+      app: app,
+      url: appParams.applyMatch,
+      data: {
+       
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    });
   },
 
   /**
