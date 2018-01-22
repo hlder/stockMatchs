@@ -10,13 +10,17 @@ import java.util.Map;
 
 public class BaseController  {
     public static final int ERROR_CODE_SUCCESS=0;//成功
+    public static final int ERROR_CODE_OTHER=999999;//其他错误
     public static final int ERROR_CODE_LOGIN_FAILD=100001;//登录失败
-
+    public static final int ERROR_CODE_NO_DATA=100002;//没数据
+    public static final int ERROR_CODE_ALERADY=100003;//已经报名
+//    Already
     @Autowired
     RedisService redisService;
 
     public Map<String,Object> checkToken(String token,String userId){
-        String reqtoken=redisService.get(userId);
+        String reqtoken=redisService.get("loginTokenUserId"+userId);
+        System.out.println("请求用户:userId:"+userId+"    reqtoken:"+reqtoken);
         if(reqtoken==null){//token有问题,重新登录
             return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
         }

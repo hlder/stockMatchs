@@ -2,27 +2,33 @@
 
   <image wx:if='{{isShowTitleBanner}}' style='width:{{bannerWidth}}px;height:{{bannerHeigth}}px' class="image-top" src='{{bannerImgUrl}}'></image>
 
+<form bindsubmit="formSubmit">
+
   <view class="text-title">填写信息</view>
   <view class="form-infos">
     <view class="flex-wrp" style="flex-direction:row;">
       <view class="flex-item-text">姓名:</view>
       <view class="view-line-h" ></view>
-      <input class="flex-item-input" placeholder-class="placeholder-apply" placeholder="请输入您的名称"></input>
+      <input name="name" class="flex-item-input" placeholder-class="placeholder-apply" placeholder="请输入您的名称"></input>
     </view>
     <view class="view-line"></view>
     <!--===============================================================-->
     <view class="flex-wrp" style="flex-direction:row;margin-top: 20rpx;">
       <view class="flex-item-text">手机:</view>
       <view class="view-line-h"></view>
-      <input class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的手机号"></input>
+      <input bindinput="bindPhoneInput" name="phone" class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的手机号"></input>
     </view>
     <view class="view-line"></view>
     <!--===============================================================-->
     <view class="flex-wrp" style="flex-direction:row;margin-top: 20rpx;">
       <view class="flex-item-text">验证码:</view>
       <view class="view-line-h"></view>
-      <input class="flex-item-input" style="width: 50%;" placeholder-class="placeholder-apply" placeholder="输入验证码"></input>
-      <view class="btn-send-auth-code">发送验证码(55)</view>
+      <input name="authCode" class="flex-item-input" style="width: 50%;" placeholder-class="placeholder-apply" placeholder="输入验证码"></input>
+      <view bindtap='onSendSmsClick' class="btn-send-auth-code" style="color:{{isAuthCodeSend?'#b7b7b7':'#f95220'}}">发送验证码
+        <block wx:if="{{isAuthCodeSend}}">
+          ({{timerAuthCodeSend}})
+        </block>
+      </view>
     </view>
     <view class="view-line"></view>
     <!--===============================================================-->
@@ -30,21 +36,21 @@
     <view wx:if='{{isShowProfession}}' class="flex-wrp" style="flex-direction:row;margin-top: 20rpx;">
       <view class="flex-item-text">职业:</view>
       <view class="view-line-h"></view>
-      <input class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的手机号"></input>
+      <input name="profession" class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的职业"></input>
     </view>
     <view wx:if='{{isShowProfession}}' class="view-line"></view>
     <!--===============================================================-->
     <view wx:if='{{isShowClass}}' class="flex-wrp" style="flex-direction:row;margin-top: 20rpx;">
       <view class="flex-item-text">班级:</view>
       <view class="view-line-h"></view>
-      <input class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的手机号"></input>
+      <input name="class" class="flex-item-input" placeholder-class="placeholder-apply"placeholder="输入您的所在的班级"></input>
     </view>
     <view wx:if='{{isShowClass}}' class="view-line"></view>
     <!--===============================================================-->
     <view wx:if='{{isShowStuNum}}' class="flex-wrp" style="flex-direction:row;margin-top: 20rpx;">
       <view class="flex-item-text">学号:</view>
       <view class="view-line-h"></view>
-      <input class="flex-item-input" placeholder-class="placeholder-apply"placeholder="请输入您的手机号"></input>
+      <input name="number" class="flex-item-input" placeholder-class="placeholder-apply"placeholder="输入您的学号"></input>
     </view>
     <view wx:if='{{isShowStuNum}}' class="view-line"></view>
     <!--===============================================================-->
@@ -53,8 +59,8 @@
   </view>
 
   
-  <view class='submitButton'>立即报名</view>
+  <button class='submitButton' type="warn" size="default" formType="submit">立即报名</button>
 
-
+</form>
   
 </scroll-view>

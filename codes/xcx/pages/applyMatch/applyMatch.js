@@ -1,5 +1,10 @@
-// pages/applyMatch/applyMatch.js
+const appParams = require('../../utils/appParams.js')
+const httpUtil = require('../../utils/httpUtil.js')
+
+const app = getApp()
 var that;
+var inputPhoneNum;
+var matchId;
 Page({
 
   /**
@@ -10,33 +15,128 @@ Page({
     bannerWidth:200,
     bannerHeigth:150,
     bannerImgUrl:"",
-    isShowProfession:true,//是否要输入职业
-    isShowClass:true,//是否要输入班级
-    isShowStuNum:true//是否要输入学号
+    isAuthCodeSend:false,//是否已经发送了验证码
+    timerAuthCodeSend:60,//发送验证码的倒计时
+    isShowProfession:false,//是否要输入职业
+    isShowClass: false,//是否要输入班级
+    isShowStuNum: false//是否要输入学号
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    that=this;
-    this.chanageBanner(0.3,"http://pic.qiantucdn.com/58pic/17/93/62/87e58PICV9N_1024.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS40LnBuZw==/align/center");
-  
+    that = this;
+    matchId=options.matchId;
+    
+    httpUtil.doPost({
+      app:app,
+      url: appParams.queryApplyMatch,
+      data: {
+        matchCode: '1'
+      },
+      success: function (res) {
+        console.log(res.data)
+        var bl = parseFloat(res.data.data.apply_banner_height) / parseFloat(res.data.data.apply_banner_width);
+        var isShowProfession = false, isShowClass = false, isShowStuNum = false;
+
+        if (res.data.data.is_need_profession == 0) {
+          isShowProfession = true;
+        } else {
+          isShowProfession = false;
+        }
+        if (res.data.data.is_need_stu_class == 0) {
+          isShowClass = true;
+        } else {
+          isShowClass = false;
+        }
+        if (res.data.data.is_need_stu_num == 0) {
+          isShowStuNum = true;
+        } else {
+          isShowStuNum = false;
+        }
+
+        that.chanageBanner(parseFloat(bl), res.data.data.apply_banner, isShowProfession, isShowClass, isShowStuNum);
+
+      }
+    });
+    
   }, 
   /**
    * 改变banner的大小和图片
    */
-  chanageBanner: function (bl, imgUrl){
+
+  chanageBanner: function (bl, imgUrl, isShowProfession, isShowClass, isShowStuNum){
     try {
       var res = wx.getSystemInfoSync()
       this.setData({
         bannerWidth: res.windowWidth,
         bannerHeigth: res.windowWidth*bl,
         bannerImgUrl:imgUrl,
-        isShowTitleBanner: true
+        isShowTitleBanner: true,
+        isShowProfession: isShowProfession,
+        isShowClass: isShowClass,
+        isShowStuNum: isShowStuNum
       });
     } catch (e) {
     }
+  },
+  bindPhoneInput:function(e){//数据手机号监听
+    inputPhoneNum = e.detail.value;
+  },
+  onSendSmsClick:function(e){//点击发送验证码
+    console.log('输入的手机号：', inputPhoneNum)
+    if (typeof (inputPhoneNum) == "undefined") { 
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      })
+    }else{//执行发送验证码
+
+    }
+  },
+  formSubmit:function(e){
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    var temVal = e.detail.value;
+    httpUtil.doPost({
+      app: app,
+      url: appParams.applyMatch,
+      data: {
+        matchId: matchId,
+        name: temVal.name,
+        phoneNum: temVal.phone,
+        authNum: temVal.authCode,
+        profession: temVal.profession,
+        stuClass: temVal.class,
+        stuNum: temVal.number,
+        isShowProfession: that.data.isShowProfession,//是否要输入职业
+        isShowClass: that.data.isShowClass,//是否要输入班级
+        isShowStuNum: that.data.isShowStuNum//是否要输入学号
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code==0){//成功
+          wx.showToast({
+            title: '报名成功' ,
+            icon: 'none',
+            duration: 2000,
+            success:function(){//弹框结束了
+
+            }
+          })
+        }else{
+          // res.data.msg;
+          wx.showToast({
+            title: '' + res.data.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+
+      }
+    });
+    
   },
 
   /**

@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var that;
+var matchId;
 Page({
   data: {
     userInfo: {},
@@ -11,11 +12,12 @@ Page({
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../applyMatch/applyMatch?matchId=' + matchId
     })
   },
-  onLoad: function () {
-    that=this;
+  onLoad: function (options) {
+    that = this;
+    matchId = options.matchId;
     this.getUserInfo();
   },
   getUserInfo:function(){
@@ -50,7 +52,8 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' // 默认值
       },
       success: function (res) {
-        console.log(res.data)
+        console.log("登录成功:",res.data)
+        app.globalData.tokenUser = res.data.data;
       }
     })
 

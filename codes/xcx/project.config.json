@@ -26,19 +26,25 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "报名",
 					"pathName": "pages/applyMatch/applyMatch",
-					"query": ""
+					"query": "matchId=1"
 				},
 				{
 					"id": -1,
 					"name": "主页",
 					"pathName": "pages/home/home",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "启动页",
+					"pathName": "pages/index/index",
+					"query": "matchId=1"
 				}
 			]
 		}

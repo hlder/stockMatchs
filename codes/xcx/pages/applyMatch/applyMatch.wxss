@@ -4,12 +4,10 @@
   font-size: 20rpx;
   text-align: right;
   padding-top: 10rpx;
-  color: #f95220;
 }
 .form-infos{
   padding-left: 10%;
   padding-right: 10%;
-  
 }
 .submitButton{
   margin-left: 10%;
@@ -17,8 +15,8 @@
   margin-top: 40rpx;
   color: #fff0ed;
   background-color: #f95220;
-  padding: 20rpx;
   text-align: center;
+  
 }
 .text-title{
   text-align: center;

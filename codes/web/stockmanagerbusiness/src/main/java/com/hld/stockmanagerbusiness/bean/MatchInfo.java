@@ -9,6 +9,60 @@ public class MatchInfo {
     private long max_people_num;
     private long now_people_num;
     private long creator_user_id;
+    private int is_need_profession;
+    private int is_need_stu_class;
+    private int is_need_stu_num;
+    private String apply_banner;
+    private int apply_banner_width;
+    private int apply_banner_height;
+
+    public String getApply_banner() {
+        return apply_banner;
+    }
+
+    public void setApply_banner(String apply_banner) {
+        this.apply_banner = apply_banner;
+    }
+
+    public int getApply_banner_width() {
+        return apply_banner_width;
+    }
+
+    public void setApply_banner_width(int apply_banner_width) {
+        this.apply_banner_width = apply_banner_width;
+    }
+
+    public int getApply_banner_height() {
+        return apply_banner_height;
+    }
+
+    public void setApply_banner_height(int apply_banner_height) {
+        this.apply_banner_height = apply_banner_height;
+    }
+
+    public int getIs_need_profession() {
+        return is_need_profession;
+    }
+
+    public void setIs_need_profession(int is_need_profession) {
+        this.is_need_profession = is_need_profession;
+    }
+
+    public int getIs_need_stu_class() {
+        return is_need_stu_class;
+    }
+
+    public void setIs_need_stu_class(int is_need_stu_class) {
+        this.is_need_stu_class = is_need_stu_class;
+    }
+
+    public int getIs_need_stu_num() {
+        return is_need_stu_num;
+    }
+
+    public void setIs_need_stu_num(int is_need_stu_num) {
+        this.is_need_stu_num = is_need_stu_num;
+    }
 
     public long getId() {
         return id;

@@ -34,6 +34,20 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    tokenUser:null
   }
 })
+
+//tokenUser
+// city
+// def_account_id
+// head_url
+// id
+// nicke_name
+// privilege
+// province
+// sex
+// token
+// wx_open_id
+// wx_union_id

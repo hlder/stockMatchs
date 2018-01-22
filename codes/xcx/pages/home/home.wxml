@@ -1,7 +1,83 @@
-<swiper indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
+<scroll-view style="background-color: #ffffff;">
+
+<swiper indicator-dots="true"  autoplay="true" interval="5000" duration="200">  
   <block wx:for="{{banners}}">  
   <swiper-item class="banner">  
-    <image src="{{item}}" class="slide-image" width="355px" height="150px"/>  
+    <image src="{{item.imgUrl}}" class="slide-image" width="355px" height="150px"/>  
   </swiper-item>  
   </block>  
 </swiper>
+<view class="flex-wrp" style='margin-top: 25rpx;'>
+  <block wx:for="{{buttons}}">
+    <view class="flex-btn-item">
+      <image class='btn_img' src='{{item.imgUrl}}'></image>
+      <view class="btn_text">支付宝</view>
+    </view>
+  </block>
+</view>
+<view class="view_line" style="margin-top: 10px;"></view>
+<view class="title_bg flex-wrp">
+  <image src='{{matchInfo.logo}}' style="width:100rpx;height:100rpx;margin-top: 20rpx;margin-left: 20rpx;"></image>
+  <view style="margin-top: 23rpx;margin-left: 20rpx;">
+    <view>上海大学比赛</view>
+    <view style="color: #9e9e9e;font-size: 30rpx;">张三</view>
+  </view>
+</view>
+
+<view class="view_line" style="margin-top: 10px;"></view>
+<view class="flex-wrp" style="margin-top: 10px;">
+  <view class="flex-text-item">
+    <view class="stock_num_lable">20000</view>
+    <view class="stock_num_text">总资产</view>
+  </view>
+  <view class="flex-text-item">
+    <view class="stock_num_lable">10</view>
+    <view class="stock_num_text">月交易(次)</view>
+  </view>
+  <view class="flex-text-item">
+    <view class="stock_num_lable">0.43%</view>
+    <view class="stock_num_text">成功率</view>
+  </view>
+</view>
+<view class="flex-wrp" style="margin-top: 10px;">
+  <view class="flex-text-item">
+    <view class="stock_num_lable">0.12%</view>
+    <view class="stock_num_text_min">2131</view>
+    <view class="stock_num_text">总收益</view>
+  </view>
+  <view class="flex-text-item">
+    <view class="stock_num_lable">10.08%</view>
+    <view class="stock_num_text_min">2800</view>
+    <view class="stock_num_text">本月收益</view>
+  </view>
+  <view class="flex-text-item">
+    <view class="stock_num_lable">18.08%</view>
+    <view class="stock_num_text_min">1808</view>
+    <view class="stock_num_text">本周收益</view>
+  </view>
+</view>
+<view class="bg_controll flex-wrp">
+  <view class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon1.png'></image>
+    <view class="controll_text">卖出</view>
+  </view>
+  <view class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon2.png'></image>
+    <view class="controll_text">买入</view>
+  </view>
+  <view class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon3.png'></image>
+    <view class="controll_text">撤单</view>
+  </view>
+  <view class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon4.png'></image>
+    <view class="controll_text">持仓</view>
+  </view>
+  <view class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon5.png'></image>
+    <view class="controll_text">查询</view>
+  </view>
+  
+</view>
+
+</scroll-view>
