@@ -1,0 +1,25 @@
+ssh root@47.100.180.170
+
+// ssh上传文件到服务器
+scp /Users/sald/Documents/svnworkspace/stockProject/web2/stockserver/target/stockserver.jar root@47.100.180.170:/root/projects/stockserver
+
+//启动
+nohup java -jar stockserver.jar >temp.txt &
+//查看进程id
+ps -ef | grep stockserver
+ps -ef | grep redis
+ps -ef | grep stockserver//检查项目1是否在运行
+ps -ef | grep redis//检查redis是否在运行
+
+
+//杀掉进程
+kill -9 id
+
+tomcat
+//查看tomcat的log
+tail -f catalina.out
+
+//查看端口号是否被占用
+netstat -pan|grep 8080
+
+
