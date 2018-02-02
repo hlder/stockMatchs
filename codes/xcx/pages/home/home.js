@@ -2,6 +2,8 @@
 const httpUtil = require('../../utils/httpUtil.js')
 const appParams = require('../../utils/appParams.js')
 
+const app = getApp()
+var that;
 
 Page({
 
@@ -9,47 +11,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banners: [
-      {
-        imgUrl:"http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg",
-        skip:"",
-        type:0
-      },
-      {
-        imgUrl: "http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg",
-        skip: "",
-        type:0
-      },
-      {
-        imgUrl: "http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg",
-        skip: "",
-        type:0
-      }
-    ],
-    buttons:[
-      {
-        imgUrl: "https://t.alipayobjects.com/images/rmsweb/T1Fb0iXnJiXXXXXXXX.png",
-        skip: "",
-        type: 0
-      }
-    ],
-    matchInfo:{
-      logo:"http://pic.qiantucdn.com/58pic/12/95/46/26858PICHmF.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS4zLnBuZw==/align/center"
-    }
+    banners: null,
+    buttons:null,
+    matchInfo:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    that=this;
     httpUtil.doPost({
       app: app,
-      url: appParams.applyMatch,
+      url: appParams.queryHomeInfo,
       data: {
-       
+        matchId:"1",
+        accountId:"1"
       },
       success: function (res) {
-        console.log(res.data)
+        console.log("返回:", res.data)
+        that.setData({
+          banners: JSON.parse(res.data.data.banners),
+          buttons: JSON.parse(res.data.data.buttons),
+          matchInfo: res.data.data
+        });
       }
     });
   },

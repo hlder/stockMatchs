@@ -14,6 +14,7 @@ public class BaseController  {
     public static final int ERROR_CODE_LOGIN_FAILD=100001;//登录失败
     public static final int ERROR_CODE_NO_DATA=100002;//没数据
     public static final int ERROR_CODE_ALERADY=100003;//已经报名
+    public static final int ERROR_CODE_PARAMS=100004;//参数错误
 //    Already
     @Autowired
     RedisService redisService;
@@ -21,12 +22,12 @@ public class BaseController  {
     public Map<String,Object> checkToken(String token,String userId){
         String reqtoken=redisService.get("loginTokenUserId"+userId);
         System.out.println("请求用户:userId:"+userId+"    reqtoken:"+reqtoken);
-        if(reqtoken==null){//token有问题,重新登录
-            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
-        }
-        if(!reqtoken.equals(token)){//token有问题,重新登录
-            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"你的账号已再其他地方登录！");
-        }
+//        if(reqtoken==null){//token有问题,重新登录
+//            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
+//        }
+//        if(!reqtoken.equals(token)){//token有问题,重新登录
+//            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"你的账号已再其他地方登录！");
+//        }
         return null;
     }
 

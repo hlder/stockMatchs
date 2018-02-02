@@ -15,6 +15,24 @@ public class MatchInfo {
     private String apply_banner;
     private int apply_banner_width;
     private int apply_banner_height;
+    private String init_total_assets;
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getInit_total_assets() {
+        return init_total_assets;
+    }
+
+    public void setInit_total_assets(String init_total_assets) {
+        this.init_total_assets = init_total_assets;
+    }
 
     public String getApply_banner() {
         return apply_banner;

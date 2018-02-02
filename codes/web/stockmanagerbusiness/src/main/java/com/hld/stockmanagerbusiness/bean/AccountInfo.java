@@ -10,6 +10,107 @@ public class AccountInfo {
     private String profession;
     private String stu_class;
     private String stu_num;
+    private String account_name;
+    private String total_assets;
+    private long deal_count;
+    private float total_income;
+    private float total_income_rate;
+
+    private long total_deal_success_num;
+    private long total_deal_error_num;
+
+    private float week_income;
+    private float week_income_rate;
+    private float month_income;
+    private float month_income_rate;
+
+    public long getDeal_count() {
+        return deal_count;
+    }
+
+    public void setDeal_count(long deal_count) {
+        this.deal_count = deal_count;
+    }
+
+    public float getTotal_income() {
+        return total_income;
+    }
+
+    public void setTotal_income(float total_income) {
+        this.total_income = total_income;
+    }
+
+    public float getTotal_income_rate() {
+        return total_income_rate;
+    }
+
+    public void setTotal_income_rate(float total_income_rate) {
+        this.total_income_rate = total_income_rate;
+    }
+
+    public long getTotal_deal_success_num() {
+        return total_deal_success_num;
+    }
+
+    public void setTotal_deal_success_num(long total_deal_success_num) {
+        this.total_deal_success_num = total_deal_success_num;
+    }
+
+    public long getTotal_deal_error_num() {
+        return total_deal_error_num;
+    }
+
+    public void setTotal_deal_error_num(long total_deal_error_num) {
+        this.total_deal_error_num = total_deal_error_num;
+    }
+
+    public float getWeek_income() {
+        return week_income;
+    }
+
+    public void setWeek_income(float week_income) {
+        this.week_income = week_income;
+    }
+
+    public float getWeek_income_rate() {
+        return week_income_rate;
+    }
+
+    public void setWeek_income_rate(float week_income_rate) {
+        this.week_income_rate = week_income_rate;
+    }
+
+    public float getMonth_income() {
+        return month_income;
+    }
+
+    public void setMonth_income(float month_income) {
+        this.month_income = month_income;
+    }
+
+    public float getMonth_income_rate() {
+        return month_income_rate;
+    }
+
+    public void setMonth_income_rate(float month_income_rate) {
+        this.month_income_rate = month_income_rate;
+    }
+
+    public String getTotal_assets() {
+        return total_assets;
+    }
+
+    public void setTotal_assets(String total_assets) {
+        this.total_assets = total_assets;
+    }
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
+    }
 
     public long getId() {
         return id;

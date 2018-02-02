@@ -36,7 +36,6 @@ public class MatchController extends BaseController {
         if(StringUtils.isEmpty(authNum)){//输入验证码
             return getErrorMap(ERROR_CODE_OTHER,"请输入验证码!");
         }
-
         if(isShowProfession&&StringUtils.isEmpty(profession)){//输入职业
             return getErrorMap(ERROR_CODE_OTHER,"请输入您的职业!");
         }
@@ -49,6 +48,8 @@ public class MatchController extends BaseController {
         int code=matchService.applyMatch(userId,matchId, name, phoneNum, authNum, profession, stuClass, stuNum);
         if(code==ERROR_CODE_ALERADY){
             return getErrorMap(ERROR_CODE_ALERADY,"您已经报名此比赛，不可以重复报名!");
+        }else if(code==ERROR_CODE_PARAMS){//参数错误
+            return getErrorMap(ERROR_CODE_ALERADY,"您输入的参数有误!");
         }
         return getNoDataMap(code);
     }
