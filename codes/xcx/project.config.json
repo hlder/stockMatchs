@@ -26,7 +26,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
@@ -45,6 +45,18 @@
 					"name": "启动页",
 					"pathName": "pages/index/index",
 					"query": "matchId=1"
+				},
+				{
+					"id": 3,
+					"name": "持仓",
+					"pathName": "pages/holder/holder",
+					"query": "accountId=1"
+				},
+				{
+					"id": 4,
+					"name": "股票信息",
+					"pathName": "pages/stockDetail/stockDetail",
+					"query": "stockCode=002471&stockCodeStr=sz002471&&stockName=中超股份"
 				}
 			]
 		}

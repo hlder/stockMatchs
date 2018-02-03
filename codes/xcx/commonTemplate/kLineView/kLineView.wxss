@@ -1,0 +1,9 @@
+/*k线图*/
+.kLine{
+    position:relative;
+}
+.kLine_touch{
+    position: absolute;
+    top:0px;
+    left: 0px;
+}

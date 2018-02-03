@@ -1,0 +1,84 @@
+<!--
+    length: 数据源个数
+    loadOver: 是否加载完毕
+    description: 描述(可为空)
+-->
+<template name="nodata">
+   <view wx:if="{{length <= 0 && loadOver}}" class="center">
+        <view catchtap="clickNodataImage" style="text-align:center;margin-top:200rpx;">
+            <image class="nodataImg center" src="/images/nodata.png"/>
+        </view>
+        <view class="font-base-3 fontSize16" style="padding:15px;">{{description == null ? '暂无数据' : description}}</view>
+    </view>
+</template>
+
+<!--
+    length: 数据源个数
+    hasMore: 是否有更多数据
+    description: 描述(可为空)
+-->
+<template name="loadFoot">
+    <view wx:if="{{length > 0}}" class="font-base-3 fontSize12" style="background-color:#eeeeee;padding:10px;">
+        <view wx:if="{{hasMore}}" style="display:flex;flex-direction:row;align-items: center; align-self: center; justify-content: center;">
+            <text class="fontSize12">正在加载...</text>
+        </view>
+        <view wx:else>
+            <text class="fontSize12">{{description == null ? '没有更多内容了' : description}}</text>
+        </view>
+    </view>
+</template>
+
+<!--
+    分享提示箭头
+-->
+<template name="shareBg">
+    <view bindtap="onCengClick" wx:if="{{isShowHint==0}}">
+        <view class="ceng" style="background:#000000;opacity:0.5;z-index:9999;"></view>
+        <view class="ceng" style="text-align:right;z-index:9999;">
+            <image src="/images/pk/pk_show_hint.png" mode="right" style="width:100%;height:100px;"></image>
+        </view>
+    </view>
+</template>
+
+
+<!--
+    正在开发中...
+-->
+<template name="isDeveloping">
+   <view class="center">
+        <view style="text-align:center;margin-top:200rpx;">
+            <image class="nodataImg center" src="/images/isDeveloping.png"/>
+        </view>
+        <view class="font-base-3 fontSize16" style="padding:15px;">{{description == null ? '正在努力开拓中...' : description}}</view>
+    </view>
+</template>
+
+
+<!--
+    搜索框view
+    placeholder:搜索框默认占位符
+    type:模块类型[同个页面多次引用时,需要此字段区分]
+事件:
+    toSearchAction:点击搜索视图进入对应界面
+-->
+<template name="searchView">
+    <view bindtap="toSearchAction" id="{{type}}" class="horizontal_layout_start frameLine" style="margin:10px;">
+        <image mode="aspectFit" style="width:15px;height:15px;margin:10px;" src="/images/search.png" />
+        <view class="font-base-3 fontSize13 center" style="text-align:left;">{{placeholder == null ? '' : placeholder}}</view>
+    </view>
+</template>
+
+
+<!--
+    搜索界面
+    inputName:input组件名称[string]
+    placeholder:占位符
+事件:
+    searchInput:实时获取搜索框内容
+-->
+<template name="searchPage">
+    <view class="horizontal_layout bottomLine" style="background-color:#ffffff;">
+        <input name="{{inputName}}" focus="true" bindinput="searchInput" placeholder="{{placeholder}}" class="font-base-1 fontSize14 searchInput input-base" style="width:70vw;"/>
+        <button form-type="submit" class="button-base searchButton" style="width:30vw;" >搜索</button>
+    </view>
+</template>

@@ -1,0 +1,96 @@
+<import src="/commonTemplate/kLineView/kLineView.wxml" />
+
+<view style="height:92vh;background-color:#ffffff;">
+    <view class="horizontal_layout_around bottomLine" style="padding:10px;">
+        <view style="width:35vw;">
+            <view class="{{stockData.currentChangeNum < 0 ? 'font-base-green' : 'font-base-red'}}" style="font-size:54rpx;padding-top:8px;">{{stockData.nowPrice}}</view>
+            <view class="horizontal_layout_around">
+                <view class="{{stockData.currentChangeNum < 0 ? 'font-base-green' : 'font-base-red'}} fontSize13" style="width:50vw;padding-top:8px;">{{stockData.currentChange}}</view>
+                <view class="{{stockData.currentChangeNum < 0 ? 'font-base-green' : 'font-base-red'}} fontSize13" style="width:50vw;padding-top:8px;">{{stockData.changeRate}}</view>
+            </view>
+        </view>
+        <view style="width:5vw;">
+        </view>
+        <view style="width:17vw;">
+            <view class="font-base-3 fontSize13" style="text-align:left;">今开</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.todayStartPri}}</view>
+            <view class="font-base-3 fontSize13" style="text-align:left;padding-top:5px;">昨收</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.yestodEndPri}}</view>
+        </view>
+        <view style="width:26vw;">
+            <view class="font-base-3 fontSize13" style="text-align:left;">成交量</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.traNumber}}手</view>
+            <view class="font-base-3 fontSize13" style="text-align:left;padding-top:5px;">成交额</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.traAmount}}</view>
+        </view>
+        <view style="width:17vw;">
+            <view class="font-base-3 fontSize13" style="text-align:left;">最高</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.todayMax}}</view>
+            <view class="font-base-3 fontSize13" style="text-align:left;padding-top:5px;">最低</view>
+            <view class="font-base-1 fontSize13" style="text-align:left;padding-top:5px;">{{stockData.todayMin}}</view>
+        </view>
+    </view>
+    <view wx:if="{{isShow}}">
+        <view class="horizontal_layout_around bottomLine" style="padding:10px;">
+            <view class="center" style="width:20vw;">
+                <view class="font-base-3 fontSize12">最  高</view>
+                <view class="font-base-3 fontSize12" style="padding:10px;">内  盘</view>
+                <view class="font-base-3 fontSize12">市盈率</view>
+            </view>
+            <view class="center" style="width:20vw;">
+                <view class="font-base-1 fontSize12">0</view>
+                <view class="font-base-1 fontSize12" style="padding:10px;">0</view>
+                <view class="font-base-1 fontSize12">0</view>
+            </view>
+            <view class="center" style="width:20vw;">
+                <view class="font-base-3 fontSize12">最  低</view>
+                <view class="font-base-3 fontSize12" style="padding:10px;">外  盘</view>
+                <view class="font-base-3 fontSize12">振  幅</view>
+            </view>
+            <view class="center" style="width:20vw;">
+                <view class="font-base-1 fontSize12">0</view>
+                <view class="font-base-1 fontSize12" style="padding:10px;">0</view>
+                <view class="font-base-1 fontSize12">0</view>
+            </view>
+            <view class="center" style="width:20vw;">
+                <view class="font-base-3 fontSize12">成交额</view>
+                <view class="font-base-3 fontSize12" style="padding:10px;">市  值</view>
+                <view class="font-base-3 fontSize12">流通市值</view>
+            </view>
+            <view class="center" style="width:20vw;">
+                <view class="font-base-1 fontSize12">0</view>
+                <view class="font-base-1 fontSize12" style="padding:10px;">0</view>
+                <view class="font-base-1 fontSize12">0</view>
+            </view>
+        </view>
+    </view>
+    
+    <view class="kLine" style="background-color:#ffffff;">
+       
+            <view class="horizontal_layout bottomLine">
+                <view class="incomeItem-title {{currentTab==0 ? 'incomeItemOn' : ''}}" style="width:25vw;padding-top:10px;padding-bottom:10px;"
+                    data-current="0" bindtap="switchNav">分时</view>
+                <view class="incomeItem-title {{currentTab==1 ? 'incomeItemOn' : ''}}" style="width:25vw;padding-top:10px;padding-bottom:10px;"
+                    data-current="1" bindtap="switchNav">日K</view>
+                <view class="incomeItem-title {{currentTab==2 ? 'incomeItemOn' : ''}}" style="width:25vw;padding-top:10px;padding-bottom:10px;"
+                    data-current="2" bindtap="switchNav">周K</view>
+                <view class="incomeItem-title {{currentTab==3 ? 'incomeItemOn' : ''}}" style="width:25vw;padding-top:10px;padding-bottom:10px;"
+                    data-current="3" bindtap="switchNav">月K</view>
+            </view>
+            <view wx:if="{{isTouch}}" class="kLine_touch" style="background-color:#ffffff;">
+                    <canvas style="width:{{klineViewWidth}}px;height:{{timeViewHeight}}px" canvas-id="timeLine2" />
+            </view>
+    </view>
+    
+    <!--k线图-->
+    <template is="kLineView" data="{{currentTab:currentTab,imageWidth:imageWidth,imageHeight:imageHeight,imageKLineWidth:imageKLineWidth,sell5:sell5,buy5:buy5,isIndex:isIndex}}" />
+    
+
+</view>
+<!--<block wx:if="{{notShareStock}}">-->
+    <view class="horizontal_layout topLine" style="height:8vh;background-color:#ffffff;" wx:if="{{!isIndex}}">
+        <view bindtap="buyAction" class="bottom_btn fontSize15" style="border-right: 1px solid #dcdcdc;color:#ff5722;">买入</view>
+        <view bindtap="sellAction" class="bottom_btn fontSize15" style="color:#424242;">卖出</view>
+    </view>
+    <view class="horizontal_layout" style="height:8vh;background-color:#ffffff;" wx:else></view>
+<!--</block>-->

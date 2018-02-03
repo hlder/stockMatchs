@@ -12,6 +12,7 @@ public class AccountInfo {
     private String stu_num;
     private String account_name;
     private String total_assets;
+    private String can_use_assets;
     private long deal_count;
     private float total_income;
     private float total_income_rate;
@@ -23,6 +24,14 @@ public class AccountInfo {
     private float week_income_rate;
     private float month_income;
     private float month_income_rate;
+
+    public String getCan_use_assets() {
+        return can_use_assets;
+    }
+
+    public void setCan_use_assets(String can_use_assets) {
+        this.can_use_assets = can_use_assets;
+    }
 
     public long getDeal_count() {
         return deal_count;

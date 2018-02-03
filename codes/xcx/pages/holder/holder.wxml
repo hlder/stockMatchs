@@ -1,0 +1,64 @@
+<!--pages/holder/holder.wxml-->
+<scroll-view style='background-color: white;height: 100%;'>
+  <view class="title_layout">
+    <view class='title_layout_left'>
+      <view class="text_gray text_title_size" style='padding: 10rpx;'>总盈亏</view>
+      <view class="text_lager_size" style="padding-left:10rpx;padding-right:10rpx;color:#{{hodlerBaseInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{hodlerBaseInfo.allIncome>=0?'+':''}}{{hodlerBaseInfo.allIncome}}</view>
+      <view class="text_middle_size" style="padding: 10rpx;color:#{{hodlerBaseInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{hodlerBaseInfo.allIncomeRate}}</view>
+    </view>
+    <view class='title_layout_center'>
+      <view class="text_gray text_title_size" style='padding-top:10rpx;padding-left:10rpx;padding-right:10rpx'>当日盈亏</view>
+      <view class="text_wite text_title_size" style='padding-left:10rpx;padding-right:10rpx'>{{hodlerBaseInfo.todayIncome}}</view>
+      <view class="text_gray text_title_size" style='padding-top:10rpx;padding-left:10rpx;padding-right:10rpx'>可用资金</view>
+      <view class="text_wite text_title_size" style='padding-left:10rpx;padding-right:10rpx'>{{hodlerBaseInfo.canUseFund}}</view>
+    </view>
+
+    <view class='title_layout_right'>
+      <view class="text_gray text_title_size" style='padding-top:10rpx;padding-left:10rpx;padding-right:10rpx'>持有市值</view>
+      <view class="text_wite text_title_size" style='padding-left:10rpx;padding-right:10rpx'>{{hodlerBaseInfo.holderFund}}</view>
+      <view class="text_gray text_title_size" style='padding-top:10rpx;padding-left:10rpx;padding-right:10rpx'>总资产</view>
+      <view class="text_wite text_title_size" style='padding-left:10rpx;padding-right:10rpx'>{{hodlerBaseInfo.allFund}}</view>
+    </view>
+  </view>
+
+  <view class="list_layout_title">
+    <view class="tab_item">市值</view>
+    <view class="tab_item">现价/成本</view>
+    <view class="tab_item">可用/持有</view>
+    <view class="tab_item">参考盈亏</view>
+  </view>
+  <view wx:for="{{listData}}">
+    <view class="list_layout_content" bindtap="onItemClick" id="{{index}}">
+      <view class="tab_item">
+        <view class="item_text_center">{{item.stockName}}</view>
+        <view class="item_text_center">{{item.stockFund}}</view>
+      </view>
+      <view class="tab_item">
+        <view class="item_text_center" style='font-weight: bold;'>{{item.nowPrice}}</view>
+        <view class="item_text_center">{{item.costPrice}}</view>
+      </view>
+      <view class="tab_item">
+        <view class="item_text_center" style='font-weight: bold;'>{{item.canUseNum}}</view>
+        <view class="item_text_center">{{item.holderNum}}</view>
+      </view>
+      <view class="tab_item">
+        <view class="item_text_center" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income}}</view>
+        <view class="item_text_center" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income>=0?'+':''}}{{item.incomeRate}}</view>
+      </view>
+    </view>
+    <view class="list_layout_bottom" wx:if="{{selectIndex==index}}">
+      <view class="tab_item_bottom">
+        <image class="img_item_bottom" src="../../images/controll_btn_icon1.png"></image>
+        <view>买入</view>
+      </view>
+      <view class="tab_item_bottom">
+        <image class="img_item_bottom" src="../../images/controll_btn_icon2.png"></image>
+        <view>卖出</view>
+      </view>
+      <view class="tab_item_bottom" bindtap='toStockDetail' id="{{index}}">
+        <image class="img_item_bottom" src="../../images/controll_btn_icon6.png"></image>
+        <view>行情</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

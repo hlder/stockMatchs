@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/applyMatch/applyMatch",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/holder/holder",
+    "pages/stockDetail/stockDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

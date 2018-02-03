@@ -1,0 +1,67 @@
+<template name="kLineView">
+    <view class="bottomLine">
+        <!-- 分时 -->
+        <view hidden="{{currentTab != 0}}">
+            <view class="horizontal_layout" style="padding:5px;">
+                <view class="kLine" style="{{isIndex?'width:100vw;':'width:60vw;'}}">
+                    <canvas class="kLine" style="width:{{imageWidth}}px; height:{{imageHeight}}px;" canvas-id="timeLine" ></canvas>
+                    <canvas class="kLine_touch" style="width:{{imageWidth}}px; height:{{imageHeight}}px;" canvas-id="timeLine1" bindtouchend="chartTouchend" bindtouchmove="chartTouchmove" bindtouchstart="chartTouchstart"  
+                    bindtouchcancel="bindtouchcancel" disable-scroll="true"></canvas>
+                </view>
+                 <view class="center" style="width:40vw;" wx:if="{{!isIndex}}">
+                    <view style="font-size:24rpx;color:#ffffff;padding-left:5px;padding-right:5px;">
+                        <view wx:for="{{sell5}}">
+                            <view class="horizontal_layout">
+                                <text class="font-base-1 buysell5_item fontSize12" style="text-align: left;">{{sell5[4-index].name}}</text>
+                                <text class="{{sell5[4-index].dValue < 0 ? 'font-base-green' : 'font-base-red'}} buysell5_item fontSize12" style="text-align: center;">{{sell5[4-index].price.length == 0 ? '--' : sell5[4-index].price}}</text>
+                                <text class="font-base-1 buysell5_item fontSize12" style="text-align: right;">{{sell5[4-index].entrustCount.length == 0 ? '--' : sell5[4-index].entrustCount}}</text>
+                            </view>
+                        </view>
+                        <view class="horizontalLine" style="margin-top:5px;margin-bottom:5px;"></view>
+                        <view wx:for="{{buy5}}">
+                            <view class="horizontal_layout">
+                                <text class="font-base-1 buysell5_item fontSize12" style="text-align: left;">{{item.name}}</text>
+                                <text class="{{item.dValue < 0 ? 'font-base-green' : 'font-base-red'}} buysell5_item fontSize12" style="text-align: center;">{{item.price.length == 0 ? '--' : item.price}}</text>
+                                <text class="font-base-1 buysell5_item fontSize12" style="text-align: right;">{{item.entrustCount == 0 ? '--' : item.entrustCount}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view> 
+            </view>
+        </view>
+        <!-- 日K -->
+        <view hidden="{{currentTab != 1}}">
+            <view class="horizontal_layout" style="padding:5px;">
+                <view class="kLine">
+                    <canvas class="kLine" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="kchart" ></canvas>
+                    <canvas class="kLine_touch" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="kchart1"  bindtouchend="chartTouchend" bindtouchmove="chartTouchmove"  bindtouchcancel="bindtouchcancel" bindtouchstart="chartTouchstart"></canvas>
+                </view>
+            </view>
+        </view>
+        <!-- 周K -->
+        <view hidden="{{currentTab != 2}}">
+            <view class="horizontal_layout" style="padding:5px;">
+                <view class="kLine">
+                    <canvas class="kLine" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="weeklychart" ></canvas>
+                    <canvas class="kLine_touch" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="weeklychart1"  bindtouchend="chartTouchend" bindtouchmove="chartTouchmove"  bindtouchcancel="bindtouchcancel" bindtouchstart="chartTouchstart"></canvas>
+                </view>
+            </view>
+        </view>
+        <!-- 月K -->
+        <view hidden="{{currentTab != 3}}">
+            <view class="horizontal_layout" style="padding:5px;">
+                <view class="kLine">
+                    <canvas class="kLine" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="monthlychart" ></canvas>
+                    <canvas class="kLine_touch" style="width:{{imageKLineWidth}}px; height:{{imageHeight}}px;" canvas-id="monthlychart1"  bindtouchend="chartTouchend" bindtouchmove="chartTouchmove"  bindtouchcancel="bindtouchcancel" bindtouchstart="chartTouchstart"></canvas>
+                </view>
+            </view>
+        </view>
+        <!--金融界logo-->
+        <!-- <view class="horizontal_layout_end fontSize12 center" style="padding:0px 10px 5px 10px;">
+            <view class="font-base-2">数据来源:</view>
+            <image style="width:12px;height:12px;padding-left:2px;padding-right:2px;" mode="aspectFit" src="/images/jrjlogo.png" />
+            <view class="font-base-1">金融界</view>
+        </view> -->
+    </view>
+</template>
+

@@ -1,0 +1,406 @@
+<!--
+    团队赛团队成员小排行榜
+-->
+<template name="memberRankListTem">
+    <view class="horizontal_layout center bottomLine" style="background-color:{{item.itemBgcolor}};padding:10rpx 0;">
+        <view class="center center-hor" style="width:10vw;">
+            <view class="font-base-1 fontSize12 fontWeight">{{item.rank}}</view>
+        </view>
+        <view class="center center-hor" style="width:15vw">
+            <image mode="aspectFill" class="item-image" style="margin-bottom:5px;margin-top:5px;" src="{{item.logo}}"></image>
+        </view>
+        <view class="center" style="width:45vw;">
+            <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:10px;">张三</view>
+            <view class="font-base-3 fontSize12 ellipsis" style="text-align:left;padding-top:5px;padding-bottom:10px;">{{item.schoolName}}</view>
+        </view>
+        <view class="center" style="width:30vw;padding-right:10px;">
+            <view class="{{item.totalIncomeRate < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:10px;">18.8%</view>
+            <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:10px;">收益</view>
+          
+        </view>
+    </view>
+</template>
+
+<!--
+    战队列表-排行榜
+事件:
+-->
+<template name="teamListTem">
+    <view class="horizontal_layout center bottomLine" style="background-color:{{item.itemBgcolor}};position:relative;padding:5px 0;">
+        <block wx:if="{{item.frameType==1}}">
+            <image src="{{item.frameStyle.gifUrl}}" style="position:absolute;width:100%;height:100%;top:0;left:0;" mode="scaleToFill"></image>
+            <view class="fontSize14 fontWeight" style="position:absolute;width:100%;bottom:6rpx;left:0;text-align:center;color:{{item.frameStyle.textColor}};">{{item.frameStyle.text}}</view>
+        </block>
+        <view class="center center-hor" style="width:10vw;">
+            <block wx:if="{{item.rank <= 3}}">
+                <image mode="aspectFit" class="item-rank-image" src="/images/schoolRanking/{{item.rank}}.png"></image>
+            </block>
+            <block wx:else>
+                <view class="{{item.rank <= 3 ? 'font-base-orange' : 'font-base-1'}} fontSize12 fontWeight">{{item.rank}}</view>
+            </block>
+        </view>
+        <view class="center center-hor" style="width:15vw;position:relative;">
+            <image mode="aspectFill" class="item-image" src="{{item.logo}}"></image>
+        </view>
+        <view class="center" style="width:45vw;">
+            <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:10px;padding-bottom:5px;padding-left:5px;">{{item.teamName}}</view>
+            <view class="horizontal_layout_start">
+                <view class="font-base-2 fontSize12" style="text-align:left;padding:5px;width:20vw;">{{item.teamNumber}}人</view>
+            </view>
+        </view>
+        <view class="center" style="width:30vw;padding-right:10px;">
+            <view class="{{item.sixthIncomeRate < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:14px;">{{item.sixthIncomeRateStr}}</view>
+             <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:14px;">第六名收益率</view>
+        </view>
+    </view>
+</template>
+
+<!--
+    学校列表
+事件:
+    joinTeamAction: 进入团队说明
+-->
+<template name="schoolListTem">
+    <view class="horizontal_layout center bottomLine" style="background-color:{{item.itemBgcolor}};">
+        <view class="center center-hor" style="width:10vw;">
+            <block wx:if="{{item.rank <= 3}}">
+                <image mode="aspectFit" class="item-rank-image" src="/images/schoolRanking/{{item.rank}}.png"></image>
+            </block>
+            <block wx:else>
+                <view class="{{item.rank <= 3 ? 'font-base-orange' : 'font-base-1'}} fontSize12 fontWeight">{{item.rank}}</view>
+            </block>
+        </view>
+        <view wx:if="{{item.isJoinTeam == 0}}" class="center center-hor" style="width:15vw;position:relative;">
+            <image mode="aspectFit" class="item-image" src="{{item.logo}}"></image>
+            <image mode="aspectFit" class="item-image-icon" src="/images/icon_teamIcon.png" />
+        </view>
+        <view wx:else class="center center-hor" style="width:15vw;position:relative;">
+            <image mode="aspectFit" class="item-image" src="{{item.logo}}"></image>
+        </view>
+        <view class="center" style="width:45vw;">
+            <block wx:if="{{item.isJoinTeam == 0}}">
+                <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:10px;padding-bottom:5px;padding-left:5px;">{{item.schoolName}}</view>
+                <view class="horizontal_layout_start">
+                    <view catchtap="joinTeamAction" class="font-base-orange fontSize12" style="text-align:left;padding:5px;width:20vw;">已加入团队赛</view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:10px;padding-bottom:10px;padding-left:5px;">{{item.schoolName}}</view>
+            </block>
+        </view>
+        <view class="center" style="width:30vw;padding-right:10px;">
+            <view class="{{item.incomeAmount < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:14px;">{{item.incomeAmountStr}}</view>
+            <block wx:if="{{item.isJoinTeam == 0}}">
+                <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:14px;">团队收益</view>
+            </block>
+            <block wx:else>
+                <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:14px;">第六名收益</view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!--
+    类收益列表
+    item: 列表item
+    index: 下标
+    type: 视图类型[string](income:高手榜;help:领投榜;loss:韭菜榜)
+-->
+<template name="incomeListTem">
+    <view class="horizontal_layout center bottomLine" style="background-color:{{item.itemBgcolor}};">
+        <view class="center center-hor" style="width:10vw;">
+            <block wx:if="{{item.rank <= 3}}">
+                <block wx:if="{{type == 'income' || type == 'help'}}">
+                    <image mode="aspectFit" class="item-rank-image" src="/images/incomeRanking/{{index+1}}.png"></image>
+                </block>
+                <block wx:else>
+                    <view class="{{item.rank <= 3 ? 'font-base-orange' : 'font-base-1'}} fontSize12 fontWeight">{{item.rank}}</view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class="{{item.rank <= 3 ? 'font-base-orange' : 'font-base-1'}} fontSize12 fontWeight">{{item.rank}}</view>
+            </block>
+        </view>
+        <view class="center center-hor" style="width:15vw">
+            <image mode="aspectFill" class="item-image" style="margin-bottom:5px;margin-top:5px;" src="{{item.img}}"></image>
+        </view>
+        <view class="center" style="width:45vw;">
+            <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:10px;">{{item.name}}</view>
+            <view class="font-base-3 fontSize12 ellipsis" style="text-align:left;padding-top:5px;padding-bottom:10px;">{{item.schoolName}}</view>
+        </view>
+        <view class="center" style="width:30vw;padding-right:10px;">
+            <block wx:if="{{type == 'income'}}">
+                <view class="{{item.totalIncomeRate < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:10px;">{{item.totalIncomeRateStr}}</view>
+                <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:10px;">收益</view>
+            </block>
+            <block wx:if="{{type == 'help'}}">
+                <view class="{{item.helpIncome < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:10px;">{{item.helpIncomeStr}}</view>
+                <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:10px;">帮好友收益</view>
+            </block>
+            <block wx:if="{{type == 'loss'}}">
+                <view class="{{item.totalIncome < 0 ? 'font-base-green' : 'font-base-red'}} font-base-1 fontSize12" style="text-align:right;padding-top:10px;">{{item.totalIncomeStr}}</view>
+                <view class="font-base-3 fontSize12" style="text-align:right;padding-top:5px;padding-bottom:10px;">总盈亏</view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!--
+    牛人榜
+    item: 列表item
+    index: 下标
+-->
+<template name="celebrityListRank">
+    <view class="horizontal_layout center bottomLine" style="background-color:{{item.userId == userId?'#eeeeee;':'white;'}}">
+        <view class="center center-hor" style="width:10vw;">
+            <block wx:if="{{item.rank <= 3}}">
+                    <image mode="aspectFit" class="item-rank-image" src="/images/incomeRanking/{{index+1}}.png"></image>
+            </block>
+            <block wx:else>
+                <view class="font-base-1 fontSize12 fontWeight">{{item.rank}}</view>
+            </block>
+        </view>
+        <view class="center center-hor" style="width:15vw">
+            <image mode="aspectFill" class="item-image" style="margin-bottom:10rpx;margin-top:10rpx;" src="{{item.avatarUrl}}"></image>
+        </view>
+        <view class="center" style="width:45vw;">
+            <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;padding-top:20rpx;">{{item.name}}</view>
+            <view class="font-base-3 fontSize12 ellipsis" style="text-align:left;padding-top:10rpx;padding-bottom:20rpx;">{{item.school==null?'--':item.school}}</view>
+        </view>
+        <view class="center" style="width:30vw;padding-right:20rpx;">
+              <view class="font-base-1 fontSize14 fontWeight" style="text-align:right;">{{item.earning}}</view>
+        </view>
+    </view>
+</template>
+
+<!--
+    评论列表(上半部 -- 头像信息等)
+    item
+    index
+    type:该模块类型[与点击头像事件相关](comment首页常规评论;hot热门评论;new最新评论)
+    comtype:该模块类型[与点击评论图标事件相关](hot热门评论;new最新评论)
+事件:
+    toUserInfoAction: 点击头像进入个人收益(根据id获取数组对应元素)
+    zanAction: 点击赞图标对该条评论点赞
+    commentAction: 点击评论图标进入回复
+-->
+<template name="commentListTem">
+    <view class="horizontal_layout" style="padding:10px 10px 5px 10px;background-color:#ffffff;">
+        <view id="{{index}}" catchtap="toUserInfoAction" data-totype="{{type}}" class="center center-hor" style="width:15vw">
+            <image mode="aspectFill" class="item-image" src="{{item.img}}"/>
+        </view>
+        <view style="width:85vw;padding-left:5px;">
+            <view class="horizontal_layout_start" style="padding-top:5px;">
+                <view class="center namestyle">
+                    <view class="font-base-1 fontSize14 ellipsis" style="text-align:left;">{{item.name}}</view>
+                </view>
+                <view class="center namestyle">
+                    <view class="fontSize14 ellipsis" style="text-align:right;padding-left:5px;color:{{item.schoolNameColor}}">{{item.schoolName}}</view>
+                </view>
+            </view>
+            <view class="horizontal_layout_start">
+                <view class="center" style="width:30vw;padding-top:8px;">
+                    <view class="font-base-3 fontSize14" style="text-align:left;">{{item.publishTime}}</view>
+                </view>
+                <view class="horizontal_layout_end" style="width:50vw;" >
+                    <view id="{{index}}" catchtap="zanAction" class="horizontal_layout" style="padding-top:5px;">
+                        <block wx:if="{{item.isILove == 0}}">
+                            <image mode="aspectFit" class="center icon-15" src="/images/comment/zan_pre.png" />
+                        </block>
+                        <block wx:else>
+                            <image mode="aspectFit" class="center icon-15" src="/images/comment/zan.png" />
+                        </block>
+                        <view class="font-base-1 fontSize14 center" style="text-align:right;padding-left:3px;padding-right:3px;padding-top:2px;">{{item.loveNum}}</view>
+                    </view>
+                    <view id="{{index}}" data-comtype="{{comtype}}" catchtap="commentAction" class="horizontal_layout" style="padding-top:5px;padding-left:5px;">
+                        <image mode="aspectFit" class="center icon-15" src="/images/comment/comment.png" />
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view> 
+</template>
+
+<!--
+    评论列表(下半部 -- 评论内容)
+    item
+    index
+-->
+<template name="commentContentTem">
+    <view class="horizontal_layout bottomLine" style="padding-left:10px;padding-right:10px;padding-bottom:10px;background-color:#ffffff;">
+        <view class="center center-hor" style="width:15vw">
+            <view></view>
+        </view>
+        <view style="width:85vw;">
+            <text class="font-base-1 fontSize14 textContent" style="text-align:left;">{{item.comment}}</text>
+            <!--如果有评论回复-->
+            <block wx:if="{{item.isReply}}">
+                <view class="font-base-1 fontSize14" style="margin-top:5px;padding:10px;background-color:#eeeeee;text-align:left;">
+                    <text catchtap="nameAction" class="font-base-orange">{{item.replyComment.name}}：</text>
+                    <text class="font-base-1 textContent">{{item.replyComment.comment}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!--
+    股票信息
+-->
+<template name="stockItemTem">
+    <view class="horizontal_layout bottomLine" style="background-color:#ffffff;padding:10px;">
+        <view style="width:33vw;">
+            <view class="font-base-1 fontSize14" style="text-align:left;padding:5px 0;">{{item.name}}</view>
+            <view class="font-base-3 fontSize12" style="text-align:left;padding-top:2px;">{{item.code}}</view>
+        </view>
+        <view class="center" style="width:33vw;">
+            <view class="font-base-3 fontSize14" style="padding:5px 0;">{{item.nowPrice}}</view>
+        </view>
+        <view class="center" style="width:33vw;">
+            <view class="{{item.zdf < 0 ? 'font-base-green' : 'font-base-red'}} fontSize14" style="text-align:right;padding:5px 0;">{{item.zdfStr}}</view>
+        </view>
+    </view>
+</template>
+
+<!--
+    商品列表
+    item
+-->
+<template name="goodsOrder">
+    <view class="frameLine" style="margin:10px;background-color:#ffffff;position:relative;overflow:hidden;">
+        <view class="horizontal_layout center" style="padding:10px;">
+            <view class="center center-hor" style="width:15vw;">
+                <image mode="aspectFill" class="item-image" src="{{item.image}}"></image>
+            </view>
+            <view style="width:85vw;padding-left:10px;">
+                <view class="horizontal_layout center fontSize15">
+                    <view class="font-base-1" style="text-align:left;width:70%;">{{item.name}} </view>
+                    <block wx:if="{{item.shopType == 1}}">
+                        <block wx:if="{{item.type == 0}}">
+                            <view class="font-base-orange" style="text-align:right;width:30%;">等待发货</view>
+                        </block>
+                        <block wx:else>
+                            <view class="font-base-3" style="text-align:right;width:30%;">已发货</view>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.shopType == 2}}">
+                        <block wx:if="{{item.type == 0}}">
+                            <view class="font-base-orange" style="text-align:right;width:30%;">等待充值</view>
+                        </block>
+                        <block wx:else>
+                            <view class="font-base-3" style="text-align:right;width:30%;">已充值</view>
+                        </block>
+                    </block>
+                    <block wx:if="{{item.shopType == 3}}">
+                        <view class="font-base-orange" style="text-align:right;width:30%;">已完成</view> 
+                    </block>
+                </view>
+                <view class="horizontal_layout center" style="padding-top:10px;">
+                    <view class="font-base-3 fontSize15" style="text-align:left;width:70%;" wx:if="{{item.shopType!=3}}">
+                            <text class="font-base-red">{{item.orderCash>0?item.orderCash:''}}</text>
+                            <text class="font-base-3">{{item.orderCash>0?'元':''}}</text>
+                            <text class="font-base-3" wx:if="{{item.priceType==0}}">{{item.orderCash>0&&item.orderPrice>0?'+':''}}</text>
+                            <text class="font-base-3" wx:elif="{{item.priceType==1}}">{{item.orderCash>0&&item.orderPrice>0?'/':''}}</text>
+                            <text class="font-base-red">{{item.orderPrice>0?item.orderPrice:''}}</text>
+                            <text class="font-base-3">{{item.orderPrice>0?'航币':''}}</text>
+                    </view>
+                    <view class="font-base-3 fontSize15" style="text-align:left;width:70%;" wx:else>
+                            <text class="font-base-3">{{item.orderCash>0&&item.orderPrice>0?'(':''}}</text>
+                            <text class="font-base-red">{{item.orderCash>0?item.orderCash:''}}</text>
+                            <text class="font-base-3">{{item.orderCash>0?'元':''}}</text>
+                            <text class="font-base-3" wx:if="{{item.priceType==0}}">{{item.orderCash>0&&item.orderPrice>0?'+':''}}</text>
+                            <text class="font-base-3" wx:elif="{{item.priceType==1}}">{{item.orderCash>0&&item.orderPrice>0?'/':''}}</text>
+                            <text class="font-base-red">{{item.orderPrice>0?item.orderPrice:''}}</text>
+                            <text class="font-base-3">{{item.orderPrice>0?'航币':''}}</text>
+                            <text class="font-base-3">{{item.orderCash>0&&item.orderPrice>0?')':''}}</text>
+                            <text class="font-base-red"> *</text>{{item.peopleNum}}
+                    </view>
+
+                    <view class="font-base-3 fontSize15" style="text-align:right;width:35%;">{{item.orderTime}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!--
+    卡券列表
+    item
+    isNotOrder 是否是兑换界面
+-->
+<template name="cardOrder">
+    <view style="margin:10px;background-color:{{item.backgroundColor}};position:relative;overflow:hidden;">
+        <view class="horizontal_layout center" style="padding:10px 10px 0 10px;">
+            <view class="center center-hor" style="width:15vw;">
+                <image mode="aspectFill" class="item-image" src="{{item.logo}}"></image>
+            </view>
+            <view class="center fontSize15" style="width:{{isNotOrder ? '60vw' : '85vw'}};padding-left:10px;">
+                <view class="font-base" style="text-align:left;">{{item.name}}</view>
+            </view>
+            <block wx:if="{{isNotOrder}}">
+                <view class="fontSize15" style="width:25vw;">
+                    <view class="font-base ellipsis" style="text-align:right;">
+                    <!-- {{item.price}}航币 -->
+                        <text>{{item.priceCash>0?item.priceCash:''}}</text>
+                        <text>{{item.priceCash>0?'元':''}}</text>
+                        <text wx:if="{{item.priceType==0}}">{{item.priceCash>0&&item.price>0?'+':''}}</text>
+                        <text wx:elif="{{item.priceType==1}}">{{item.priceCash>0&&item.price>0?'/':''}}</text>
+                        <text>{{item.price>0?item.price:''}}</text>
+                        <text>{{item.price>0?'航币':''}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <block wx:if="{{item.shopType == 0}}">
+            <block wx:if="{{item.type == 1}}">
+                <image style="position:relative;top:5px;width:100%;height:2.5px;" src="/images/enjoyLife/wavyline2.png" />
+                <view class="font-base fontSize13" style="padding:8px 10px 6px 10px;background-color:#bdbdbd;text-align:left;">有效期：{{item.validity}}</view>
+                <block wx:if="{{!isNotOrder}}">
+                    <image style="position:absolute;right:0;bottom:0;width:57px;height:54px;" mode="aspectFit" src="/images/enjoyLife/finish.png"  />
+                </block>
+            </block>
+            <block wx:else>
+                <image style="position:relative;top:5px;width:100%;height:2.5px;" src="/images/enjoyLife/wavyline1.png" />
+                <view class="font-base fontSize13" style="padding:8px 10px 6px 10px;background-color:#ff5722;text-align:left;">有效期：{{item.validity}}</view>
+                <block wx:if="{{!isNotOrder}}">
+                    <image style="position:absolute;right:0;bottom:0;width:57px;height:54px;" mode="aspectFit" src="/images/enjoyLife/unfinished.png"  />
+                </block>
+            </block>
+        </block>
+    </view>   
+</template>
+
+<!--
+    segmentList 控件名称list
+    height 高度（百分比）
+    currentTab 当前选择
+-->
+<template name="segmentControl">
+    <view class="horizontal_layout topLine bottomLine" style="background-color:#ffffff;height:{{height}}%">
+        <block wx:for="{{segmentList}}">
+            <view class="{{currentTab==index ? 'bottom' : ''}}" style="width:{{100/segmentList.length}}vw;">
+                <view class="item-title {{currentTab==index ? 'on' : ''}}" style="z-index:999;" data-current="{{index}}" bindtap="switchNav">{{item}}</view>
+            </view>
+        </block>
+    </view>
+</template>
+
+<!--
+    新股申购 -- 一键申购弹窗
+-->
+<template name="oneKeyAlert">
+    <view class="fontSize16" style="padding:16rpx 20rpx;">
+        <view class="horizontal_layout">
+            <view class="font-base-3" style="width:15vw;">名称</view>
+            <view class="font-base-1 fontWeight" style="width:35vw;text-align:left;">利群股份</view>
+            <view class="font-base-3" style="width:25vw;">申购价格</view>
+            <view class="font-base-1 fontWeight" style="width:25vw;text-align:right;">11.17</view>
+        </view>
+        <view class="horizontal_layout" style="padding-top:20rpx;">
+            <view class="font-base-3" style="width:15vw;">代码</view>
+            <view class="font-base-1 fontWeight" style="width:35vw;text-align:left;">007834</view>
+            <view class="font-base-3" style="width:25vw;">申购数量</view>
+            <view class="font-base-1 fontWeight" style="width:25vw;text-align:right;">500</view>
+        </view>
+    </view>
+</template>
