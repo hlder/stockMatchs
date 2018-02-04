@@ -1,18 +1,20 @@
 package com.hld.stockmanagerbusiness.service.impl;
 
 import com.hld.stockmanagerbusiness.bean.AccountInfo;
+import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
+import com.hld.stockmanagerbusiness.bean.EntrustStockInfoHistory;
 import com.hld.stockmanagerbusiness.bean.HolderInfo;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
+import com.hld.stockmanagerbusiness.mapper.EntrustMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -20,6 +22,8 @@ public class AccountServiceImpl implements AccountService {
     StockInfoMapper stockInfoMapper;
     @Autowired
     AccountMapper accountMapper;
+    @Autowired
+    EntrustMapper entrustMapper;
 
     DecimalFormat df = new DecimalFormat("0.00");
     @Override
@@ -70,5 +74,45 @@ public class AccountServiceImpl implements AccountService {
         map.put("listData",listDataMap);
         map.put("hodlerBaseInfo",temMap);
         return map;
+    }
+
+    //查询正在委托的
+    @Override
+    public List<EntrustStockInfo> queryMyEntrust(String accountId){
+        List<EntrustStockInfo> list=entrustMapper.queryMyEntrustById(accountId);
+        return list;
+    }
+
+
+    //查询委托历史
+    @Override
+    public List<Object> queryMyEntrustHistory(String accountId, String startDate, String endDate, int page){
+        List<Object> listData=new ArrayList<>();
+
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            Date temDate = sdf.parse(endDate);
+            if(sdf.format(new Date()).equals(sdf.format(temDate))){//是今天
+                List<EntrustStockInfo> listToday=entrustMapper.queryMyEntrustById(accountId);
+                listData.addAll(listToday);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        List<EntrustStockInfoHistory> list=entrustMapper.queryMyEntrustHistoryById(accountId,startDate,endDate,page);
+        listData.addAll(list);
+        return listData;
+    }
+
+    //执行撤单
+    @Override
+    public boolean revokeMyEntrust(String accountId,String entrustId){
+        EntrustStockInfo info=entrustMapper.queryMyEntrustOneById(entrustId);
+        //删除委托
+        entrustMapper.deleteEntrust(entrustId);
+        //添加委托记录
+        entrustMapper.insertEntrustHistory(info,"2");
+        return true;
     }
 }

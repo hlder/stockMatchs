@@ -1,0 +1,65 @@
+<!--pages/entrustList/entrustList.wxml-->
+<view class="picker_layout">
+  <picker class="picker_date" mode="date" value="{{startDate}}" start="2015-01-01" end="{{endDate}}" bindchange="bindStartDateChange">
+      <view class="picker_date_selector">
+        起始时间: {{startDate}}
+      </view>
+  </picker>
+  <picker class="picker_date" mode="date" value="{{endDate}}" start="{{startDate}}" end="2200-12-31" bindchange="bindEndDateChange">
+      <view class="picker_date_selector">
+        结束时间: {{endDate}}
+      </view>
+  </picker>
+  <view bindtap="onSearchClick" class="picker_search_button">搜索</view>
+</view>
+
+<view style="height:20rpx;"></view>
+<scroll-view wx:for="{{listData}}" style="padding-bottom:20rpx;">
+
+<view class="item_layout">
+  <view class="item_title_layout">
+    <view class="item_title_left">
+      <view class="item_title_name">
+        <view style="color:{{item.type==1?\"#ff5722\":\"#536dfe\"}};width:25%;">{{item.type==1?"定价买":"定价卖"}}</view>
+        <view style="color:#424242;width:30%;">{{item.stock_name}}</view>
+        <view style="color:#9e9e9e;width:30%;">{{item.stock_code}}</view>
+      </view>
+      <view style="margin-top: 8rpx;margin-left: 15rpx;">
+        <view style="font-size:30rpx;color:#9e9e9e;">{{item.entrust_time}}</view>
+      </view>
+    </view>
+
+    <view class="item_title_right">
+      <view wx:if="{{item.vol_type ==1}}"> 
+        <view style="color:#9e9e9e;margin-top:20rpx;">已成交</view>
+      </view>
+      <view wx:elif="{{item.vol_type == 2}}"> 
+        <button id="{{item.id}}" size='mini' style="background-color:#bdbdbd;color:#ffffff;">已撤单</button>
+      </view>
+      <view wx:else> 
+        <button id="{{item.id}}" bindtap='onCheDanClick' size='mini' style="background-color:#ff5722;color:#ffffff;">撤单</button>
+      </view>
+    </view>
+  </view>
+  <view class="horizontalLine"></view>
+  <view class="item_content_layout">
+    <view style="margin-left: 25rpx;margin-top:25rpx;">
+      <view style="color:#9e9e9e;">已成交/委托量</view>
+      <view style="color:#424242;">{{item.vol_num}}/{{item.entrust_num}}</view>
+    </view>
+    <view style="margin-top:25rpx;">
+      <view style="color:#9e9e9e;">委托价</view>
+      <view style="color:#424242;text-align:center;">{{item.entrust_price}}</view>
+    </view>
+    <view style="margin-right: 25rpx;margin-top:25rpx;">
+      <view style="color:#9e9e9e;">成交价</view>
+      <view style="color:#424242;text-align:right;">
+        <view wx:if="{{item.vol_price >=0}}"> {{item.vol_price}} </view>
+        <view wx:else>--</view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+</scroll-view>

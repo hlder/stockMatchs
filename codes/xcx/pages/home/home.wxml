@@ -66,14 +66,14 @@
     <view class="controll_text">买入</view>
   </view>
   <view class="controll_item">
-    <image class="controll_btn" src='../../images/controll_btn_icon3.png'></image>
+    <image bindtap="onRevokeClick" class="controll_btn" src='../../images/controll_btn_icon3.png'></image>
     <view class="controll_text">撤单</view>
   </view>
-  <view class="controll_item">
+  <view bindtap="onHolderClick" class="controll_item">
     <image class="controll_btn" src='../../images/controll_btn_icon4.png'></image>
     <view class="controll_text">持仓</view>
   </view>
-  <view class="controll_item">
+  <view bindtap="onQueryClick" class="controll_item">
     <image class="controll_btn" src='../../images/controll_btn_icon5.png'></image>
     <view class="controll_text">查询</view>
   </view>

@@ -1,0 +1,5 @@
+/* pages/queryUi/queryUi.wxss */
+.item_button{
+  padding: 25rpx;
+  border-bottom:1px solid #bdbdbd;
+}

@@ -1,0 +1,46 @@
+/* pages/entrustList/entrustList.wxss */
+page {
+  background-color: #eeeeee;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}
+
+.item_layout{
+  width: 95%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-bottom: 0rpx;
+  
+}
+.item_title_layout{
+  display: flex;
+  width: 100%;
+  height: 125rpx;
+  background-color: white;
+}
+.item_content_layout{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+  height: 125rpx;
+  background-color: white;
+  font-size: 28rpx;
+}
+
+.item_title_name{
+  display: flex;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+}
+.item_title_left{
+  width: 70%;
+  height: 100%;
+}
+.item_title_right{
+  width: 30%;
+  height: 100%;
+  text-align: center;
+}

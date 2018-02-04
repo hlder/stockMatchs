@@ -5,7 +5,10 @@
     "pages/applyMatch/applyMatch",
     "pages/home/home",
     "pages/holder/holder",
-    "pages/stockDetail/stockDetail"
+    "pages/stockDetail/stockDetail",
+    "pages/entrustList/entrustList",
+    "pages/entrustHistoryList/entrustHistoryList",
+    "pages/queryUi/queryUi"
   ],
   "window": {
     "backgroundTextStyle": "light",

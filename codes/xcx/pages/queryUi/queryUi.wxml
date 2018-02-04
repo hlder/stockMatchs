@@ -1,0 +1,7 @@
+<view style="width:100%;height:100%;background-color: white;">
+  <view bindtap="onButtonClick1" class="item_button">今日成交</view>
+  <view bindtap="onButtonClick2" class="item_button">今日委托</view>
+  <view bindtap="onButtonClick3" class="item_button">成交历史</view>
+</view>
+
+
