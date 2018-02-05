@@ -20,7 +20,6 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-    
 
     httpUtil.doPost({
       app: app,

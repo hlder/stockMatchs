@@ -1,0 +1,118 @@
+<!--pages/actions/buy/buy.wxml-->
+<view class="head_layout">
+  <view class="stock_input_layout">
+    <view style="display: flex;">
+      <input class="input_layout" placeholder="股票代码" value="{{stockDetail.securityCode}}"></input>
+      <view class="stock_name_layout">{{stockDetail.securityName!=null?stockDetail.securityName:"股票名称"}}</view>
+    </view>
+    <view style="display:flex;">
+      <input class="input_layout" style="text-align:center;" placeholder="价格"></input>
+      <image class="icon_price_add" src="../../../images/icon_add.png"></image>
+      <view class="line_price_add"></view>
+      <image class="icon_price_cut" src="../../../images/icon_cut.png"></image>
+      <view class="line_price_cut"></view>
+    </view>
+    <view style="display:flex;justify-content:space-between;width:90%;margin-left:5%;font-size: 28rpx;color:#424242;margin-top:10rpx;">
+      <view>跌停  <text style="color:#00bfa5;">{{stockDetail.dieting}}</text></view>
+      <view>涨停  <text style="color:#ff5722;">{{stockDetail.zhangting}}</text></view>
+    </view>
+    <view style="display:flex;margin-top:-10rpx;">
+      <input class="input_layout" style="text-align:center;" placeholder="数量"></input>
+      <image class="icon_price_add" src="../../../images/icon_add.png"></image>
+      <view class="line_price_add"></view>
+      <image class="icon_price_cut" src="../../../images/icon_cut.png"></image>
+      <view class="line_price_cut"></view>
+    </view>
+    <view style="width:90%;margin-left:5%;font-size: 28rpx;color:#9e9e9e;margin-top:10rpx;">可买201210股</view>
+    <view class="range_btns_layout">
+      <view class="range_btns_item">全仓</view>
+      <view class="range_btns_item">半仓</view>
+      <view class="range_btns_item">1/3仓</view>
+      <view class="range_btns_item">1/4仓</view>
+    </view>
+    <button class="buy_button">买入</button>
+  </view>
+  <view class="stock_sellbuy5_layout">
+    <view class="stock_sellbuy5_item">
+      <view>卖5</view>
+      <view style="color:#{{(stockDetail.sell[4].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[4].tradePx}}</view>
+      <view>{{stockDetail.sell[4].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>卖4</view>
+      <view style="color:#{{(stockDetail.sell[3].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[3].tradePx}}</view>
+      <view>{{stockDetail.sell[3].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>卖3</view>
+      <view style="color:#{{(stockDetail.sell[2].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[2].tradePx}}</view>
+      <view>{{stockDetail.sell[2].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>卖2</view>
+      <view style="color:#{{(stockDetail.sell[1].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[1].tradePx}}</view>
+      <view>{{stockDetail.sell[1].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>卖1</view>
+      <view style="color:#{{(stockDetail.sell[0].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[0].tradePx}}</view>
+      <view>{{stockDetail.sell[0].tradeNum/100}}</view>
+    </view>
+    <view class="view_line" style="margin-top:10rpx;"></view>
+    <view class="stock_sellbuy5_item" style="margin-top:10rpx;">
+      <view>买1</view>
+      <view style="color:#{{(stockDetail.buy[0].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[0].tradePx}}</view>
+      <view>{{stockDetail.buy[0].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>买2</view>
+      <view style="color:#{{(stockDetail.buy[1].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[1].tradePx}}</view>
+      <view>{{stockDetail.buy[1].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>买3</view>
+      <view style="color:#{{(stockDetail.buy[2].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[2].tradePx}}</view>
+      <view>{{stockDetail.buy[2].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>买4</view>
+      <view style="color:#{{(stockDetail.buy[3].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[3].tradePx}}</view>
+      <view>{{stockDetail.buy[3].tradeNum/100}}</view>
+    </view>
+    <view class="stock_sellbuy5_item">
+      <view>买5</view>
+      <view style="color:#{{(stockDetail.buy[4].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[4].tradePx}}</view>
+      <view>{{stockDetail.buy[4].tradeNum/100}}</view>
+    </view>
+    
+  </view>
+
+</view>
+
+<view class="holder_title_layout">
+  <view class="holder_title_layout_item">市值</view>
+  <view class="holder_title_layout_item">现价/成本</view>
+  <view class="holder_title_layout_item">持有/可用</view>
+  <view class="holder_title_layout_item">参考盈亏</view>
+</view>
+
+<block wx:for="{{listHolderData}}">
+  <view class="holder_list_item_layout" >
+    <view class="holder_title_layout_item">
+      <view class="holder_text">{{item.stockName}}</view>
+      <view class="holder_text">{{item.stockFund}}</view>
+    </view>
+    <view class="holder_title_layout_item">
+      <view class="holder_text" style="font-weight:bold;">{{item.nowPrice}}</view>
+      <view class="holder_text">{{item.costPrice}}</view>
+    </view>
+    <view class="holder_title_layout_item">
+      <view class="holder_text" style="font-weight:bold;">{{item.canUseNum}}</view>
+      <view class="holder_text">{{item.holderNum}}</view>
+    </view>
+    <view class="holder_title_layout_item">
+      <view class="holder_text" style="font-weight:bold;color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income}}</view>
+      <view class="holder_text" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income>=0?'+':''}}{{item.incomeRate}}</view>
+    </view>
+  </view>
+</block>
