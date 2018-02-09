@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    uiType:0,
     listHolderData:[],//持仓列表
     stockDetail:{}//股票的详细信息
   },
@@ -17,10 +18,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '买入'
-    });
+    // options.type//0:买入,1:卖出
     that = this;
+    this.setData({
+      uiType: options.type
+    });
+    
+    wx.setNavigationBarTitle({
+      title: that.data.uiType==0?"买入":"卖出"
+    });
     stockCodeStr = options.stockCodeStr;
     //查询持仓
     httpUtil.doPost({
@@ -67,6 +73,9 @@ Page({
         });
       }
     });
+  },
+  onBuyOrSellClick:function(){
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

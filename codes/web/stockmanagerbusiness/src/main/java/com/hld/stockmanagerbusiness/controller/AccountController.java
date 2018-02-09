@@ -82,4 +82,49 @@ public class AccountController extends BaseController {
             return getErrorMap(ERROR_CODE_PARAMS,"操作失败");
         }
     }
+
+    //购买股票
+    @RequestMapping(value="/entrustBuyStock")
+    @ResponseBody
+    public Map<String,Object> entrustBuyStock(String token,String userId,String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count){
+        Map<String,Object> checkMap=checkToken(token,userId+"");
+        if(checkMap!=null){
+            return checkMap;
+        }
+        int code=accountService.entrustBuyStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,count);
+        return getNoDataMap(code);
+    }
+
+    //卖出股票
+    @RequestMapping(value="/entrustSellStock")
+    @ResponseBody
+    public Map<String,Object> entrustSellStock(String token,String userId,String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count){
+        Map<String,Object> checkMap=checkToken(token,userId+"");
+        if(checkMap!=null){
+            return checkMap;
+        }
+        int code=accountService.entrustSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,count);
+        return getNoDataMap(code);
+    }
+
+
+//    //模糊搜索
+//    public Map<String,Object> queryStockFuzzy(){
+//
+//    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

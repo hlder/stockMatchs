@@ -26,7 +26,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": 0,
@@ -80,7 +80,13 @@
 					"id": 8,
 					"name": "买入",
 					"pathName": "pages/actions/buy/buy",
-					"query": "accountId=1&stockCodeStr=sz002471"
+					"query": "accountId=1&stockCodeStr=sz002471&type=1"
+				},
+				{
+					"id": -1,
+					"name": "搜索股票",
+					"pathName": "pages/actions/searchStock/searchStock",
+					"query": ""
 				}
 			]
 		}

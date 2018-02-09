@@ -29,8 +29,10 @@ public class StockServiceImpl implements StockService {
     //根据股票名称或代码搜索股票
     @Override
     public List<StockBean> searchStock(String queryStr) {
-        return stockMapper.queryStock(queryStr);
+//        return stockMapper.queryStock(queryStr);
+        return stockMapper.queryStockFuzzy(queryStr);
     }
+
 
     //根据股票代码查询股票详情信息
     @Override
@@ -79,9 +81,9 @@ public class StockServiceImpl implements StockService {
             Hq.TradeDetail td=buyList.getTradeDetail(i);
             listBuy.add(new StockJrjSellBuyBean(td.getTradeType()+"",td.getTradeTime()+"",td.getTradeNum()+"",td.getTradePx()+""));
         }
+        bean.setSecurityCodeStr(str);
         bean.setSell(listSell);
         bean.setBuy(listBuy);
-
         bean.setUpdateTime(Calendar.getInstance().getTimeInMillis());
 
 //        System.out.println("重新获取");

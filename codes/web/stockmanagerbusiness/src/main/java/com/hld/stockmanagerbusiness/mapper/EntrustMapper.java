@@ -9,6 +9,12 @@ import java.util.List;
 @Mapper
 public interface EntrustMapper {
 
+    @Select("insert into user_entrust_stock(stock_code,stock_code_str,stock_name,entrust_price,type,entrust_num,account_id) " +
+            "values(#{stockCode},#{stockCodeStr},#{stockName},#{entrustPrice},#{type},#{entrustNum},#{accountId})")
+    int buyOrSellStock(@Param("accountId") String accountId,@Param("stockCode") String stockCode,@Param("stockCodeStr") String stockCodeStr,@Param("stockName") String stockName,
+                 @Param("entrustPrice") String entrustPrice,@Param("type") String type,@Param("entrustNum") String entrustNum);//购买股票
+
+
     @Select("SELECT * FROM user_entrust_stock where account_id=#{accountId} order by id desc")
     List<EntrustStockInfo> queryMyEntrustById(@Param("accountId") String accountId);
 

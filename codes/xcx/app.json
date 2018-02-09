@@ -9,7 +9,8 @@
     "pages/entrustList/entrustList",
     "pages/entrustHistoryList/entrustHistoryList",
     "pages/queryUi/queryUi",
-    "pages/actions/buy/buy"
+    "pages/actions/buy/buy",
+    "pages/actions/searchStock/searchStock"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -2,26 +2,26 @@
 <view class="head_layout">
   <view class="stock_input_layout">
     <view style="display: flex;">
-      <input class="input_layout" placeholder="股票代码" value="{{stockDetail.securityCode}}"></input>
+      <input class="input_layout" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="股票代码" value="{{stockDetail.securityCode}}"></input>
       <view class="stock_name_layout">{{stockDetail.securityName!=null?stockDetail.securityName:"股票名称"}}</view>
     </view>
     <view style="display:flex;">
-      <input class="input_layout" style="text-align:center;" placeholder="价格"></input>
-      <image class="icon_price_add" src="../../../images/icon_add.png"></image>
-      <view class="line_price_add"></view>
-      <image class="icon_price_cut" src="../../../images/icon_cut.png"></image>
-      <view class="line_price_cut"></view>
+      <input class="input_layout" style="text-align:center;border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="价格"></input>
+      <image class="icon_price_add" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
+      <view class="line_price_add" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
+      <image class="icon_price_cut" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
+      <view class="line_price_cut" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
     </view>
     <view style="display:flex;justify-content:space-between;width:90%;margin-left:5%;font-size: 28rpx;color:#424242;margin-top:10rpx;">
       <view>跌停  <text style="color:#00bfa5;">{{stockDetail.dieting}}</text></view>
       <view>涨停  <text style="color:#ff5722;">{{stockDetail.zhangting}}</text></view>
     </view>
     <view style="display:flex;margin-top:-10rpx;">
-      <input class="input_layout" style="text-align:center;" placeholder="数量"></input>
-      <image class="icon_price_add" src="../../../images/icon_add.png"></image>
-      <view class="line_price_add"></view>
-      <image class="icon_price_cut" src="../../../images/icon_cut.png"></image>
-      <view class="line_price_cut"></view>
+      <input class="input_layout" style="text-align:center;border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="数量"></input>
+      <image class="icon_price_add" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
+      <view class="line_price_add" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
+      <image class="icon_price_cut" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
+      <view class="line_price_cut" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
     </view>
     <view style="width:90%;margin-left:5%;font-size: 28rpx;color:#9e9e9e;margin-top:10rpx;">可买201210股</view>
     <view class="range_btns_layout">
@@ -30,7 +30,7 @@
       <view class="range_btns_item">1/3仓</view>
       <view class="range_btns_item">1/4仓</view>
     </view>
-    <button class="buy_button">买入</button>
+    <button class="buy_button" bindtap="onBuyOrSellClick" style="background-color: {{uiType==0?'#ff5722':'#536dfe'}};">{{uiType==0?'买入':'卖出'}}</button>
   </view>
   <view class="stock_sellbuy5_layout">
     <view class="stock_sellbuy5_item">

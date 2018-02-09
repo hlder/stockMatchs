@@ -18,4 +18,10 @@ public interface AccountService {
 
     //撤单
     boolean revokeMyEntrust(String accountId,String entrustId);
+
+
+    //购买股票
+    int entrustBuyStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count);
+    //卖出股票
+    int entrustSellStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count);
 }

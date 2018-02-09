@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hld.stockserver.mapper.StockMapper;
 import com.hld.stockserver.service.StockManagerService;
+import com.hld.stockserver.uitls.ChangeToPinYin;
 import com.hld.stockserver.uitls.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,11 @@ public class StockManagerServiceImpl implements StockManagerService {
 
     @Autowired
     StockMapper stockMapper;
+    private ChangeToPinYin changeToPinYin;
+
+    public StockManagerServiceImpl(){
+        changeToPinYin=new ChangeToPinYin();
+    }
 
     @Override
     public void doUpdateStock(){
@@ -69,12 +75,17 @@ public class StockManagerServiceImpl implements StockManagerService {
                                          String tunRate,String vol,String peRate,String totalValue){
 
         int count=stockMapper.queryStockCountByCode(code);
+
+        String tem1=changeToPinYin.getStringPinYin(name+"");
+        String tem2=changeToPinYin.getPinYinHeadChar(name+"",1);
+        String searchStr=code+" "+name+" "+tem2+" "+tem1;
+
         if(count>0){//已经存在,执行更新就行了
             System.out.println("执行更新:"+name+"("+code+")");
-            stockMapper.updateOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate);
+            stockMapper.updateOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate,searchStr);
         }else{//不存在，需要新增
             System.out.println("新增:"+name+"("+code+")");
-            stockMapper.insertOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate);
+            stockMapper.insertOneStock(name,code,codeStr,nowPrice,yesClosePrice,"0",openPrice,maxPrice,minPrice,totalValue,tunRate,vol,peRate,searchStr);
         }
     }
 
@@ -82,11 +93,31 @@ public class StockManagerServiceImpl implements StockManagerService {
     public static void main(String[] args){
 //        String json1=HttpUtil.sendPost("http://money.finance.sina.com.cn/d/api/openapi_proxy.php/?__s=[[\"hq\",\"cyb\",\"\",0,1,10000]]");
 //        String json2=HttpUtil.sendPost("http://money.finance.sina.com.cn/d/api/openapi_proxy.php/?__s=[[\"hq\",\"zxqy\",\"\",0,1,10000]]");
-        String json3= HttpUtil.sendPost("http://money.finance.sina.com.cn/d/api/openapi_proxy.php?__s=[[\"hq\",\"hs_a\",\"\",0,1,500]]");
+//        String json3= HttpUtil.sendPost("http://money.finance.sina.com.cn/d/api/openapi_proxy.php?__s=[[\"hq\",\"hs_a\",\"\",0,1,500]]");
+//
+//
+//        JSONArray ja= JSON.parseArray(""+json3);
+//
+//        System.out.println(""+ja.getJSONObject(0).getJSONArray("items").size());
 
 
-        JSONArray ja= JSON.parseArray(""+json3);
 
-        System.out.println(""+ja.getJSONObject(0).getJSONArray("items").size());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

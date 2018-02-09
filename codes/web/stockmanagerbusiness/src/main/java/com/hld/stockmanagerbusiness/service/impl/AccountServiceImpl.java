@@ -4,6 +4,7 @@ import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfoHistory;
 import com.hld.stockmanagerbusiness.bean.HolderInfo;
+import com.hld.stockmanagerbusiness.controller.BaseController;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
 import com.hld.stockmanagerbusiness.mapper.EntrustMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
@@ -115,4 +116,81 @@ public class AccountServiceImpl implements AccountService {
         entrustMapper.insertEntrustHistory(info,"2");
         return true;
     }
+
+
+    //购买股票
+    @Override
+    public int entrustBuyStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count){
+        //判断我是否有足够的钱购买
+        AccountInfo acountInfo=accountMapper.queryAccountById(accountId);
+        float canUse=0;
+        try{
+            canUse=Float.parseFloat(""+acountInfo.getCan_use_assets());
+            float entrustPriceFloat=Float.parseFloat(""+entrustPrice);
+            if(canUse<(entrustPriceFloat*count)){//钱不够
+                return BaseController.ERROR_NO_MONEY;
+            }
+            canUse-=entrustPriceFloat*count;//从可用中减去
+        }catch (NumberFormatException e){
+            return BaseController.ERROR_NO_MONEY;
+        }
+        int status=entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"1",""+count);
+
+        if(status==1){
+            //成功后，需要从可用中减去
+            accountMapper.chanageCanUseMoney(accountId,canUse+"");
+
+            return BaseController.ERROR_CODE_SUCCESS;
+        }else{
+            return BaseController.ERROR_CODE_OTHER;
+        }
+    }
+    //卖出股票
+    @Override
+    public int entrustSellStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count){
+        //判断我是否有足够的股票可以卖
+        List<HolderInfo> myHolder=stockInfoMapper.queryMyHolderWithStock(accountId,stockCodeStr);
+        if(myHolder==null||myHolder.size()<=0){//没有持仓
+            return BaseController.ERROR_NO_HOLDER;
+        }
+        long holderCount=0;
+        for(HolderInfo info:myHolder){
+            holderCount+=info.getHolder_num();
+        }
+        if(holderCount<count){//持仓不够
+            return BaseController.ERROR_NO_HOLDER;
+        }
+
+        int status=entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"2",""+count);
+        if(status==1){
+            return BaseController.ERROR_CODE_SUCCESS;
+        }else{
+            return BaseController.ERROR_CODE_OTHER;
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

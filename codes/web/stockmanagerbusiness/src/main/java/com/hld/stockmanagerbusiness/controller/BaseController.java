@@ -15,6 +15,8 @@ public class BaseController  {
     public static final int ERROR_CODE_NO_DATA=100002;//没数据
     public static final int ERROR_CODE_ALERADY=100003;//已经报名
     public static final int ERROR_CODE_PARAMS=100004;//参数错误
+    public static final int ERROR_NO_MONEY=100005;//钱不够了
+    public static final int ERROR_NO_HOLDER=100006;//没持仓
 //    Already
     @Autowired
     RedisService redisService;

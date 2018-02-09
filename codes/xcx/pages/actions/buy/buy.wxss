@@ -57,8 +57,10 @@
   margin-top: 20rpx;
   padding: 15rpx;
   box-sizing: border-box;
-  border: 1rpx solid #ff5722;
 }
+
+
+
 .stock_name_layout{
   width: 200rpx;
   margin-left: -220rpx;
@@ -92,7 +94,7 @@
   height: 90rpx;
   margin-top: 20rpx;
   margin-left: -70rpx;
-  border-left:  1rpx solid #ff5722;
+  
 }
 .icon_price_cut{
   width: 55rpx;
@@ -110,7 +112,6 @@
 .buy_button{
   width: 90%;
   margin-left: 5%;
-  background-color: #ff5722;
   color: white;
 }
 .view_line{

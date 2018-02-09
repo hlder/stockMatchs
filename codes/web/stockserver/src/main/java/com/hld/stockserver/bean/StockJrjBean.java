@@ -4,6 +4,7 @@ import java.util.List;
 
 public class StockJrjBean {
     private String securityCode;
+    private String securityCodeStr;
     private String date;
     private String time;
     private String securityName;
@@ -115,6 +116,14 @@ public class StockJrjBean {
         this.accumNet = accumNet;
         this.sell = sell;
         this.buy = buy;
+    }
+
+    public String getSecurityCodeStr() {
+        return securityCodeStr;
+    }
+
+    public void setSecurityCodeStr(String securityCodeStr) {
+        this.securityCodeStr = securityCodeStr;
     }
 
     public long getUpdateTime() {

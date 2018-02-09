@@ -1,0 +1,12 @@
+<!--pages/actions/searchStock/searchStock.wxml-->
+
+<view class="head_layout">
+<input class="input_layout" placeholder="代码/股票名/拼音/首字母" value="{{searchStr}}" bindinput=""></input>
+</view>
+
+<scroll-view class="scroll_layout" scroll-y="true">
+  <view id="{{item.stockCodeStr}}" class="item_layout" wx:for="{{requestListData}}">
+    <view class="item_left_layout">{{item.stockName}}</view>
+    <view>{{item.stockCode}}</view>
+  </view>
+</scroll-view>

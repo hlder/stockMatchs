@@ -12,6 +12,9 @@ const queryMyEntrust = AppIp +"queryMyEntrust";//查询我的委托
 const revokeMyEntrust = AppIp +"revokeMyEntrust";//撤单
 const queryMyEntrustHistory = AppIp +"queryMyEntrustHistory";//委托历史
 
+const entrustBuyStock = AppIp +"entrustBuyStock";//委托买入
+const entrustSellStock = AppIp +"entrustSellStock";//委托卖出
+
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
 
