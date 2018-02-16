@@ -101,6 +101,7 @@
   height: 55rpx; 
   margin-left: -70%;
   margin-top: 37rpx; 
+  background-color: red;
 }
 .line_price_cut{
   width: 1rpx;
@@ -118,4 +119,41 @@
   width: 100%;
   height: 1rpx;
   background-color: #bdbdbd;
+}
+
+
+
+
+
+
+
+
+
+.input_layout2{
+  width: 54%;
+  height: 52rpx; 
+  margin-top: 20rpx; 
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 17.5rpx;
+  padding-bottom: 17.5rpx;
+}
+.icon_price_cut2{
+  width: 12%;
+  height: 52rpx; 
+  margin-top: 20rpx; 
+  margin-left: 5%;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 17.5rpx;
+  padding-bottom: 17.5rpx;
+}
+.icon_price_add2{
+  width: 12%;
+  height: 52rpx; 
+  margin-top: 20rpx; 
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 17.5rpx;
+  padding-bottom: 17.5rpx;
 }

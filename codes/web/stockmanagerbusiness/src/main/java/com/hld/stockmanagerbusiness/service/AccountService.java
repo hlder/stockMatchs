@@ -24,4 +24,7 @@ public interface AccountService {
     int entrustBuyStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count);
     //卖出股票
     int entrustSellStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count);
+
+    //模糊搜索股票信息
+    List<Map<String,Object>> queryStockFuzzy(String searchStr);
 }

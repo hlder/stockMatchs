@@ -108,10 +108,17 @@ public class AccountController extends BaseController {
     }
 
 
-//    //模糊搜索
-//    public Map<String,Object> queryStockFuzzy(){
-//
-//    }
+    //模糊搜索
+    @RequestMapping(value="/queryStockFuzzy")
+    @ResponseBody
+    public Map<String,Object> queryStockFuzzy(String token,String userId,String searchStr){
+        Map<String,Object> checkMap=checkToken(token,userId+"");
+        if(checkMap!=null){
+            return checkMap;
+        }
+        List<Map<String,Object>> listData = accountService.queryStockFuzzy(searchStr);
+        return getSuccessMap(listData);
+    }
 
 }
 

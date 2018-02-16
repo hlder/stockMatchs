@@ -2,26 +2,24 @@
 <view class="head_layout">
   <view class="stock_input_layout">
     <view style="display: flex;">
-      <input class="input_layout" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="股票代码" value="{{stockDetail.securityCode}}"></input>
-      <view class="stock_name_layout">{{stockDetail.securityName!=null?stockDetail.securityName:"股票名称"}}</view>
+      <input disabled="true" bindtap="onSearchInputClick" class="input_layout" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="股票代码" value="{{selectStockCode}}"></input>
+      <view class="stock_name_layout">{{selectStockName!=null?selectStockName:"股票名称"}}</view>
     </view>
     <view style="display:flex;">
-      <input class="input_layout" style="text-align:center;border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="价格"></input>
-      <image class="icon_price_add" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
-      <view class="line_price_add" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
-      <image class="icon_price_cut" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
-      <view class="line_price_cut" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
+    <image bindtap="onPriceCutClick" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" class="icon_price_cut2" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
+      <input bindinput="onPriceInput" class="input_layout2" value="{{inputPrice}}" style="text-align:center;border-top: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};border-bottom: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="价格"></input>
+      <image bindtap="onPriceAddClick" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"  class="icon_price_add2" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
     </view>
+
     <view style="display:flex;justify-content:space-between;width:90%;margin-left:5%;font-size: 28rpx;color:#424242;margin-top:10rpx;">
       <view>跌停  <text style="color:#00bfa5;">{{stockDetail.dieting}}</text></view>
       <view>涨停  <text style="color:#ff5722;">{{stockDetail.zhangting}}</text></view>
     </view>
+
     <view style="display:flex;margin-top:-10rpx;">
-      <input class="input_layout" style="text-align:center;border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="数量"></input>
-      <image class="icon_price_add" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
-      <view class="line_price_add" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
-      <image class="icon_price_cut" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
-      <view class="line_price_cut" style="border-left:  1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};"></view>
+      <image bindtap="onNumberCutClick" class="icon_price_cut2" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" src="../../../images/{{uiType==0?'icon_cut':'icon_cut_blue'}}.png"></image>
+      <input bindinput="onNumberInput" class="input_layout2" value="{{inputNumber}}" style="text-align:center;border-top: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};border-bottom: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" placeholder="数量"></input>
+      <image bindtap="onNumberAddClick" class="icon_price_add2" style="border: 1rpx solid {{uiType==0?'#ff5722':'#536dfe'}};" src="../../../images/{{uiType==0?'icon_add':'icon_add_blue'}}.png"></image>
     </view>
     <view style="width:90%;margin-left:5%;font-size: 28rpx;color:#9e9e9e;margin-top:10rpx;">可买201210股</view>
     <view class="range_btns_layout">

@@ -1,4 +1,5 @@
-const AppIp ="http://192.168.1.177:8088/";
+// const AppIp ="http://192.168.1.177:8088/";
+const AppIp = "http://127.0.0.1:8088/";
 const stockIp = "http://47.100.180.170:8080/";
 // stockServer/queryStockInfoByCode?stockCode=sz002471
 
@@ -15,6 +16,8 @@ const queryMyEntrustHistory = AppIp +"queryMyEntrustHistory";//委托历史
 const entrustBuyStock = AppIp +"entrustBuyStock";//委托买入
 const entrustSellStock = AppIp +"entrustSellStock";//委托卖出
 
+const queryStockFuzzy = AppIp +"queryStockFuzzy";//模糊搜索
+
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
 
@@ -26,6 +29,10 @@ module.exports = {
   queryMyEntrust: queryMyEntrust,
   revokeMyEntrust: revokeMyEntrust,
   queryMyEntrustHistory: queryMyEntrustHistory,
+
+  entrustBuyStock: entrustBuyStock,
+  entrustSellStock: entrustSellStock,
+  queryStockFuzzy: queryStockFuzzy,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

@@ -169,6 +169,14 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+
+    //模糊查询
+    @Override
+    public List<Map<String,Object>> queryStockFuzzy(String searchStr){
+        List<Map<String,Object>> listData=stockInfoMapper.queryStockFuzzy(searchStr);
+        return listData;
+    }
+
 }
 
 
