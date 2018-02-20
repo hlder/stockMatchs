@@ -22,6 +22,7 @@ const queryStockFuzzy = AppIp +"queryStockFuzzy";//模糊搜索
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
 
 module.exports = {
+  loginUrl:loginUrl,
   queryApplyMatch: queryApplyMatch,
   applyMatch: applyMatch,
   queryHomeInfo: queryHomeInfo,

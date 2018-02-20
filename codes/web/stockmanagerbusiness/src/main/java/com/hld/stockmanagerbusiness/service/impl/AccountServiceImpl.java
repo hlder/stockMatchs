@@ -27,6 +27,7 @@ public class AccountServiceImpl implements AccountService {
     EntrustMapper entrustMapper;
 
     DecimalFormat df = new DecimalFormat("0.00");
+
     @Override
     public Map<String,Object> queryHolderInfos(String accountId){
         Map<String,Object> map=new HashMap<>();
@@ -84,12 +85,113 @@ public class AccountServiceImpl implements AccountService {
         return list;
     }
 
+    //查询表中所有的委托
+    @Override
+    public List<EntrustStockInfo> queryAllEntrust(){
+        List<EntrustStockInfo> list=entrustMapper.queryAllEntrust();
+        return list;
+    }
+    //购买股票
+    @Override
+    public void buyStock(EntrustStockInfo info,String buyPrice){
+
+        info.setVol_num(Long.parseLong(info.getEntrust_num()));
+        info.setVol_price(buyPrice);
+
+        //增加历史
+        entrustMapper.insertEntrustHistory(info,"1");
+
+        //删除委托
+        int count=entrustMapper.deleteEntrust(info.getId()+"");
+        //委托删除成功
+        if(count>0){
+            //增加持仓
+            float nowPrice=Float.parseFloat(buyPrice+"");
+            List<HolderInfo> list=stockInfoMapper.queryMyHolderWithStock(info.getAccount_id()+"",""+info.getStock_code_str());
+            if(list!=null&&list.size()>0){//有值,需要修改
+                HolderInfo item=list.get(0);
+                float costPrice=Float.parseFloat(item.getCost_price());
+                long holderNum=item.getHolder_num();
+                long nowNum= Long.parseLong(info.getEntrust_num())+holderNum;
+                //计算新成本
+                float cb=(nowPrice*nowNum-nowPrice*holderNum+costPrice*holderNum)/nowNum;
+                stockInfoMapper.updateHolder(nowNum+"",cb+"",item.getId()+"");
+
+                if(list.size()==1){//只有一条数据
+                }else{//有多条数据，需要重新插入
+                }
+            }else{//没有，直接增加持仓
+                HolderInfo bean=new HolderInfo();
+                bean.setUser_id(info.getUser_id());
+                bean.setAccount_id(info.getAccount_id());
+                bean.setStock_code(""+info.getStock_code());
+                bean.setStock_code_str(""+info.getStock_code_str());
+                bean.setStock_name(""+info.getStock_name());
+                bean.setCost_price(buyPrice);
+                bean.setNow_price("0");
+                bean.setHolder_num(Long.parseLong(info.getEntrust_num()));
+                bean.setUsable_num(0);
+
+                stockInfoMapper.addHolder(bean);
+            }
+        }
+    }
+    //卖出股票
+    @Override
+    public void sellStock(EntrustStockInfo info,String sellPrice){
+        info.setVol_num(Long.parseLong(info.getEntrust_num()));
+        info.setVol_price(sellPrice);
+
+        //增加历史
+        entrustMapper.insertEntrustHistory(info,"1");
+
+        //删除委托
+        int count=entrustMapper.deleteEntrust(info.getId()+"");
+        float nowPrice=Float.parseFloat(sellPrice+"");
+        //减掉持仓
+        //委托删除成功
+        if(count>0){
+            //将钱加到账户
+            AccountInfo acountInfo=accountMapper.queryAccountById(""+info.getAccount_id());
+            float canUse=Float.parseFloat(""+acountInfo.getCan_use_assets());
+            float price=Float.parseFloat(info.getEntrust_price());
+            long num=Long.parseLong(info.getEntrust_num());
+            canUse+=price*num;
+            accountMapper.chanageCanUseMoney(""+info.getAccount_id(),canUse+"");
+
+
+            //增加持仓
+            List<HolderInfo> list=stockInfoMapper.queryMyHolderWithStock(info.getAccount_id()+"",info.getStock_code_str());
+            if(list!=null&&list.size()>0){//有值,需要修改
+                long volNum=Long.parseLong(info.getEntrust_num());
+
+                for(int i=0;i<list.size();i++){
+                    HolderInfo item=list.get(i);
+                    float costPrice=Float.parseFloat(item.getCost_price());
+                    long holderNum=item.getHolder_num();
+                    long nowNum= holderNum-volNum;
+                    if(nowNum<0){
+                        volNum=-nowNum;
+                        nowNum=0;
+                    }
+                    if(nowNum==0){
+                        //删除这条持仓
+                        stockInfoMapper.deleteHolder(item.getId()+"");
+                        break;
+                    }
+                    //计算新成本
+                    float cb=(nowPrice*nowNum-nowPrice*holderNum+costPrice*holderNum)/nowNum;
+                    stockInfoMapper.updateHolder(nowNum+"",cb+"",item.getId()+"");
+                }
+            }
+        }
+    }
+
 
     //查询委托历史
     @Override
     public List<Object> queryMyEntrustHistory(String accountId, String startDate, String endDate, int page){
         List<Object> listData=new ArrayList<>();
-
         try {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
             Date temDate = sdf.parse(endDate);
@@ -108,12 +210,21 @@ public class AccountServiceImpl implements AccountService {
 
     //执行撤单
     @Override
-    public boolean revokeMyEntrust(String accountId,String entrustId){
+    public boolean revokeMyEntrust(String entrustId){
         EntrustStockInfo info=entrustMapper.queryMyEntrustOneById(entrustId);
         //删除委托
-        entrustMapper.deleteEntrust(entrustId);
-        //添加委托记录
-        entrustMapper.insertEntrustHistory(info,"2");
+        int count=entrustMapper.deleteEntrust(entrustId);
+        if(count>0){//删除成功
+            //添加委托记录
+            entrustMapper.insertEntrustHistory(info,"2");
+            //将钱加回去
+            AccountInfo acountInfo=accountMapper.queryAccountById(""+info.getAccount_id());
+            float canUse=Float.parseFloat(""+acountInfo.getCan_use_assets());
+            float price=Float.parseFloat(info.getEntrust_price());
+            long num=Long.parseLong(info.getEntrust_num());
+            canUse+=price*num;
+            accountMapper.chanageCanUseMoney(""+info.getAccount_id(),canUse+"");
+        }
         return true;
     }
 
@@ -134,16 +245,12 @@ public class AccountServiceImpl implements AccountService {
         }catch (NumberFormatException e){
             return BaseController.ERROR_NO_MONEY;
         }
-        int status=entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"1",""+count);
+        entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"1",""+count);
 
-        if(status==1){
-            //成功后，需要从可用中减去
-            accountMapper.chanageCanUseMoney(accountId,canUse+"");
+        accountMapper.chanageCanUseMoney(accountId,canUse+"");
 
-            return BaseController.ERROR_CODE_SUCCESS;
-        }else{
-            return BaseController.ERROR_CODE_OTHER;
-        }
+        return BaseController.ERROR_CODE_SUCCESS;
+
     }
     //卖出股票
     @Override
@@ -161,12 +268,9 @@ public class AccountServiceImpl implements AccountService {
             return BaseController.ERROR_NO_HOLDER;
         }
 
-        int status=entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"2",""+count);
-        if(status==1){
-            return BaseController.ERROR_CODE_SUCCESS;
-        }else{
-            return BaseController.ERROR_CODE_OTHER;
-        }
+        entrustMapper.buyOrSellStock(accountId,stockCode,stockCodeStr,stockName,entrustPrice,"2",""+count);
+        return BaseController.ERROR_CODE_SUCCESS;
+
     }
 
 

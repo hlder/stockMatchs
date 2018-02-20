@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface AccountService {
+    //查询表里面所有委托列表
+    List<EntrustStockInfo> queryAllEntrust();
+
     //查询此账户的持仓信息
     Map<String,Object> queryHolderInfos(String accountId);
 
@@ -16,8 +19,10 @@ public interface AccountService {
     //根据委托时间,查询我的委托历史表
     List<Object> queryMyEntrustHistory(String accountId, String startDate, String endDate, int page);
 
+    void buyStock(EntrustStockInfo info,String buyPrice);
+    void sellStock(EntrustStockInfo info,String sellPrice);
     //撤单
-    boolean revokeMyEntrust(String accountId,String entrustId);
+    boolean revokeMyEntrust(String entrustId);
 
 
     //购买股票

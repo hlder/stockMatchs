@@ -4,7 +4,7 @@ const httpUtil = require('../../utils/httpUtil.js')
 const app = getApp()
 
 var that;
-
+var accountId;
 Page({
   /**
    * 页面的初始数据
@@ -20,7 +20,7 @@ Page({
    */
   onLoad: function (options) {
     that = this;
-
+    accountId = options.accountId;
     httpUtil.doPost({
       app: app,
       url: appParams.queryMyHolderInfos,
@@ -43,7 +43,18 @@ Page({
   onReady: function () {
   
   },
-
+  onBuyClick: function (e) {
+    // pages / actions / buy / buy
+    // accountId = 1 & stockCodeStr=sz002471 & type=0
+    wx.navigateTo({
+      url: '/pages/actions/buy/buy?accountId=' + accountId + '&type=0&stockCodeStr=' + e.currentTarget.id
+    })
+  },
+  onSellClick: function (e) {
+    wx.navigateTo({
+      url: '/pages/actions/buy/buy?accountId=' + accountId + '&type=1&stockCodeStr=' + e.currentTarget.id
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

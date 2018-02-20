@@ -57,13 +57,13 @@
   </view>
 </view>
 <view class="bg_controll flex-wrp">
-  <view class="controll_item">
+  <view bindtap="onBuyClick" class="controll_item">
     <image class="controll_btn" src='../../images/controll_btn_icon1.png'></image>
-    <view class="controll_text">卖出</view>
-  </view>
-  <view class="controll_item">
-    <image class="controll_btn" src='../../images/controll_btn_icon2.png'></image>
     <view class="controll_text">买入</view>
+  </view>
+  <view bindtap="onSellClick" class="controll_item">
+    <image class="controll_btn" src='../../images/controll_btn_icon2.png'></image>
+    <view class="controll_text">卖出</view>
   </view>
   <view class="controll_item">
     <image bindtap="onRevokeClick" class="controll_btn" src='../../images/controll_btn_icon3.png'></image>

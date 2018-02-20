@@ -47,11 +47,11 @@
       </view>
     </view>
     <view class="list_layout_bottom" wx:if="{{selectIndex==index}}">
-      <view class="tab_item_bottom">
+      <view bindtap="onBuyClick" id="{{item.stockCodeStr}}" class="tab_item_bottom">
         <image class="img_item_bottom" src="../../images/controll_btn_icon1.png"></image>
         <view>买入</view>
       </view>
-      <view class="tab_item_bottom">
+      <view bindtap="onSellClick" id="{{item.stockCodeStr}}" class="tab_item_bottom">
         <image class="img_item_bottom" src="../../images/controll_btn_icon2.png"></image>
         <view>卖出</view>
       </view>

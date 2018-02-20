@@ -1,5 +1,7 @@
 //index.js
 //获取应用实例
+const appParams = require('../../utils/appParams.js')
+const httpUtil = require('../../utils/httpUtil.js')
 const app = getApp()
 var that;
 var matchId;
@@ -11,9 +13,7 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../applyMatch/applyMatch?matchId=' + matchId
-    })
+    
   },
   onLoad: function (options) {
     that = this;
@@ -40,23 +40,32 @@ Page({
   onLoadUserSuccess: function (detail,code){
     console.log("code:" + code);
     console.log("encryptedData:", detail);
-    wx.request({
-      url: 'http://192.168.1.177:8088/loginWx', //仅为示例，并非真实的接口地址
-      method: 'POST',
+
+
+    httpUtil.doPost({
+      app: app,
+      url: appParams.loginUrl,
       data: {
         encryptedData: '' + detail.encryptedData,
         iv: '' + detail.iv,
         code: '' + code
       },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
       success: function (res) {
-        console.log("登录成功:",res.data)
-        app.globalData.tokenUser = res.data.data;
-      }
-    })
+        console.log("登录成功:", res.data)
+        var reqData = res.data.data;
 
+        app.globalData.tokenUser = reqData;
+        if (reqData.def_account_id>0){//有默认的比赛，直接进入默认比赛首页
+          wx.navigateTo({
+            url: '/pages/home/home?accountId=' + reqData.def_account_id
+          });
+        }else{//没有默认的比赛，跳转报名页面
+          wx.navigateTo({
+            url: '../applyMatch/applyMatch?matchId=' + matchId
+          });
+        }
+      }
+    });
   }
 })
   

@@ -40,6 +40,18 @@ Page({
       }
     });
   },
+  onBuyClick:function(){
+    // pages / actions / buy / buy
+    // accountId = 1 & stockCodeStr=sz002471 & type=0
+    wx.navigateTo({
+      url: '/pages/actions/buy/buy?accountId=' + accountId +'&type=0'
+    })
+  },
+  onSellClick:function(){
+    wx.navigateTo({
+      url: '/pages/actions/buy/buy?accountId=' + accountId + '&type=1'
+    })
+  },
   onHolderClick:function(){//点击持仓按钮
     wx.navigateTo({
       url: '../holder/holder?accountId=' + accountId

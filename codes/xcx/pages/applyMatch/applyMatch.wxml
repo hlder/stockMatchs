@@ -4,11 +4,14 @@
 
 <form bindsubmit="formSubmit">
 
-  <view class="text-title">填写信息</view>
+  <view class="text-title">
+    报名参加:{{matchInfo.match_name}}
+    <view>{{matchInfo.match_note}}</view>
+  </view>
   <view class="form-infos">
     <view class="flex-wrp" style="flex-direction:row;">
       <view class="flex-item-text">姓名:</view>
-      <view class="view-line-h" ></view>
+      <view class="view-line-h"></view>
       <input name="name" class="flex-item-input" placeholder-class="placeholder-apply" placeholder="请输入您的名称"></input>
     </view>
     <view class="view-line"></view>

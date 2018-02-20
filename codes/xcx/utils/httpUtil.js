@@ -1,11 +1,13 @@
 
 function doPost(params) {
+  // console.log("tokenUser:", params.app.globalData.tokenUser);
   if (params.app.globalData.tokenUser!=null){
     params.data.userId = params.app.globalData.tokenUser.id;
     params.data.token = params.app.globalData.tokenUser.token;
   }
 
-  console.log("tokenUser:", params.data);
+  console.log("请求:", params.url, params.data);
+  // console.log("tokenUser:", params.data);
   wx.request({
     url: params.url, //仅为示例，并非真实的接口地址
     method: 'POST',
@@ -13,7 +15,21 @@ function doPost(params) {
     header: {
       'content-type': 'application/x-www-form-urlencoded' // 默认值
     },
-    success: params.success,
+    // success: params.success,
+    success: function (res){
+      console.log("返回:" , res.data);
+      if (!res.data.hasOwnProperty("code") || res.data.code == 0) {//成功
+        if (params.success != null) {
+          params.success(res);
+        }
+      } else if (res.data.hasOwnProperty("msg")){//抱错
+        wx.showToast({
+          title: '' + res.data.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },
     fail: params.fail
   })
 }

@@ -53,7 +53,9 @@ Page({
       selectStockCode: temBean.stock_code,
       selectStockCodeStr: temBean.stock_code_str,
       selectStockName: temBean.stock_name,
+      inputPrice: temBean.now_price
     });
+    prevPage.setCanStockNum();
 
     wx.navigateBack({
       delta: 1

@@ -21,7 +21,7 @@ public class AccountController extends BaseController {
     AccountService accountService;
 
     //查询我的持仓
-    @RequestMapping(value="/queryMyHolderInfos",method = RequestMethod.POST)
+    @RequestMapping(value="/queryMyHolderInfos")
     @ResponseBody
     public Map<String,Object> queryMyHolderInfos(String token,String userId,String accountId){
         Map<String,Object> checkMap=checkToken(token,userId+"");
@@ -75,7 +75,7 @@ public class AccountController extends BaseController {
         if(checkMap!=null){
             return checkMap;
         }
-        boolean flag=accountService.revokeMyEntrust(accountId,entrustId);
+        boolean flag=accountService.revokeMyEntrust(entrustId);
         if(flag){//true
             return getNoDataMap(ERROR_CODE_SUCCESS);
         }else{

@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    matchInfo:null,
+
     isShowTitleBanner:false,
     bannerWidth:200,
     bannerHeigth:150,
@@ -33,10 +35,13 @@ Page({
       app:app,
       url: appParams.queryApplyMatch,
       data: {
-        matchCode: '1'
+        matchCode: '' + matchId
       },
       success: function (res) {
         console.log(res.data)
+        that.setData({
+          matchInfo: res.data.data
+        });
         var bl = parseFloat(res.data.data.apply_banner_height) / parseFloat(res.data.data.apply_banner_width);
         var isShowProfession = false, isShowClass = false, isShowStuNum = false;
 
@@ -55,7 +60,6 @@ Page({
         } else {
           isShowStuNum = false;
         }
-
         that.chanageBanner(parseFloat(bl), res.data.data.apply_banner, isShowProfession, isShowClass, isShowStuNum);
 
       }

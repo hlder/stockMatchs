@@ -24,18 +24,43 @@ public class BaseController  {
     public Map<String,Object> checkToken(String token,String userId){
         String reqtoken=redisService.get("loginTokenUserId"+userId);
         System.out.println("请求用户:userId:"+userId+"    reqtoken:"+reqtoken);
-//        if(reqtoken==null){//token有问题,重新登录
-//            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
-//        }
-//        if(!reqtoken.equals(token)){//token有问题,重新登录
-//            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"你的账号已再其他地方登录！");
-//        }
+        if(reqtoken==null){//token有问题,重新登录
+            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
+        }
+        if(!reqtoken.equals(token)){//token有问题,重新登录
+            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"你的账号已再其他地方登录！");
+        }
         return null;
     }
 
+    private String getCodeMsg(long code){
+        if(code==ERROR_CODE_SUCCESS){
+            return "成功";
+        }
+        if(code==ERROR_CODE_LOGIN_FAILD){
+            return "登录失败";
+        }
+        if(code==ERROR_CODE_NO_DATA){
+            return "没有数据";
+        }
+        if(code==ERROR_CODE_ALERADY){
+            return "您已报名了此比赛，不用重复报名!";
+        }
+        if(code==ERROR_CODE_PARAMS){
+            return "参数错误";
+        }
+        if(code==ERROR_NO_MONEY){
+            return "您没有足够的资金！";
+        }
+        if(code==ERROR_NO_HOLDER){
+            return "您的持仓不够!";
+        }
+        return "发生错误";
+
+    }
 
     public Map<String,Object> getNoDataMap(long code){
-        String msg="";
+        String msg=getCodeMsg(code);
         if(code==ERROR_CODE_SUCCESS){//成功
             msg="成功";
         }

@@ -16,6 +16,7 @@ public class MatchController extends BaseController {
     @Autowired
     MatchService matchService;
 
+    //报名
     @RequestMapping(value="/applyMatch",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> applyMatch(String token,String userId,String matchId,String name,String phoneNum,String authNum,String profession,String stuClass,String stuNum,

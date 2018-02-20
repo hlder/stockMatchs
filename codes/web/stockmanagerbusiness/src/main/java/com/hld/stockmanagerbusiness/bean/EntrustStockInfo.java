@@ -11,9 +11,18 @@ public class EntrustStockInfo {
     private long type;
     private String entrust_num;
     private long vol_num;
+    private String vol_price;
     private Date entrust_time;
     private long user_id;
     private long account_id;
+
+    public String getVol_price() {
+        return vol_price;
+    }
+
+    public void setVol_price(String vol_price) {
+        this.vol_price = vol_price;
+    }
 
     public long getId() {
         return id;
