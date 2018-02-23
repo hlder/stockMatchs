@@ -14,12 +14,14 @@ public interface AccountMapper {
     @Select("select * from user_info_account where id=#{id}")
     AccountInfo queryAccountById(@Param("id") String id);
 
-    @Insert("insert into user_info_account (user_id,match_id,account_name,phone_num,profession,stu_class,stu_num,total_assets,init_total_assets) values(#{userId},#{matchId},#{name},#{phoneNum},#{profession},#{stuClass},#{stuNum},#{total_assets},#{init_total_assets})")
-    void insertAccount(@Param("userId") String userId,@Param("matchId") String matchId,@Param("name") String name,@Param("phoneNum") String phoneNum,@Param("profession") String profession,@Param("stuClass") String stuClass,@Param("stuNum") String stuNum,@Param("total_assets") String total_assets,@Param("init_total_assets") String init_total_assets);
+    @Insert("insert into user_info_account (user_id,match_id,account_name,phone_num,profession,stu_class,stu_num,total_assets,init_total_assets,can_use_assets) values(#{userId},#{matchId},#{name},#{phoneNum},#{profession},#{stuClass},#{stuNum},#{total_assets},#{init_total_assets},#{can_use_assets})")
+    void insertAccount(@Param("userId") String userId,@Param("matchId") String matchId,@Param("name") String name,@Param("phoneNum") String phoneNum,@Param("profession") String profession,@Param("stuClass") String stuClass,@Param("stuNum") String stuNum,@Param("total_assets") String total_assets,@Param("init_total_assets") String init_total_assets,@Param("can_use_assets") String can_use_assets);
 
     //修改账户的剩余的钱
     @Update("update user_info_account set can_use_assets=#{canUserAssets} where id=#{accountId}")
     int chanageCanUseMoney(@Param("accountId") String accountId,@Param("canUserAssets") String canUserAssets);
 
 
+    @Update("update user_info set def_account_id=#{accountId} where id=#{userId}")
+    void updateDefAccount(@Param("userId") String userId,@Param("accountId") String accountId);
 }

@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
+import com.hld.stockmanagerbusiness.bean.HolderInfo;
+import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import com.hld.stockmanagerbusiness.utils.HttpUtil;
 import org.apache.log4j.Logger;
@@ -29,6 +31,12 @@ public class ScheduledUpdateUserInfo {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    StockInfoMapper stockInfoMapper;
+
+
+
+
 
     private boolean todayIsRest=true;//是否休息，默认休息
 
@@ -51,29 +59,54 @@ public class ScheduledUpdateUserInfo {
 
 
     //每日凌晨00:01分将今天所有的未处理的委托都撤单
+    //将持仓中的可用数量改为全部数量
     @Scheduled(cron="0 01 00 ? * *")
     public void chanageEntrustInfo(){
         List<EntrustStockInfo> listAll=accountService.queryAllEntrust();
         for(EntrustStockInfo item:listAll){
             accountService.revokeMyEntrust(""+item.getId());//执行撤单
         }
+        //将可用更高为总持仓
+        stockInfoMapper.updateHolderCanUse();
     }
 
 
+    @Scheduled(cron="0/20 * * * * ?")
+    public void scranHolder(){
+        if(!isDoEntrust()){//非交易时间
+            return;
+        }
+        List<String> listData = stockInfoMapper.queryAllHolderStock();
+        for(String item:listData){
+            String jsonStr=HttpUtil.sendPost("http://47.100.180.170:8080/stockServer/queryStockInfoByCode?stockCode="+item);
+            try{
+                JSONObject json=JSON.parseObject(jsonStr);
+                String tradingStatus=json.getString("tradingStatus");
+                if("TRADING_STATUS_NORMAL".equals(tradingStatus)){//正常状态
+                    String lastPx=json.getString("lastPx");
+                    stockInfoMapper.updateHolderNowPrice(item,lastPx);
+                }
+
+            }catch (JSONException e){
+//                e.printStackTrace();
+            }
+        }
+    }
 
     //每秒执行查询委托
     @Scheduled(cron="0/1 * * * * ?")
     public void scranEntrust(){
-        if(!isDoEntrust()){//非交易时间
-            return;
-        }
+//        if(!isDoEntrust()){//非交易时间
+//            return;
+//        }
 
+
+//        System.out.println("====================================================================================");
 
         List<EntrustStockInfo> listAll=accountService.queryAllEntrust();
         for(EntrustStockInfo item:listAll){
 
             String jsonStr=HttpUtil.sendPost("http://47.100.180.170:8080/stockServer/queryStockInfoByCode?stockCode="+item.getStock_code_str());
-
             try{
                 JSONObject json=JSON.parseObject(jsonStr);
                 String tradingStatus=json.getString("tradingStatus");
@@ -87,7 +120,9 @@ public class ScheduledUpdateUserInfo {
                         if(tradePx>0&&entrustPrice>=tradePx){//可以成交,按照卖一价购买
 //                            item.getEntrust_num()//委托数量
                             accountService.buyStock(item,tradePx+"");
-//                            System.out.println("买入了"+item.getId()+"......"+item.getStock_name()+"  委托价:"+entrustPrice+"   卖一价:"+tradePx);
+//                            System.out.println("买入了"+item.getId()+"......"+item.getStock_name());
+                        }else{
+//                            System.out.println("不买:"+item.getStock_name()+"  委托价:"+entrustPrice+"   卖一价:"+tradePx);
                         }
                     }else if(item.getType()==2&&buyArr!=null&&buyArr.size()>=5){//卖出,且有人买
                         float entrustPrice=Float.parseFloat(item.getEntrust_price()+"");

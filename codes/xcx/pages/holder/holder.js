@@ -21,20 +21,7 @@ Page({
   onLoad: function (options) {
     that = this;
     accountId = options.accountId;
-    httpUtil.doPost({
-      app: app,
-      url: appParams.queryMyHolderInfos,
-      data: {
-        accountId: '' + options.accountId
-      },
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          hodlerBaseInfo: res.data.hodlerBaseInfo,
-          listData: res.data.listData
-        });
-      }
-    });
+    
   },
 
   /**
@@ -59,7 +46,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    httpUtil.doPost({
+      app: app,
+      url: appParams.queryMyHolderInfos,
+      data: {
+        accountId: '' + accountId
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          hodlerBaseInfo: res.data.hodlerBaseInfo,
+          listData: res.data.listData
+        });
+      }
+    });
   },
 
   /**

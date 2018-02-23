@@ -9,6 +9,9 @@ public interface UserMapper {
     @Select("select id,nicke_name,head_url,wx_union_id,wx_open_id,def_account_id,sex,province,city,privilege from user_info WHERE wx_union_id=#{0}")
     UserInfo queryUserByUnionId(String unionid);
 
+    @Select("select def_account_id from user_info WHERE id=#{userId}")
+    String queryDefAccountId(@Param("userId") String userId);
+
     //添加一条用户信息
     @Insert("insert into user_info(nicke_name,head_url,wx_union_id,wx_open_id,sex,province,city,privilege,register_time)" +
             " values(#{nicke_name},#{head_url},#{wx_union_id},#{wx_open_id},#{sex},#{province},#{city},#{privilege},now())")

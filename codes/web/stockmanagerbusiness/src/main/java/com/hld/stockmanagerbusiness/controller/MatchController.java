@@ -1,6 +1,8 @@
 package com.hld.stockmanagerbusiness.controller;
 
+import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.MatchInfo;
+import com.hld.stockmanagerbusiness.service.AccountService;
 import com.hld.stockmanagerbusiness.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.hld.stockmanagerbusiness.utils.StringUtils;
@@ -15,6 +17,9 @@ import java.util.Map;
 public class MatchController extends BaseController {
     @Autowired
     MatchService matchService;
+
+    @Autowired
+    AccountService accountService;
 
     //报名
     @RequestMapping(value="/applyMatch",method = RequestMethod.POST)
@@ -52,7 +57,11 @@ public class MatchController extends BaseController {
         }else if(code==ERROR_CODE_PARAMS){//参数错误
             return getErrorMap(ERROR_CODE_ALERADY,"您输入的参数有误!");
         }
-        return getNoDataMap(code);
+
+        //报名成功,获取默认的账户信息
+        AccountInfo info=accountService.queryDefAccountInfo(userId+"");
+        return getSuccessMap(info);
+//        return getNoDataMap(code);
     }
 
 

@@ -46,7 +46,12 @@ public class HomeServiceImpl implements HomeService {
         map.put("accountName",""+accountInfo.getAccount_name());
         map.put("allAsset",""+accountInfo.getTotal_assets());//总资产
         map.put("priceTimesOneMonth",""+accountInfo.getDeal_count());//交易次数
-        map.put("rightRate",""+(accountInfo.getTotal_deal_success_num()/accountInfo.getDeal_count()));//成功率
+
+        if(accountInfo.getDeal_count()==0){
+            map.put("rightRate","0");//成功率
+        }else{
+            map.put("rightRate",""+(accountInfo.getTotal_deal_success_num()/accountInfo.getDeal_count()));//成功率
+        }
         map.put("allIncomeRate",""+df.format(accountInfo.getTotal_income_rate()*100)+"%");//总收益率
         map.put("allIncome",""+accountInfo.getTotal_income());//总收入
         map.put("incomeRateMonth",""+df.format(accountInfo.getMonth_income_rate()*100)+"%");//本月收益率

@@ -1,5 +1,6 @@
 package com.hld.stockmanagerbusiness.service;
 
+import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfoHistory;
 
@@ -24,6 +25,7 @@ public interface AccountService {
     //撤单
     boolean revokeMyEntrust(String entrustId);
 
+    AccountInfo queryDefAccountInfo(String userId);
 
     //购买股票
     int entrustBuyStock(String accountId,String stockCode,String stockCodeStr,String stockName,String entrustPrice,int count);

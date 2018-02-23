@@ -21,7 +21,7 @@ public class AccountController extends BaseController {
     AccountService accountService;
 
     //查询我的持仓
-    @RequestMapping(value="/queryMyHolderInfos")
+    @RequestMapping(value="/queryMyHolderInfos",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> queryMyHolderInfos(String token,String userId,String accountId){
         Map<String,Object> checkMap=checkToken(token,userId+"");

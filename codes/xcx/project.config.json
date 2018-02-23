@@ -26,7 +26,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": 0,
@@ -87,6 +87,12 @@
 					"name": "搜索股票",
 					"pathName": "pages/actions/searchStock/searchStock",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": "matchId=1"
 				},
 				{
 					"id": -1,

@@ -9,10 +9,19 @@ import java.util.Map;
 @Mapper
 public interface StockInfoMapper {
 
+    @Select("select DISTINCT stock_code_str from user_holder_stock")
+    List<String> queryAllHolderStock();
+
+    @Update("update user_holder_stock set usable_num=holder_num")
+    void updateHolderCanUse();
+
+    @Update("update user_holder_stock set now_price=#{nowPrice} where stock_code_str=#{stockCodeStr}")
+    void updateHolderNowPrice(@Param("stockCodeStr") String stockCodeStr,@Param("nowPrice") String nowPrice);
+
     @Select("SELECT * FROM user_holder_stock where account_id=#{accountId}")
     List<HolderInfo> queryMyHolderByAccountId(@Param("accountId") String accountId);
 
-    @Select("SELECT * FROM lhy_sotck_match.user_holder_stock where account_id=#{accountId} and stock_code_str='#{stockCodeStr}'")
+    @Select("SELECT * FROM lhy_sotck_match.user_holder_stock where account_id=#{accountId} and stock_code_str=#{stockCodeStr}")
     List<HolderInfo> queryMyHolderWithStock(@Param("accountId") String accountId,@Param("stockCodeStr") String stockCodeStr);
 
 

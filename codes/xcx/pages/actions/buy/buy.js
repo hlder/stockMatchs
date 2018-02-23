@@ -5,6 +5,7 @@ const app = getApp()
 
 var that;
 var accountId;
+var isDoTimer=true;
 Page({
   /**
    * 页面的初始数据
@@ -67,6 +68,8 @@ Page({
       inputPrice: item.nowPrice
     });
     that.setCanStockNum();
+
+    this.loadBuyAndSell5();
   },
   setCanStockNum: function (){
     if (that.data.uiType==0){//买入
@@ -100,12 +103,12 @@ Page({
 
     }
     console.log("setCanStockNum:......");
-    
-
   },
   dataTimer: function () {//定时器，定时加载股票信息
     that.loadBuyAndSell5();
-    setTimeout(that.dataTimer, 5000);
+    if (isDoTimer){
+      setTimeout(that.dataTimer, 5000);
+    }
   },
   loadBuyAndSell5:function(){
     if (that.data.selectStockCodeStr == null) {
@@ -178,7 +181,17 @@ Page({
         },
         success: function (res) {
           // res.data
-          
+          //委托成功
+          if(res.data.code==0){//成功
+            wx.showToast({
+              title: '委托成功!',
+              icon: 'none',
+              duration: 2000,
+              success: function () {//弹框结束了
+                wx.navigateBack();
+              }
+            })
+          }
 
         }
       });
@@ -308,7 +321,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    isDoTimer=false;
   },
 
   /**

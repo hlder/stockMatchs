@@ -24,7 +24,12 @@ public class MatchServiceImpl implements MatchService{
         if(list==null|list.size()==0){//没有数据可以报名
             MatchInfo matchInfo=queryApplyMatchInfo(matchId);
             if(matchInfo!=null){
-                accountMapper.insertAccount( userId, matchId,  name,  phoneNum,  profession,  stuClass,  stuNum,matchInfo.getInit_total_assets(),matchInfo.getInit_total_assets());
+                accountMapper.insertAccount( userId, matchId,  name,  phoneNum,  profession,  stuClass,  stuNum,matchInfo.getInit_total_assets(),matchInfo.getInit_total_assets(),matchInfo.getInit_total_assets());
+                List<AccountInfo> list2=accountMapper.queryAccountByUserId(userId+"",matchId+"");
+                if(list2.size()>0){//有值,报名成功后，将def_account_id改为此账户
+                    AccountInfo info=list2.get(0);
+                    accountMapper.updateDefAccount(userId+"",info.getId()+"");
+                }
             }else{
                 return BaseController.ERROR_CODE_PARAMS;
             }

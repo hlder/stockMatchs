@@ -8,6 +8,7 @@ import com.hld.stockmanagerbusiness.controller.BaseController;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
 import com.hld.stockmanagerbusiness.mapper.EntrustMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
+import com.hld.stockmanagerbusiness.mapper.UserMapper;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class AccountServiceImpl implements AccountService {
     AccountMapper accountMapper;
     @Autowired
     EntrustMapper entrustMapper;
+    @Autowired
+    UserMapper userMapper;
 
     DecimalFormat df = new DecimalFormat("0.00");
 
@@ -128,7 +131,7 @@ public class AccountServiceImpl implements AccountService {
                 bean.setStock_code_str(""+info.getStock_code_str());
                 bean.setStock_name(""+info.getStock_name());
                 bean.setCost_price(buyPrice);
-                bean.setNow_price("0");
+                bean.setNow_price(buyPrice);
                 bean.setHolder_num(Long.parseLong(info.getEntrust_num()));
                 bean.setUsable_num(0);
 
@@ -261,8 +264,13 @@ public class AccountServiceImpl implements AccountService {
             return BaseController.ERROR_NO_HOLDER;
         }
         long holderCount=0;
+        long canUseCount=0;
         for(HolderInfo info:myHolder){
             holderCount+=info.getHolder_num();
+            canUseCount+=info.getUsable_num();
+        }
+        if(canUseCount<count){//持仓不够
+            return BaseController.ERROR_NO_HOLDER;
         }
         if(holderCount<count){//持仓不够
             return BaseController.ERROR_NO_HOLDER;
@@ -281,6 +289,11 @@ public class AccountServiceImpl implements AccountService {
         return listData;
     }
 
+    @Override
+    public AccountInfo queryDefAccountInfo(String userId) {
+        String accountId=userMapper.queryDefAccountId(userId);
+        return accountMapper.queryAccountById(accountId);
+    }
 }
 
 
