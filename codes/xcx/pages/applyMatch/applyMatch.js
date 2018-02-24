@@ -126,7 +126,7 @@ Page({
             icon: 'none',
             duration: 2000,
             success:function(){//弹框结束了
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '/pages/home/home?accountId=' + res.data.data.id
               });
             }

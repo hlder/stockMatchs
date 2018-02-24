@@ -16,7 +16,24 @@ Page({
     buttons:null,
     matchInfo:null
   },
-
+  skip:function(skipType,value){
+    console.log("skipType:", skipType,"    value:",value);
+    if (skipType==3){//跳转html解析
+      wx.navigateTo({
+        url: '/pages/h5/h5?value=' + value
+      });
+    }
+  },
+  onBannerItemClick:function(e){//点击banner
+    console.log();
+    var item=that.data.banners[parseInt(e.currentTarget.id)];
+    that.skip(item.type, item.skip);
+  },
+  onButtonItemClick:function(e){//功能按钮的点击事件
+    console.log(e.currentTarget.id);
+    var item = that.data.buttons[parseInt(e.currentTarget.id)];
+    that.skip(item.type, item.skip);
+  },
   /**
    * 生命周期函数--监听页面加载
    */

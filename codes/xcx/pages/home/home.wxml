@@ -3,13 +3,13 @@
 <swiper wx:if="{{banners!=null}}" indicator-dots="true"  autoplay="true" interval="5000" duration="200">  
   <block wx:for="{{banners}}">  
   <swiper-item class="banner">  
-    <image src="{{item.imgUrl}}" class="slide-image" width="355px" height="150px"/>  
+    <image  id="{{index}}" src="{{item.imgUrl}}" bindtap="onBannerItemClick" class="slide-image" width="355px" height="150px"/>  
   </swiper-item>  
   </block>  
 </swiper>
 <view wx:if="{{buttons!=null}}" class="flex-wrp" style='margin-top: 25rpx;'>
   <block wx:for="{{buttons}}">
-    <view class="flex-btn-item">
+    <view id="{{index}}" class="flex-btn-item" bindtap="onButtonItemClick">
       <image class='btn_img' src='{{item.imgUrl}}'></image>
       <view class="btn_text">支付宝</view>
     </view>

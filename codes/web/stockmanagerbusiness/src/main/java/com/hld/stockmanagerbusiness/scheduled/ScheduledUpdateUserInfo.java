@@ -71,11 +71,12 @@ public class ScheduledUpdateUserInfo {
     }
 
 
+    //每过20秒 更新所有人持仓的现价
     @Scheduled(cron="0/20 * * * * ?")
     public void scranHolder(){
-        if(!isDoEntrust()){//非交易时间
-            return;
-        }
+//        if(!isDoEntrust(false)){//非交易时间
+//            return;
+//        }
         List<String> listData = stockInfoMapper.queryAllHolderStock();
         for(String item:listData){
             String jsonStr=HttpUtil.sendPost("http://47.100.180.170:8080/stockServer/queryStockInfoByCode?stockCode="+item);
@@ -93,15 +94,13 @@ public class ScheduledUpdateUserInfo {
         }
     }
 
-    //每秒执行查询委托
+    //每秒查询委托列表是否可以成交
     @Scheduled(cron="0/1 * * * * ?")
     public void scranEntrust(){
-//        if(!isDoEntrust()){//非交易时间
+//        if(!isDoEntrust(true)){//非交易时间
 //            return;
 //        }
 
-
-//        System.out.println("====================================================================================");
 
         List<EntrustStockInfo> listAll=accountService.queryAllEntrust();
         for(EntrustStockInfo item:listAll){
@@ -150,8 +149,8 @@ public class ScheduledUpdateUserInfo {
 
 
 
-    //判断是否执行委托
-    private boolean isDoEntrust(){
+    //判断是否处于休息时间
+    private boolean isDoEntrust(boolean isEntrust){
         if(todayIsRest){//休息
             return false;
         }
@@ -159,19 +158,26 @@ public class ScheduledUpdateUserInfo {
         Date now=Calendar.getInstance().getTime();
         try {
             String nowDate=dateFormat.format(now);
-
             Date date1 = format.parse(nowDate+" 09:30:02");
             Date date2 = format.parse(nowDate+" 11:29:58");
 
             Date date3 = format.parse(nowDate+" 13:00:02");
             Date date4 = format.parse(nowDate+" 14:59:58");
+
+            if(!isEntrust){
+                date1 = format.parse(nowDate+" 09:28:02");
+                date2 = format.parse(nowDate+" 11:30:58");
+
+                date3 = format.parse(nowDate+" 13:00:02");
+                date4 = format.parse(nowDate+" 15:00:58");
+            }
 //            Date date4 = format.parse(nowDate+" 19:59:58");
 
             long nowTime=now.getTime();
 
-            System.out.println("date1:"+format.format(date1)+"   now:"+format.format(now));
+//            System.out.println("date1:"+format.format(date1)+"   now:"+format.format(now));
             if((nowTime>date1.getTime()&&nowTime<date2.getTime())||(nowTime>date3.getTime()&&nowTime<date4.getTime())){
-                System.out.println("可以交易");
+//                System.out.println("可以交易");
                 return true;
             }
         } catch (ParseException e) {
