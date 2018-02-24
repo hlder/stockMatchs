@@ -11,6 +11,7 @@ public class AccountInfo {
     private String stu_class;
     private String stu_num;
     private String account_name;
+    private String init_total_assets;
     private String total_assets;
     private String can_use_assets;
     private long deal_count;
@@ -27,6 +28,14 @@ public class AccountInfo {
 
     public String getCan_use_assets() {
         return can_use_assets;
+    }
+
+    public String getInit_total_assets() {
+        return init_total_assets;
+    }
+
+    public void setInit_total_assets(String init_total_assets) {
+        this.init_total_assets = init_total_assets;
     }
 
     public void setCan_use_assets(String can_use_assets) {

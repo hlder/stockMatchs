@@ -37,11 +37,9 @@ public class AccountServiceImpl implements AccountService {
         List<HolderInfo> listData = stockInfoMapper.queryMyHolderByAccountId(accountId);//拿到账户的所有持仓信息
 
         List<Map<String,Object>> listDataMap=new ArrayList<>();
-        float holderFund=0;
         for(HolderInfo holderInfo:listData){
             float price=0;
             try{price=Float.parseFloat(""+holderInfo.getNow_price());}catch (NumberFormatException e){}
-            holderFund+=price;
 
             Map<String,Object> temItemMap=new HashMap<>();
             temItemMap.put("stockCode",""+holderInfo.getStock_code());
@@ -66,15 +64,30 @@ public class AccountServiceImpl implements AccountService {
         }
 
         AccountInfo accountInfo=accountMapper.queryAccountById(accountId);
+
+        float allHolderAssets= stockInfoMapper.queryUserAllValue(accountId);//总持有市值
+
+        float canUseAssets = Float.parseFloat(accountInfo.getCan_use_assets());//可用资产
+        float initAllAssets=Float.parseFloat(accountInfo.getInit_total_assets());//初始总资产
+        float yestodayAllAssets=0;
+        try{
+            yestodayAllAssets=Float.parseFloat(""+accountMapper.queryYestodayTotalAssets(accountId));//昨日的总资产
+        }catch (NumberFormatException e){}
+
+
+
         Map<String,Object> temMap=new HashMap<>();
-        temMap.put("allIncome",""+ accountInfo.getTotal_income());//总盈亏
+        temMap.put("allIncome",""+ (canUseAssets+allHolderAssets-initAllAssets));//总盈亏
 
-
-        temMap.put("allIncomeRate",""+ df.format(accountInfo.getTotal_income_rate()*100)+"%");//总收益率
-        temMap.put("todayIncome",""+ accountInfo.getTotal_income());//今日盈亏
+        temMap.put("allIncomeRate",""+ df.format(((canUseAssets+allHolderAssets-initAllAssets)/initAllAssets)*100)+"%");//总收益率
+        if(yestodayAllAssets>0){
+            temMap.put("todayIncome",""+(canUseAssets+allHolderAssets-yestodayAllAssets));//今日盈亏
+        }else{
+            temMap.put("todayIncome","0");//今日盈亏
+        }
         temMap.put("canUseFund",""+ accountInfo.getCan_use_assets());//可用资产
-        temMap.put("allFund",""+ accountInfo.getTotal_assets());//总资产
-        temMap.put("holderFund",""+holderFund);
+        temMap.put("allFund",""+ (canUseAssets+allHolderAssets));//总资产
+        temMap.put("holderFund",""+allHolderAssets);
 
         map.put("listData",listDataMap);
         map.put("hodlerBaseInfo",temMap);
@@ -294,6 +307,15 @@ public class AccountServiceImpl implements AccountService {
         String accountId=userMapper.queryDefAccountId(userId);
         return accountMapper.queryAccountById(accountId);
     }
+
+
+    @Override
+    public void addAccountToHis(){
+        accountMapper.addAccountToHis();
+    }
+
+
+
 }
 
 

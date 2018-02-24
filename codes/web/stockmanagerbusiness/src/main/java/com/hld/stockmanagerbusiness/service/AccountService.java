@@ -34,4 +34,7 @@ public interface AccountService {
 
     //模糊搜索股票信息
     List<Map<String,Object>> queryStockFuzzy(String searchStr);
+
+    //每日备份账户记录
+    void addAccountToHis();
 }

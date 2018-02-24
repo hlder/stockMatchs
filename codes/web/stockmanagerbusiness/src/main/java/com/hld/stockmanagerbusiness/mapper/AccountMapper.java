@@ -24,4 +24,27 @@ public interface AccountMapper {
 
     @Update("update user_info set def_account_id=#{accountId} where id=#{userId}")
     void updateDefAccount(@Param("userId") String userId,@Param("accountId") String accountId);
+
+    //将所有的账户信息都存到历史表中,每天一存
+    @Insert("insert into user_info_account_his (account_id,user_id,total_assets,can_use_assets,deal_count) select id,user_id,total_assets,can_use_assets,deal_count from user_info_account")
+    void addAccountToHis();
+
+    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval 1 day))=TO_DAYS(create_time) and account_id=#{accountId}")
+    String queryYestodayTotalAssets(@Param("accountId") String accountId);
+
+    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval #{days} day))=TO_DAYS(create_time) and account_id=#{accountId}")
+    String queryHisTotalAssets(@Param("accountId") String accountId,@Param("days") String days);
+
+    //更新用户的总资产
+    @Update("update user_info_account set total_assets=#{totalAssets} where id=#{id}")
+    void updateTotalAssets(@Param("totalAssets") String totalAssets,@Param("id") String id);
+
+
+    @Update("update user_info_account set total_assets=#{totalAssets},total_income=#{total_income},total_income_rate=#{total_income_rate},week_income=#{week_income},week_income_rate=#{week_income_rate},month_income=#{month_income},month_income_rate=#{month_income_rate} where id=#{id}")
+    void updateAccountIncome(@Param("id") String id,@Param("totalAssets") String totalAssets,@Param("total_income") String total_income,@Param("total_income_rate") String total_income_rate,@Param("week_income") String week_income,@Param("week_income_rate") String week_income_rate,@Param("month_income") String month_income,@Param("month_income_rate") String month_income_rate);
+
+
+    //更新所有人的交易数量
+    @Update("update lhy_sotck_match.user_info_account ua set ua.deal_count=(select count(1) from lhy_sotck_match.user_entrust_stock_his where account_id=ua.id and vol_type=1)")
+    void updateAllDealNum();
 }

@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
 import com.hld.stockmanagerbusiness.bean.HolderInfo;
+import com.hld.stockmanagerbusiness.mapper.AccountMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import com.hld.stockmanagerbusiness.utils.HttpUtil;
@@ -33,12 +35,71 @@ public class ScheduledUpdateUserInfo {
     AccountService accountService;
     @Autowired
     StockInfoMapper stockInfoMapper;
-
-
-
-
+    @Autowired
+    AccountMapper accountMapper;
 
     private boolean todayIsRest=true;//是否休息，默认休息
+
+
+
+    //每日的23:10将账户添加进历史
+    @Scheduled(cron="0 10 23 ? * *")
+    public void addAccountToHis() {
+        //更新我的收益，收益率(验算一遍)
+        List<Long> listAllId = stockInfoMapper.queryAllAccountId();
+        for(long itemId:listAllId){
+            AccountInfo info=accountMapper.queryAccountById(itemId+"");
+
+            float allMarketVal=stockInfoMapper.queryUserAllValue(itemId+"");//总市值
+
+            String total7Str=accountMapper.queryHisTotalAssets(""+itemId,"7");
+            String total30Str=accountMapper.queryHisTotalAssets(""+itemId,"30");
+
+            float total7=0;//一周前的总资产
+            float total30=0;//一个月前的总资产
+
+            float canUse=0;//可用资金
+            float initTotalAssets=0;//初始化总资产
+
+            try{total7=Float.parseFloat(""+total7Str);}catch (NumberFormatException e){}
+            try{total30=Float.parseFloat(""+total30Str);}catch (NumberFormatException e){}
+            try{canUse=Float.parseFloat(""+info.getCan_use_assets());}catch (NumberFormatException e){}
+            try{initTotalAssets=Float.parseFloat(info.getInit_total_assets());}catch (NumberFormatException e){}
+            if(initTotalAssets>0){
+                float allIncome=allMarketVal+canUse-initTotalAssets;//总收入
+                float allIncomeRate=allIncome/initTotalAssets;//总收益率
+                float income7=0;//一周收益
+                float income7Rate=0;//一周收益率
+                float income30=0;//一个月收益
+                float income30Rate=0;//一个月收益率
+                if(total7<=0){
+                    total7=initTotalAssets;
+                }
+                if(total30<=0){
+                    total30=initTotalAssets;
+                }
+
+
+                if(total7>0){
+                    income7=allMarketVal+canUse-total7;
+                    income7Rate=income7/total7;
+                }
+                if(total30>0){
+                    income30=allMarketVal+canUse-total30;
+                    income30Rate=total30/total30;
+                }
+                accountMapper.updateAccountIncome(itemId+"",(allMarketVal+canUse)+"",allIncome+"",allIncomeRate+"",income7+"",income7Rate+"",income30+"",income30Rate+"");
+            }
+        }
+        System.out.println("执行完成:更新完成收益率!");
+        //将今天的账户添加进去
+        accountService.addAccountToHis();
+        System.out.println("执行完成:将今天的账户添加进历史!");
+
+        //更新所有人的交易次数
+        accountMapper.updateAllDealNum();
+        System.out.println("执行完成:更新所有人的交易次数!");
+    }
 
     //每日凌晨1:10分进行更新所有人的信息
     @Scheduled(cron="0 10 01 ? * *")
@@ -53,8 +114,6 @@ public class ScheduledUpdateUserInfo {
         if(request.contains(dateFormat.format(calendar.getTime()))){//假期列表中有今天，今天休息
             todayIsRest=true;//今天不开盘
         }
-        //更新我的收益，收益率(验算一遍)
-
     }
 
 

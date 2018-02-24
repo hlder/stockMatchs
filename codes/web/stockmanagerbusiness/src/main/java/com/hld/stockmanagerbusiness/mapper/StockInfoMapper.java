@@ -38,4 +38,15 @@ public interface StockInfoMapper {
 
     @Select("select stock_name,stock_code,stock_code_str,now_price from stock_info where search_str like concat(concat('%',#{searchStr}),'%') limit 0,10")
     List<Map<String,Object>> queryStockFuzzy(@Param("searchStr") String searchStr);
+
+
+    //查询持仓总市值
+    @Select("SELECT sum(now_price*holder_num) FROM user_holder_stock where account_id=#{accountId}")
+    float queryUserAllValue(@Param("accountId") String accountId);
+
+
+
+    //查询出所有的账号ID
+    @Select("select id from user_info_account")
+    List<Long> queryAllAccountId();
 }
