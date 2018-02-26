@@ -4,8 +4,13 @@ ssh root@47.100.180.170
 // ssh上传文件到服务器
 scp /Users/sald/Documents/svnworkspace/stockProject/web2/stockserver/target/stockserver.jar root@47.100.180.170:/root/projects/stockserver
 
+scp /Users/sald/Documents/svnworkspace/gits/stockMatchs/codes/web/stockmanagerbusiness/target/stockmanagerbusiness.jar root@47.100.180.170:/root/projects/stockmanagerbusiness
+
+
 //启动
 nohup java -jar stockserver.jar >temp.txt &
+nohup java -jar stockmanagerbusiness.jar >temp.txt &
+
 //查看进程id
 ps -ef | grep stockserver
 ps -ef | grep redis

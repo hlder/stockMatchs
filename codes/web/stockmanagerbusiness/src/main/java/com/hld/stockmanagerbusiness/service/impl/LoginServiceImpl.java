@@ -48,15 +48,16 @@ public class LoginServiceImpl implements LoginService {
     //执行微信登录
     @Override
     public UserInfo doLoginWx(String encryptedData,String iv,String code){
-//        public static final String WECHAT_AUTH_APPID = "wx87aed6f976b67303";
-//        public static final String WECHAT_AUTH_SECRET = "53f76b0abcb4a30fa850c8c56301d40c";
-//        public static final String WECHAT_AUTH_GRANT_TYPE = "authorization_code";
         if(StringUtils.isEmpty(encryptedData)||StringUtils.isEmpty(iv)||StringUtils.isEmpty(code)){
             System.out.println("数据为空:encryptedData:"+encryptedData+"    iv:"+iv+"    code:"+code);
             return null;
         }
+//        String appId="wx87aed6f976b67303";
+//        String appSecret="53f76b0abcb4a30fa850c8c56301d40c";
+        String appId="wx5f000e25686cf609";
+        String appSecret="e66eb11a2b0d7e103d1259dd072041e3";
 
-        String result=HttpUtil.sendPost("https://api.weixin.qq.com/sns/jscode2session?appid=wx87aed6f976b67303&secret=53f76b0abcb4a30fa850c8c56301d40c&js_code="+code+"&grant_type=authorization_code");
+        String result=HttpUtil.sendPost("https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+appSecret+"&js_code="+code+"&grant_type=authorization_code");
         JSONObject jo= JSON.parseObject(result);
         String session_key=jo.getString("session_key");
 
