@@ -18,10 +18,10 @@ Page({
     bannerHeigth:150,
     bannerImgUrl:"",
     isAuthCodeSend:false,//是否已经发送了验证码
-    timerAuthCodeSend:60,//发送验证码的倒计时
     isShowProfession:false,//是否要输入职业
     isShowClass: false,//是否要输入班级
-    isShowStuNum: false//是否要输入学号
+    isShowStuNum: false,//是否要输入学号
+    countDown:-1//发送验证码倒计时
   },
 
   /**
@@ -89,6 +89,10 @@ Page({
     inputPhoneNum = e.detail.value;
   },
   onSendSmsClick:function(e){//点击发送验证码
+    if (that.data.countDown>0){
+      return;
+    }
+
     console.log('输入的手机号：', inputPhoneNum)
     if (typeof (inputPhoneNum) == "undefined") { 
       wx.showToast({
@@ -97,7 +101,35 @@ Page({
         duration: 2000
       })
     }else{//执行发送验证码
+      that.setData({
+        countDown:60
+      });
+      that.dataTimer();
 
+      httpUtil.doPost({
+        app: app,
+        url: appParams.sendAuthSmsCode,
+        data: {
+          matchId: "" + matchId,
+          phone: "" + inputPhoneNum
+        },
+        success: function (res) {
+          console.log("返回:", res.data)
+          if (res.data.code == 0) {//发送成功
+          }else{//发送验证码失败
+            // that.setData({
+            //   countDown: -1
+            // });
+            wx.showToast({
+              title: '' + res.data.msg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
+          // WxParse.wxParse('article', 'html', res.data.data, that, 5);
+
+        }
+      });
     }
   },
   formSubmit:function(e){
@@ -145,6 +177,20 @@ Page({
     
   },
 
+
+  dataTimer: function () {//定时器，定时加载股票信息
+    // that.loadBuyAndSell5();
+    var count = that.data.countDown;
+    if (count>=0){
+      count--;
+      that.setData({
+        countDown: count
+      });
+      setTimeout(that.dataTimer, 1000);//每秒定时器
+    }
+  },
+
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -2,6 +2,7 @@ package com.hld.stockmanagerbusiness.controller;
 
 import com.hld.stockmanagerbusiness.bean.UserInfo;
 import com.hld.stockmanagerbusiness.service.LoginService;
+import com.hld.stockmanagerbusiness.service.SMSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController extends BaseController{
     @Autowired
     LoginService loginService;
+    @Autowired
+    SMSService smsService;
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
@@ -35,5 +38,14 @@ public class LoginController extends BaseController{
         }
         return getSuccessMap(userInfo);
     }
+
+    //发送验证码
+
+//    @RequestMapping(value="/sendAuthCode",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Object sendAuthCode(String phoneNum){
+////        smsService.sendAuthCode();
+//        return null;
+//    }
 
 }

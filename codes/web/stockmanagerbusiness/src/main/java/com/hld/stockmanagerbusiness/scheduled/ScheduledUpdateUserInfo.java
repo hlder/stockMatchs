@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+//对股票,持仓，市值进行更新
 @Component
 public class ScheduledUpdateUserInfo {
     private Logger logger = Logger.getLogger(ScheduledUpdateUserInfo.class);
@@ -159,8 +160,6 @@ public class ScheduledUpdateUserInfo {
 //        if(!isDoEntrust(true)){//非交易时间
 //            return;
 //        }
-
-
         List<EntrustStockInfo> listAll=accountService.queryAllEntrust();
         for(EntrustStockInfo item:listAll){
 

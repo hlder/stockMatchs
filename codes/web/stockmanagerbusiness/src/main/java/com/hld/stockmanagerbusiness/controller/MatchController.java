@@ -4,6 +4,7 @@ import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.MatchInfo;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import com.hld.stockmanagerbusiness.service.MatchService;
+import com.hld.stockmanagerbusiness.service.SMSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.hld.stockmanagerbusiness.utils.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,10 @@ import java.util.Map;
 public class MatchController extends BaseController {
     @Autowired
     MatchService matchService;
-
     @Autowired
     AccountService accountService;
+    @Autowired
+    SMSService smsService;
 
     //报名
     @RequestMapping(value="/applyMatch",method = RequestMethod.POST)
@@ -56,6 +58,8 @@ public class MatchController extends BaseController {
             return getErrorMap(ERROR_CODE_ALERADY,"您已经报名此比赛，不可以重复报名!");
         }else if(code==ERROR_CODE_PARAMS){//参数错误
             return getErrorMap(ERROR_CODE_ALERADY,"您输入的参数有误!");
+        }else if(code!=ERROR_CODE_SUCCESS){
+            return getNoDataMap(code);
         }
 
         //报名成功,获取默认的账户信息
@@ -78,11 +82,11 @@ public class MatchController extends BaseController {
 
     @RequestMapping(value="/sendAuthSmsCode",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> sendAuthSmsCode(String token,long userId,String phone){
+    public Map<String,Object> sendAuthSmsCode(String token,String userId,String matchId,String phone){
         Map<String,Object> checkMap=checkToken(token,userId+"");
         if(checkMap!=null){
             return checkMap;
         }
-        return getNoDataMap(matchService.sendAuthSmsCode(phone));
+        return getNoDataMap(smsService.sendAuthCode(matchId,phone));
     }
 }

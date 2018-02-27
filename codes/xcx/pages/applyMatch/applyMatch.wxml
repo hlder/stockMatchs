@@ -27,10 +27,7 @@
       <view class="flex-item-text">验证码:</view>
       <view class="view-line-h"></view>
       <input name="authCode" class="flex-item-input" style="width: 50%;" placeholder-class="placeholder-apply" placeholder="输入验证码"></input>
-      <view bindtap='onSendSmsClick' class="btn-send-auth-code" style="color:{{isAuthCodeSend?'#b7b7b7':'#f95220'}}">发送验证码
-        <block wx:if="{{isAuthCodeSend}}">
-          ({{timerAuthCodeSend}})
-        </block>
+      <view bindtap='onSendSmsClick' class="btn-send-auth-code" style="color:{{countDown>0?'#b7b7b7':'#f95220'}}">发送验证码{{countDown>0?"("+countDown+")":""}}
       </view>
     </view>
     <view class="view-line"></view>

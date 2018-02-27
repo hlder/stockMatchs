@@ -9,6 +9,4 @@ public interface MatchService {
     //根据matchId查询比赛信息
     MatchInfo queryApplyMatchInfo(String matchId);
 
-    //发送验证码
-    int sendAuthSmsCode(String phone);
 }

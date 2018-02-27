@@ -18,6 +18,8 @@ const entrustSellStock = AppIp +"entrustSellStock";//委托卖出
 
 const queryStockFuzzy = AppIp +"queryStockFuzzy";//模糊搜索
 const queryH5Info = AppIp +"queryH5Info";
+const sendAuthSmsCode = AppIp +"sendAuthSmsCode";//发送验证码
+
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -36,6 +38,7 @@ module.exports = {
   entrustSellStock: entrustSellStock,
   queryStockFuzzy: queryStockFuzzy,
   queryH5Info: queryH5Info,
+  sendAuthSmsCode: sendAuthSmsCode,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }
