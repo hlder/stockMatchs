@@ -50,8 +50,10 @@ public class ScheduledUpdateUserInfo {
         List<Long> listAllId = stockInfoMapper.queryAllAccountId();
         for(long itemId:listAllId){
             AccountInfo info=accountMapper.queryAccountById(itemId+"");
+            float allMarketVal=0;
+            //总市值
+            try{allMarketVal=Float.parseFloat(""+stockInfoMapper.queryUserAllValue(itemId+""));}catch (NumberFormatException e){}
 
-            float allMarketVal=stockInfoMapper.queryUserAllValue(itemId+"");//总市值
 
             String total7Str=accountMapper.queryHisTotalAssets(""+itemId,"7");
             String total30Str=accountMapper.queryHisTotalAssets(""+itemId,"30");
@@ -134,9 +136,9 @@ public class ScheduledUpdateUserInfo {
     //每过20秒 更新所有人持仓的现价
     @Scheduled(cron="0/20 * * * * ?")
     public void scranHolder(){
-//        if(!isDoEntrust(false)){//非交易时间
-//            return;
-//        }
+        if(!isDoEntrust(false)){//非交易时间
+            return;
+        }
         List<String> listData = stockInfoMapper.queryAllHolderStock();
         for(String item:listData){
             String jsonStr=HttpUtil.sendPost("http://47.100.180.170:8080/stockServer/queryStockInfoByCode?stockCode="+item);
@@ -157,9 +159,9 @@ public class ScheduledUpdateUserInfo {
     //每秒查询委托列表是否可以成交
     @Scheduled(cron="0/1 * * * * ?")
     public void scranEntrust(){
-//        if(!isDoEntrust(true)){//非交易时间
-//            return;
-//        }
+        if(!isDoEntrust(true)){//非交易时间
+            return;
+        }
         List<EntrustStockInfo> listAll=accountService.queryAllEntrust();
         for(EntrustStockInfo item:listAll){
 

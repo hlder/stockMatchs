@@ -1,5 +1,5 @@
 <!--pages/entrustList/entrustList.wxml-->
-<view class="picker_layout">
+<view class="picker_layout" wx:if="{{isShowPicker}}">
   <picker class="picker_date" mode="date" value="{{startDate}}" start="2015-01-01" end="{{endDate}}" bindchange="bindStartDateChange">
       <view class="picker_date_selector">
         起始时间: {{startDate}}

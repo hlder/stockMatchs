@@ -40,27 +40,27 @@ public class AccountController extends BaseController {
         return getSuccessMap(list);
     }
 
-    //查询今日历史委托
-    @RequestMapping(value="/queryMyEntrustHistoryToday")
-    @ResponseBody
-    public Map<String,Object> queryMyEntrustHistoryToday(String token,String userId,String accountId){
-        Calendar calendar=Calendar.getInstance();
-        int year=calendar.get(Calendar.YEAR);
-        int month=calendar.get(Calendar.MONTH)+1;
-        int day=calendar.get(Calendar.DAY_OF_MONTH);
-        String startDate=year+"-"+month+"-"+day+" 00:00:00";
-        String endtDate=year+"-"+month+"-"+(day+1)+" 00:00:00";
-        return queryMyEntrustHistory(token,userId,accountId,""+startDate,""+endtDate,10000);
-    }
+//    //查询今日历史委托
+//    @RequestMapping(value="/queryMyEntrustHistoryToday")
+//    @ResponseBody
+//    public Map<String,Object> queryMyEntrustHistoryToday(String token,String userId,String accountId){
+//        Calendar calendar=Calendar.getInstance();
+//        int year=calendar.get(Calendar.YEAR);
+//        int month=calendar.get(Calendar.MONTH)+1;
+//        int day=calendar.get(Calendar.DAY_OF_MONTH);
+//        String startDate=year+"-"+month+"-"+day+" 00:00:00";
+//        String endtDate=year+"-"+month+"-"+(day+1)+" 00:00:00";
+//        return queryMyEntrustHistory(token,userId,accountId,""+startDate,""+endtDate,10000,0);
+//    }
     //查询历史委托
     @RequestMapping(value="/queryMyEntrustHistory")
     @ResponseBody
-    public Map<String,Object> queryMyEntrustHistory(String token,String userId,String accountId,String startDate,String endDate,int page){
+    public Map<String,Object> queryMyEntrustHistory(String token,String userId,String accountId,String startDate,String endDate,int page,int indexType){
         Map<String,Object> checkMap=checkToken(token,userId+"");
         if(checkMap!=null){
             return checkMap;
         }
-        List<Object> list=accountService.queryMyEntrustHistory(accountId,startDate,endDate,page);
+        List<Object> list=accountService.queryMyEntrustHistory(accountId,startDate,endDate,page,indexType);
         return getSuccessMap(list);
     }
 

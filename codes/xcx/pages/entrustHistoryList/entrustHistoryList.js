@@ -6,6 +6,7 @@ const app = getApp()
 var that;
 var accountId;
 var httpUrl;
+var indexType=0;
 Page({
 
   /**
@@ -14,7 +15,8 @@ Page({
   data: {
     startDate:"2018-01-01",
     endDate: "2018-01-01",
-    listData: []
+    listData: [],
+    isShowPicker:false
   },
 
   /**
@@ -24,6 +26,13 @@ Page({
     wx.setNavigationBarTitle({
       title: '' + options.title
     });
+    indexType = options.indexType;
+    if (indexType==2){
+      this.setData({
+        isShowPicker:true
+      });
+    }
+
     var nowDate = new Date();
     var temDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" + nowDate.getDate();
     this.setData({
@@ -44,7 +53,8 @@ Page({
         accountId: "" + accountId,
         startDate: that.data.startDate+" 00:00:00",
         endDate: that.data.endDate+" 23:59:59",
-        page:0
+        page:0,
+        indexType: indexType
       },
       success: function (res) {
         console.log("返回:", res.data)

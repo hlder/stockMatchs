@@ -21,17 +21,17 @@ Page({
   },
   onButtonClick1:function(){//今日成交
     wx.navigateTo({
-      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId+"&title=今日成交"
+      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId +"&title=今日成交&indexType=0"
     })
   },
   onButtonClick2: function () {//今日委托
     wx.navigateTo({
-      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId + "&title=今日委托"
+      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId + "&title=今日委托&indexType=1"
     })
   },
   onButtonClick3: function () {//成交历史
     wx.navigateTo({
-      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId + "&title=成交历史"
+      url: "../entrustHistoryList/entrustHistoryList?accountId=" + accountId + "&title=成交历史&indexType=2"
     })
   },
 

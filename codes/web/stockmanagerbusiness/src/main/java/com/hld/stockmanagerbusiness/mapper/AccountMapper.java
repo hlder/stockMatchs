@@ -45,6 +45,6 @@ public interface AccountMapper {
 
 
     //更新所有人的交易数量
-    @Update("update lhy_sotck_match.user_info_account ua set ua.deal_count=(select count(1) from lhy_sotck_match.user_entrust_stock_his where account_id=ua.id and vol_type=1)")
+    @Update("update user_info_account ua set ua.deal_count=(select count(1) from user_entrust_stock_his where account_id=ua.id and vol_type=1)")
     void updateAllDealNum();
 }

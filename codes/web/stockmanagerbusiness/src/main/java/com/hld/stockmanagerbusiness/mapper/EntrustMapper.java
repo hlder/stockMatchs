@@ -21,12 +21,17 @@ public interface EntrustMapper {
     @Select("SELECT * FROM user_entrust_stock where account_id=#{accountId} order by id desc")
     List<EntrustStockInfo> queryMyEntrustById(@Param("accountId") String accountId);
 
+    @Select("select entrust_num*entrust_price from user_entrust_stock where account_id=#{accountId}")
+    String queryEntrustPrice(@Param("accountId") String accountId);
+
     @Select("SELECT * FROM user_entrust_stock where id=#{id}")
     EntrustStockInfo queryMyEntrustOneById(@Param("id") String id);
 
 //    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>='2018-02-03 16:43:26' and entrust_time<='2018-02-03 16:43:26' limit #{page},20")
     @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>=#{startDate} and entrust_time<=#{endDate} order by id desc limit #{page},20")
     List<EntrustStockInfoHistory> queryMyEntrustHistoryById(@Param("accountId") String accountId, @Param("startDate") String startDate, @Param("endDate") String endDate, @Param("page") int page);
+    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>=#{startDate} and entrust_time<=#{endDate} and vol_type=#{vol_type} order by id desc limit #{page},20")
+    List<EntrustStockInfoHistory> queryMyEntrustHistoryById2(@Param("accountId") String accountId, @Param("startDate") String startDate, @Param("endDate") String endDate, @Param("page") int page,@Param("vol_type") String vol_type);
 
     //删除委托
     @Delete("delete from user_entrust_stock where id=#{id}")

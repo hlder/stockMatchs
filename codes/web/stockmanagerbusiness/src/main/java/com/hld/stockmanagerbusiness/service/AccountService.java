@@ -18,7 +18,7 @@ public interface AccountService {
     List<EntrustStockInfo> queryMyEntrust(String accountId);
 
     //根据委托时间,查询我的委托历史表
-    List<Object> queryMyEntrustHistory(String accountId, String startDate, String endDate, int page);
+    List<Object> queryMyEntrustHistory(String accountId, String startDate, String endDate, int page,int indexType);
 
     void buyStock(EntrustStockInfo info,String buyPrice);
     void sellStock(EntrustStockInfo info,String sellPrice);

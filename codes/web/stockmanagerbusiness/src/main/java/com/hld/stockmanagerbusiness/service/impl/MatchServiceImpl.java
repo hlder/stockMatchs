@@ -61,7 +61,7 @@ public class MatchServiceImpl implements MatchService{
     //校验验证码
     private boolean verifyAuthCode(String phoneNum,String authCode){
         AuthCodeInfo info=smsMapper.queryAuthCode(phoneNum,authCode);
-        if(info!=null&&!authCode.equals(info.getAuth_code())){//不为空，且相等
+        if(info!=null&&authCode.equals(info.getAuth_code())){//不为空，且相等
             //校验成功
             //删除
             smsMapper.deleteAuthCode(""+info.getId());

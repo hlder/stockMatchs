@@ -12,7 +12,8 @@ nohup java -jar stockserver.jar >temp.txt &
 nohup java -jar stockmanagerbusiness.jar >temp.txt &
 
 //查看进程id
-ps -ef | grep stockserver
+ps -ef | grep nginx
+ps -ef | grep stockmanagerbusiness
 ps -ef | grep redis
 ps -ef | grep stockserver//检查项目1是否在运行
 ps -ef | grep redis//检查redis是否在运行

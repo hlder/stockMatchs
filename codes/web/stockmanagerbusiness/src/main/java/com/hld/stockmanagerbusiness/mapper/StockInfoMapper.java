@@ -42,7 +42,7 @@ public interface StockInfoMapper {
 
     //查询持仓总市值
     @Select("SELECT sum(now_price*holder_num) FROM user_holder_stock where account_id=#{accountId}")
-    float queryUserAllValue(@Param("accountId") String accountId);
+    String queryUserAllValue(@Param("accountId") String accountId);
 
 
 

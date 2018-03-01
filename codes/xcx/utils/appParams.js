@@ -1,6 +1,9 @@
-// const AppIp ="http://192.168.1.177:8088/";
-const AppIp = "http://127.0.0.1:8088/";
-const stockIp = "http://47.100.180.170:8080/";
+const AppIp ="https://www.qdcash.xyz/";
+// const AppIp = "http://127.0.0.1:8088/";
+const stockIp = "https://qdcash.xyz/";
+// const stockIp = "http://47.100.180.170:8080/";
+
+
 // stockServer/queryStockInfoByCode?stockCode=sz002471
 
 const loginUrl = AppIp + "loginWx";//登录

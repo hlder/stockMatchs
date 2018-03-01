@@ -3,6 +3,7 @@ package com.hld.stockmanagerbusiness.service.impl;
 import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.MatchInfo;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
+import com.hld.stockmanagerbusiness.mapper.EntrustMapper;
 import com.hld.stockmanagerbusiness.mapper.MathMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
 import com.hld.stockmanagerbusiness.service.HomeService;
@@ -21,6 +22,8 @@ public class HomeServiceImpl implements HomeService {
     AccountMapper accountMapper;
     @Autowired
     StockInfoMapper stockInfoMapper;
+    @Autowired
+    EntrustMapper entrustMapper;
 
     @Override
     public Map<String, Object> queryHomeInfo(String matchId,String userId,String accountId) {
@@ -36,9 +39,18 @@ public class HomeServiceImpl implements HomeService {
             return null;
         }
 
-        float allHolderAssets= stockInfoMapper.queryUserAllValue(accountId);//持仓市值
-        float canUseAssets = Float.parseFloat(accountInfo.getCan_use_assets());//可用资产
-        float initAllAssets=Float.parseFloat(accountInfo.getInit_total_assets());//初始总资产
+
+        float allHolderAssets= 0;//持仓市值
+        float canUseAssets = 0;//可用资产
+        float initAllAssets=0;//初始总资产
+        float entrustPrice=0;//委托中的股票成本
+
+
+        String entrustPriceStr=entrustMapper.queryEntrustPrice(accountId);
+        try{entrustPrice=Float.parseFloat(entrustPriceStr+"");}catch (NumberFormatException e){}
+        try{allHolderAssets= Float.parseFloat(stockInfoMapper.queryUserAllValue(accountId)+"");}catch (NumberFormatException e){}//持仓市值
+       try{canUseAssets = Float.parseFloat(accountInfo.getCan_use_assets()+"");}catch (NumberFormatException e){}//可用资产
+        try{initAllAssets=Float.parseFloat(accountInfo.getInit_total_assets()+"");}catch (NumberFormatException e){}//初始总资产
 
         DecimalFormat df = new DecimalFormat("0.00");
 
@@ -51,7 +63,7 @@ public class HomeServiceImpl implements HomeService {
         //查询我的记录
         map.put("accountId",""+accountInfo.getId());
         map.put("accountName",""+accountInfo.getAccount_name());
-        map.put("allAsset",""+(canUseAssets+allHolderAssets));//总资产
+        map.put("allAsset",""+(canUseAssets+allHolderAssets+entrustPrice));//总资产
         map.put("priceTimesOneMonth",""+accountInfo.getDeal_count());//交易次数
 
         if(accountInfo.getDeal_count()==0){
@@ -59,8 +71,8 @@ public class HomeServiceImpl implements HomeService {
         }else{
             map.put("rightRate",""+(accountInfo.getTotal_deal_success_num()/accountInfo.getDeal_count()));//成功率
         }
-        float allIncomeRate=(canUseAssets+allHolderAssets-initAllAssets)/initAllAssets;
-        float allIncome=(canUseAssets+allHolderAssets-initAllAssets);
+        float allIncomeRate=(canUseAssets+allHolderAssets+entrustPrice-initAllAssets)/initAllAssets;
+        float allIncome=(canUseAssets+allHolderAssets+entrustPrice-initAllAssets);
 
         map.put("allIncomeRate",""+df.format((allIncomeRate)*100)+"%");//总收益率
         map.put("allIncome",""+allIncome);//总收入
