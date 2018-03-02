@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TestController {
 
     @RequestMapping(value = "/testApi")
-    public String login(HttpServletRequest request){
+    public String testApi(HttpServletRequest request){
         System.out.println("====================================================");
         Object tokenObj=request.getSession().getAttribute("token");
         System.out.println("tokenObj:"+tokenObj);

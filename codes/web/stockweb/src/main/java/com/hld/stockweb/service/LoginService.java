@@ -1,5 +1,8 @@
 package com.hld.stockweb.service;
 
-public interface LoginService {
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
+public interface LoginService {
+    Map<String,Object> doLogin(HttpServletRequest request, String userName, String passWord);
 }

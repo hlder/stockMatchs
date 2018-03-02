@@ -18,11 +18,20 @@
         })
     });
 	function onSubmitClick(){
-        var val = $("#input_name").val();
-        alert("input:"+val);
-	    // alert("加密:"+$.md5('1234'));
-        $.ajax({ url: "/testApi", context: document.body, success: function(e){
-            // alert("请求成功:"+e);
+        var usernameVal = $("#input_name").val();
+        var passwordVal = $("#input_psw").val();
+        if(usernameVal == "" || usernameVal == null || usernameVal == undefined){
+            alert("请输入账号!");
+            return;
+        }
+        if(passwordVal == "" || passwordVal == null || passwordVal == undefined){
+            alert("请输入密码!");
+            return;
+        }
+        var pswMd5=$.md5(''+passwordVal);
+
+        $.ajax({ url: "/web/login", context: document.body,data:{userName:""+usernameVal,passWord:""+pswMd5}, success: function(e){
+            alert("请求成功:"+e);
         }});
     }
 </script> 
@@ -51,8 +60,8 @@
     <div class="loginbox">
     
     <ul>
-        <li><input id="input_name" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
-        <li><input id="input_psw" type="text" class="loginpwd" value="密码" type="password" onclick="JavaScript:this.value=''"/></li>
+        <li><input id="input_name" type="text" class="loginuser" onclick="JavaScript:this.value=''"/></li>
+        <li><input id="input_psw" type="text" class="loginpwd" type="password" onclick="JavaScript:this.value=''"/></li>
         <!--<li><input name="" type="button" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>-->
         <li><input id="btn_submit" type="button" class="loginbtn" value="登录"  onclick="onSubmitClick()"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
     </ul>
