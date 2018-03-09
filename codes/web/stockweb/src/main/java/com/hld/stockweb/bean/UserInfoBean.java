@@ -46,4 +46,15 @@ public class UserInfoBean {
     public void setMatch_id(String match_id) {
         this.match_id = match_id;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "id=" + id +
+                ", user_name='" + user_name + '\'' +
+                ", pass_word='" + pass_word + '\'' +
+                ", sms_num='" + sms_num + '\'' +
+                ", match_id='" + match_id + '\'' +
+                '}';
+    }
 }
