@@ -41,6 +41,9 @@ public class ScheduledUpdateUserInfo {
 
     private boolean todayIsRest=true;//是否休息，默认休息
 
+    public ScheduledUpdateUserInfo(){//构造函数
+        updateAllUserInfo();
+    }
 
 
     //每日的23:10将账户添加进历史
@@ -110,6 +113,7 @@ public class ScheduledUpdateUserInfo {
         //检查今天是否是休息
         Calendar calendar=Calendar.getInstance();
         int weekNum=calendar.get(Calendar.DAY_OF_WEEK);
+        todayIsRest=false;//不休息
         if(weekNum==Calendar.SATURDAY||weekNum==Calendar.SUNDAY){//周六或周日 肯定不开盘
             todayIsRest=true;//今天不开盘
         }

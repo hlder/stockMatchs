@@ -48,7 +48,9 @@ public class ConfigurationFilter {
             if("/web/login".equals(""+request.getRequestURI())){//login的时候不拦截
                 filterChain.doFilter(srequest, sresponse);
             }else{
-                OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream(),"GBK");
+//                OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream(),"UTF-8");
+                OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream());
+
                 PrintWriter writer  = new PrintWriter(osw, true);
                 Map<String,Object> map=new HashMap<>();
                 map.put("code","1001");

@@ -50,6 +50,11 @@ Page({
         iv: '' + detail.iv,
         code: '' + code
       },
+      fail: function (e) {
+        console.log("登录失败:-------------------------------------")
+        console.log(e)
+
+      },
       success: function (res) {
         console.log("登录成功:", res.data)
         var reqData = res.data.data;

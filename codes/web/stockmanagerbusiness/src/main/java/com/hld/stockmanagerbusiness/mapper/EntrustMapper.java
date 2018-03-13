@@ -21,7 +21,7 @@ public interface EntrustMapper {
     @Select("SELECT * FROM user_entrust_stock where account_id=#{accountId} order by id desc")
     List<EntrustStockInfo> queryMyEntrustById(@Param("accountId") String accountId);
 
-    @Select("select entrust_num*entrust_price from user_entrust_stock where account_id=#{accountId}")
+    @Select("select sum(entrust_num*entrust_price) from user_entrust_stock where account_id=#{accountId}")
     String queryEntrustPrice(@Param("accountId") String accountId);
 
     @Select("SELECT * FROM user_entrust_stock where id=#{id}")

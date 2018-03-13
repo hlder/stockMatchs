@@ -23,8 +23,9 @@ public class HomeController {
     public Map<String,Object> queryIndexInfo(HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         UserInfoBean bean=(UserInfoBean)request.getSession().getAttribute("userInfo");
+//        bean.getId()
 
-//        request.getSession().setAttribute("userInfo",bean);
+
         return map;
     }
 
