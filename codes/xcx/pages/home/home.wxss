@@ -5,7 +5,7 @@
   color: #020202;
   font-size: 25rpx;
   text-align: center;
-  
+  margin-top:-20rpx;
 }
 .slide-image {
   width: 100%;

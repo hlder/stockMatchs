@@ -3,7 +3,7 @@
   <view class="title_layout">
     <view class='title_layout_left'>
       <view class="text_gray text_title_size" style='padding: 10rpx;'>总盈亏</view>
-      <view class="text_lager_size" style="padding-left:10rpx;padding-right:10rpx;color:#{{hodlerBaseInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{hodlerBaseInfo.allIncome>=0?'+':''}}{{hodlerBaseInfo.allIncome}}</view>
+      <view class="text_lager_size" style="padding-left:10rpx;padding-right:10rpx;color:#{{hodlerBaseInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{hodlerBaseInfo.allIncome>=0?'':''}}{{hodlerBaseInfo.allIncome}}</view>
       <view class="text_middle_size" style="padding: 10rpx;color:#{{hodlerBaseInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{hodlerBaseInfo.allIncomeRate}}</view>
     </view>
     <view class='title_layout_center'>
@@ -43,7 +43,7 @@
       </view>
       <view class="tab_item">
         <view class="item_text_center" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income}}</view>
-        <view class="item_text_center" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income>=0?'+':''}}{{item.incomeRate}}</view>
+        <view class="item_text_center" style="color:#{{item.income>=0?'ff5722':'00bfa5'}}">{{item.income>=0?'':''}}{{item.incomeRate}}</view>
       </view>
     </view>
     <view class="list_layout_bottom" wx:if="{{selectIndex==index}}">

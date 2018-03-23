@@ -6,6 +6,7 @@ public class MatchInfo {
     private String banners;
     private String buttons;
     private String match_note;
+    private String leader;
     private long max_people_num;
     private long now_people_num;
     private long creator_user_id;
@@ -17,6 +18,14 @@ public class MatchInfo {
     private int apply_banner_height;
     private String init_total_assets;
     private String logo;
+
+    public String getLeader() {
+        return leader;
+    }
+
+    public void setLeader(String leader) {
+        this.leader = leader;
+    }
 
     public String getLogo() {
         return logo;

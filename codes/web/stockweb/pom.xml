@@ -44,6 +44,14 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>provided</scope>
+			<!--optional我没弄明白，都说必须为true，但我测试true，false，不加都可以-->
+			<optional>false</optional>
+		</dependency>
+
 
 		<dependency>
 			<groupId>mysql</groupId>

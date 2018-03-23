@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -21,12 +21,16 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
@@ -38,7 +42,7 @@
 					"id": 1,
 					"name": "主页",
 					"pathName": "pages/home/home",
-					"query": "accountId=1"
+					"query": "accountId=12"
 				},
 				{
 					"id": -1,

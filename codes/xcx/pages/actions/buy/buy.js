@@ -1,6 +1,7 @@
 // pages/actions/buy/buy.js
 const appParams = require('../../../utils/appParams.js')
 const httpUtil = require('../../../utils/httpUtil.js')
+const category = require('../../../utils/category.js')
 const app = getApp()
 
 var that;
@@ -127,7 +128,7 @@ Page({
         res.data.zhangting = res.data.preClosePx + res.data.preClosePx * 0.1;
         res.data.dieting = res.data.dieting.toFixed(2);
         res.data.zhangting = res.data.zhangting.toFixed(2);
-
+        // res.data.buy.length
         that.setData({
           stockDetail:res.data
         });

@@ -30,57 +30,57 @@
     </view>
     <button class="buy_button" bindtap="onBuyOrSellClick" style="background-color: {{uiType==0?'#ff5722':'#536dfe'}};">{{uiType==0?'模拟买入':'模拟卖出'}}</button>
   </view>
-  <view class="stock_sellbuy5_layout">
+  <view class="stock_sellbuy5_layout" >
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.sell[4].tradePx}}" class="stock_sellbuy5_item">
       <view>卖5</view>
       <view style="color:#{{(stockDetail.sell[4].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[4].tradePx}}</view>
-      <view>{{stockDetail.sell[4].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.sell}}">{{stockDetail.sell[4].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.sell[3].tradePx}}"  class="stock_sellbuy5_item">
       <view>卖4</view>
       <view style="color:#{{(stockDetail.sell[3].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[3].tradePx}}</view>
-      <view>{{stockDetail.sell[3].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.sell}}">{{stockDetail.sell[3].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.sell[2].tradePx}}"  class="stock_sellbuy5_item">
       <view>卖3</view>
       <view style="color:#{{(stockDetail.sell[2].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[2].tradePx}}</view>
-      <view>{{stockDetail.sell[2].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.sell}}">{{stockDetail.sell[2].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.sell[1].tradePx}}"  class="stock_sellbuy5_item">
       <view>卖2</view>
       <view style="color:#{{(stockDetail.sell[1].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[1].tradePx}}</view>
-      <view>{{stockDetail.sell[1].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.sell}}">{{stockDetail.sell[1].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.sell[0].tradePx}}"  class="stock_sellbuy5_item">
       <view>卖1</view>
       <view style="color:#{{(stockDetail.sell[0].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.sell[0].tradePx}}</view>
-      <view>{{stockDetail.sell[0].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.sell}}">{{stockDetail.sell[0].tradeNum/100}}</view>
     </view>
     <view class="view_line" style="margin-top:10rpx;"></view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.buy[0].tradePx}}"  class="stock_sellbuy5_item" style="margin-top:10rpx;">
       <view>买1</view>
       <view style="color:#{{(stockDetail.buy[0].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[0].tradePx}}</view>
-      <view>{{stockDetail.buy[0].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.buy}}">{{stockDetail.buy[0].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.buy[1].tradePx}}"  class="stock_sellbuy5_item">
       <view>买2</view>
       <view style="color:#{{(stockDetail.buy[1].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[1].tradePx}}</view>
-      <view>{{stockDetail.buy[1].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.buy}}">{{stockDetail.buy[1].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.buy[2].tradePx}}"  class="stock_sellbuy5_item">
       <view>买3</view>
       <view style="color:#{{(stockDetail.buy[2].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[2].tradePx}}</view>
-      <view>{{stockDetail.buy[2].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.buy}}">{{stockDetail.buy[2].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.buy[3].tradePx}}"  class="stock_sellbuy5_item">
       <view>买4</view>
       <view style="color:#{{(stockDetail.buy[3].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[3].tradePx}}</view>
-      <view>{{stockDetail.buy[3].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.buy}}">{{stockDetail.buy[3].tradeNum/100}}</view>
     </view>
     <view bindtap="onBuyOrSellItemClick" id="{{stockDetail.buy[4].tradePx}}"  class="stock_sellbuy5_item">
       <view>买5</view>
       <view style="color:#{{(stockDetail.buy[4].tradePx>stockDetail.preClosePx)<0?'ff5722':'00bfa5'}}">{{stockDetail.buy[4].tradePx}}</view>
-      <view>{{stockDetail.buy[4].tradeNum/100}}</view>
+      <view wx:if="{{stockDetail.buy}}">{{stockDetail.buy[4].tradeNum/100}}</view>
     </view>
     
   </view>

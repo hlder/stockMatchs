@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -17,16 +16,11 @@ public class HomeController {
     @Autowired
     IndexService indexService;
 
-
     @RequestMapping(value = "/queryIndexInfo")
     @ResponseBody
     public Map<String,Object> queryIndexInfo(HttpServletRequest request){
-        Map<String,Object> map=new HashMap<>();
         UserInfoBean bean=(UserInfoBean)request.getSession().getAttribute("userInfo");
-//        bean.getId()
-
-
-        return map;
+        return indexService.queryIndexInfo(bean);
     }
 
 }

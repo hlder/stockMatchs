@@ -11,7 +11,16 @@
   <block wx:for="{{buttons}}">
     <view id="{{index}}" class="flex-btn-item" bindtap="onButtonItemClick">
       <image class='btn_img' src='{{item.imgUrl}}'></image>
-      <view class="btn_text">支付宝</view>
+       <view class="btn_text" style="">{{item.name}}</view> 
+    </view>
+  </block>
+</view>
+<view wx:if="{{matchInfo.leaders!=null}}" class="view_line" style="margin-top: 10px;"></view>
+<view wx:if="{{matchInfo.leaders!=null}}" class="flex-wrp" style='margin-top: 25rpx;'>
+  <block wx:for="{{matchInfo.leaders}}">
+    <view id="{{index}}" class="flex-btn-item" bindtap="onButtonItemClick">
+      <image class='btn_img' src='{{item.head_url}}'></image>
+       <view class="btn_text" style="">{{item.account_name}}</view> 
     </view>
   </block>
 </view>

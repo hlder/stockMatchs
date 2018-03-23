@@ -1,5 +1,6 @@
 package com.hld.stockweb.util;
 import com.alibaba.fastjson.JSON;
+import com.hld.stockweb.bean.UserInfoBean;
 import org.apache.catalina.filters.RemoteIpFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -48,22 +49,26 @@ public class ConfigurationFilter {
             if("/web/login".equals(""+request.getRequestURI())){//login的时候不拦截
                 filterChain.doFilter(srequest, sresponse);
             }else{
-//                OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream(),"UTF-8");
-                OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream());
+                Object userObj=request.getSession().getAttribute("userInfo");
+                if(userObj!=null){//表示存在session,允许通过
+                    filterChain.doFilter(srequest, sresponse);
+                }else{//不允许通过
+                    OutputStreamWriter osw = new OutputStreamWriter(sresponse.getOutputStream());
+                    PrintWriter writer  = new PrintWriter(osw, true);
+                    Map<String,Object> map=new HashMap<>();
+                    map.put("code","1001");
+                    map.put("msg","请求超时,请重新登录!");
+                    if(writer!=null){
+                        writer.write(JSON.toJSONString(map));
+                    }
+                    if(osw!=null){
+                        osw.close();
+                    }
+                    if(writer!=null){
+                        writer.close();
+                    }
+                }
 
-                PrintWriter writer  = new PrintWriter(osw, true);
-                Map<String,Object> map=new HashMap<>();
-                map.put("code","1001");
-                map.put("msg","请求超时,请重新登录!");
-                if(writer!=null){
-                    writer.write(JSON.toJSONString(map));
-                }
-                if(osw!=null){
-                    osw.close();
-                }
-                if(writer!=null){
-                    writer.close();
-                }
             }
         }
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,7 +28,7 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public Map<String, Object> queryHomeInfo(String matchId,String userId,String accountId) {
-        Map<String,Object> map=new HashMap<String,Object>();
+        Map<String,Object> map= new HashMap<>();
         //查询比赛的信息，banners，buttons
         MatchInfo matchInfo=mathMapper.queryApplyMatchInfo(matchId);
         //查询我的账户信息
@@ -39,12 +40,20 @@ public class HomeServiceImpl implements HomeService {
             return null;
         }
 
+        String myLeaderIds=accountInfo.getLeader();
+        String leaderIds=matchInfo.getLeader();
+        if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
+            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
+            map.put("leaders",listLeader);
+        }else if(leaderIds!=null&&!"".equals(leaderIds)){
+            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(leaderIds);
+            map.put("leaders",listLeader);
+        }
 
         float allHolderAssets= 0;//持仓市值
         float canUseAssets = 0;//可用资产
         float initAllAssets=0;//初始总资产
         float entrustPrice=0;//委托中的股票成本
-
 
         String entrustPriceStr=entrustMapper.queryEntrustPrice(accountId);
         try{entrustPrice=Float.parseFloat(entrustPriceStr+"");}catch (NumberFormatException e){}
@@ -93,6 +102,36 @@ public class HomeServiceImpl implements HomeService {
         }
         return map;
     }
+
+    @Override
+    public Map<String, Object> queryMyLeaders(String matchId, String accountId) {
+        Map<String,Object> map= new HashMap<>();
+        //查询比赛的信息，banners，buttons
+        MatchInfo matchInfo=mathMapper.queryApplyMatchInfo(matchId);
+        //查询我的账户信息
+        AccountInfo accountInfo=accountMapper.queryAccountById(accountId);
+        if(matchInfo==null){
+            return null;
+        }
+        if(accountInfo==null){
+            return null;
+        }
+
+        String myLeaderIds=accountInfo.getLeader();
+        String leaderIds=matchInfo.getLeader();
+        if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
+            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
+            map.put("myLeaders",listLeader);
+        }
+        if(leaderIds!=null&&!"".equals(leaderIds)){
+            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(leaderIds);
+            map.put("matchLeaders",listLeader);
+        }else{}
+
+        return map;
+    }
+
+
 }
 
 

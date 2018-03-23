@@ -9,13 +9,37 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 
     <script type="text/javascript">
+        function timeToDate(timeStam){
+            var time = new Date(timeStam);
+            var y = time.getFullYear();//年
+            var m = time.getMonth() + 1;//月
+            var d = time.getDate();//日
+            var h = time.getHours();//时
+            var mm = time.getMinutes();//分
+            var s = time.getSeconds();//秒
+            return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+        }
         window.onload=function(){
-            $.ajax({ url: "/web/login", context: document.body,data:{userName:""+usernameVal,passWord:""+pswMd5}, success: function(e){
+            $.ajax({ url: "/web/queryIndexInfo", context: document.body,data:{}, success: function(e){
                     if(e.code==0){
-                        // alert("登录成功!");
-                        window.location='main.html';
+                        document.getElementById("all_user").innerHTML=""+e.data.data.add_user_all;
+                        document.getElementById("all_income").innerHTML="¥"+e.data.data.income_all;
+                        document.getElementById("yes_add_num").innerHTML=""+e.data.data.add_user_yestoday;
+                        document.getElementById("yes_income").innerHTML="¥"+e.data.data.income_yestoday;
+
+
+                        var tableStr="";
+                        for(var i=0;i<e.data.list.length;i++){
+                            var item=e.data.list[i];
+                            var typeStr="";
+                            if(item.type==1){
+                                typeStr="付费查看";
+                            }
+                            tableStr+="<tr><td>"+timeToDate(item.create_time)+"</td><td>"+item.nick_name+"</td><td>"+typeStr+"</td><td>¥"+item.money+"</td><td style=\"display: none;\">￥0.000</td><td style=\"display: none;\">￥0.000</td></tr>";
+                        }
+                        document.getElementById("list_data").innerHTML=""+tableStr;
                     }else{
-                        alert("登录失败:"+e.msg);
+                        // alert("登录失败:"+e.msg);
                     }
                 }});
         }
@@ -37,16 +61,16 @@
 
     <div class="flex-container">
         <div class="card text-center">
-            <div class="text_size_larger font_bold">昨日收入</div><div class="card_child_bottom font_bold">加载中...</div>
+            <div class="text_size_larger font_bold">昨日收入</div><div id="yes_income" class="card_child_bottom font_bold">加载中...</div>
         </div>
         <div class="card text-center">
-            <div class="text_size_larger font_bold">昨日新增</div><div class="card_child_bottom font_bold">加载中...</div>
+            <div class="text_size_larger font_bold">昨日新增</div><div id="yes_add_num" class="card_child_bottom font_bold">加载中...</div>
         </div>
         <div class="card text-center">
-            <div class="text_size_larger font_bold">总收入</div><div class="card_child_bottom font_bold">加载中...</div>
+            <div class="text_size_larger font_bold">总收入</div><div id="all_income" class="card_child_bottom font_bold">加载中...</div>
         </div>
         <div class="card text-center">
-            <div class="text_size_larger font_bold">总用户</div><div class="card_child_bottom font_bold">加载中...</div>
+            <div class="text_size_larger font_bold">总用户</div><div id="all_user" class="card_child_bottom font_bold">加载中...</div>
         </div>
     </div>
 
@@ -64,7 +88,7 @@
         </tr>
         </thead>
         <tbody id="list_data">
-        <tr><td>2018-03-12</td><td>￥0.000</td><td>￥0.018</td><td>￥0.000</td><td style="display: none;">￥0.000</td><td style="display: none;">￥0.000</td></tr>
+        <!--<tr><td>2018-03-12</td><td>￥0.000</td><td>￥0.018</td><td>￥0.000</td><td style="display: none;">￥0.000</td><td style="display: none;">￥0.000</td></tr>-->
 
         </tbody>
     </table>

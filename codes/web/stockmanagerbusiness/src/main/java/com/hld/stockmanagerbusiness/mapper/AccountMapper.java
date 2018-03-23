@@ -11,6 +11,11 @@ public interface AccountMapper {
     @Select("SELECT * FROM user_info_account where user_id=#{userId} and match_id=#{matchId}")
     List<AccountInfo> queryAccountByUserId(@Param("userId") String userId, @Param("matchId") String matchId);
 
+//    @Select("select * from user_info_account where id in (${ids})")
+    @Select("select ua.*,ui.head_url head_url from user_info ui RIGHT JOIN (select * from user_info_account where id in (${ids})) ua on ui.id=ua.user_id")
+    List<AccountInfo> queryAccountInIds(@Param("ids") String ids);
+
+
     @Select("select * from user_info_account where id=#{id}")
     AccountInfo queryAccountById(@Param("id") String id);
 
