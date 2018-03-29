@@ -2,7 +2,7 @@
 
 <swiper wx:if="{{banners!=null}}" indicator-dots="true"  autoplay="true" interval="5000" duration="200">  
   <block wx:for="{{banners}}">  
-  <swiper-item>  
+  <swiper-item>
     <image  id="{{index}}" src="{{item.imgUrl}}" bindtap="onBannerItemClick" class="slide-image"/>  
   </swiper-item>
   </block>  

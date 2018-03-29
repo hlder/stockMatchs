@@ -39,7 +39,6 @@ public class HomeServiceImpl implements HomeService {
         if(accountInfo==null){
             return null;
         }
-
         String myLeaderIds=accountInfo.getLeader();
         String leaderIds=matchInfo.getLeader();
         if(myLeaderIds!=null&&!"".equals(myLeaderIds)){

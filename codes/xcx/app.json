@@ -11,7 +11,8 @@
     "pages/queryUi/queryUi",
     "pages/actions/buy/buy",
     "pages/actions/searchStock/searchStock",
-    "pages/h5/h5"
+    "pages/h5/h5",
+    "pages/study/classList"
   ],
   "window": {
     "backgroundTextStyle": "light",
