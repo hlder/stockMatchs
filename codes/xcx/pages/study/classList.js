@@ -72,7 +72,12 @@ Page({
   
   },
   
-  
+  onItemClick:function(e){
+    console.log(e);
+    wx.navigateTo({
+      url: 'list/list?mold=' + e.currentTarget.id + "&title=" + e.currentTarget.dataset.name
+    })
+  },
   getUserInfo: function () {
     wx.login({
       success: function (resLogin) {

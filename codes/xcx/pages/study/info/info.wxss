@@ -1,0 +1,5 @@
+/* pages/study/info/info.wxss */
+view{
+  padding: 15rpx;
+  background: white;
+}

@@ -24,6 +24,8 @@ const queryStockFuzzy = AppIp +"queryStockFuzzy";//模糊搜索
 const queryH5Info = AppIp +"queryH5Info";
 const sendAuthSmsCode = AppIp +"sendAuthSmsCode";//发送验证码
 
+const queryClassListByMold = AppIp +"queryClassListByMold";//查询课堂列表
+const queryClassInfoById = AppIp + "queryClassInfoById";//查询课堂详情
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -43,6 +45,9 @@ module.exports = {
   queryStockFuzzy: queryStockFuzzy,
   queryH5Info: queryH5Info,
   sendAuthSmsCode: sendAuthSmsCode,
+  queryClassListByMold: queryClassListByMold,
+  queryClassInfoById: queryClassInfoById,
+
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

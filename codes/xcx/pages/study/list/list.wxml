@@ -1,0 +1,7 @@
+
+<view class="bottomLine" wx:for="{{list}}">
+  <view id="{{item.id}}" bindtap='onItemClick' class="flex-container" style='display: flex;'>
+    <view>{{item.text_title}}</view>
+    <image class="img_icon" src='/images/icon_arraw.png'></image>
+  </view>
+</view>

@@ -109,6 +109,12 @@
 					"name": "课堂",
 					"pathName": "pages/study/classList",
 					"query": "accountId=12"
+				},
+				{
+					"id": 13,
+					"name": "list",
+					"pathName": "pages/study/list/list",
+					"query": "mold=1"
 				}
 			]
 		}

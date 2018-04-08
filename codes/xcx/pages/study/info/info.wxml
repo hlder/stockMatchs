@@ -1,0 +1,4 @@
+<!--pages/study/info/info.wxml-->
+<view>
+  <text>{{htmlVal}}</text>
+</view>

@@ -87,7 +87,7 @@ public class BaseController  {
         return map;
     }
 
-    public Map<String,Object> getSuccessMap(Object dataObj){
+    public static Map<String,Object> getSuccessMap(Object dataObj){
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",ERROR_CODE_SUCCESS);
         map.put("data",dataObj);

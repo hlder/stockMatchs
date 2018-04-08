@@ -2,15 +2,15 @@
   <image src="../../images/banner_regist.png" bindtap="getUserInfo" class="img-top-banner"></image>
   <view class="list_title_info">新手入门</view>
   <view class="flex-wrp">
-    <view class="flex-item">
+    <view id="1" data-name="基础知识" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_1.png"></image>
       <view>基础知识</view>
     </view>
-    <view class="flex-item">
+    <view id="2" data-name="交易指南" bindtap="onItemClick"  class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_2.png"></image>
       <view>交易指南</view>
     </view>
-    <view class="flex-item">
+    <view id="3" data-name="政策法规" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_3.png"></image>
       <view>政策法规</view>
     </view>
@@ -23,19 +23,19 @@
 
   <view class="list_title_info" style="margin-top:15rpx;">基本面分析</view>
   <view class="flex-wrp">
-    <view class="flex-item">
+    <view id="4" data-name="公司分析" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_5.png"></image>
       <view>公司分析</view>
     </view>
-    <view class="flex-item">
+    <view id="5" data-name="财务分析" bindtap="onItemClick"  class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_6.png"></image>
       <view>财务分析</view>
     </view>
-    <view class="flex-item">
+    <view id="6" data-name="宏观分析" bindtap="onItemClick"  class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_7.png"></image>
       <view>宏观分析</view>
     </view>
-    <view class="flex-item">
+    <view id="7" data-name="心里分析" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_8.png"></image>
       <view>心里分析</view>
     </view>
@@ -46,37 +46,37 @@
 
   <view class="list_title_info" style="margin-top:15rpx;">基本面分析</view>
   <view class="flex-wrp">
-    <view class="flex-item">
+    <view id="8" data-name="K线形态" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_9.png"></image>
       <view>K线形态</view>
     </view>
-    <view class="flex-item">
+    <view id="9" data-name="量价理论" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_10.png"></image>
       <view>量价理论</view>
     </view>
-    <view class="flex-item">
+    <view id="10" data-name="成本分析" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_11.png"></image>
       <view>成本分析</view>
     </view>
-    <view class="flex-item">
+    <view id="11" data-name="指标分析" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_12.png"></image>
       <view>指标分析</view>
     </view>
   </view>
   <view class="flex-wrp">
-    <view class="flex-item">
+    <view id="12" data-name="波浪理论" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_13.png"></image>
       <view>波浪理论</view>
     </view>
-    <view class="flex-item">
+    <view id="13" data-name="道氏理论" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_14.png"></image>
       <view>道氏理论</view>
     </view>
-    <view class="flex-item">
+    <view id="14" data-name="江恩理论" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_15.png"></image>
       <view>江恩理论</view>
     </view>
-    <view class="flex-item">
+    <view id="15" data-name="其他理论" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_16.png"></image>
       <view>其他理论</view>
     </view>
@@ -88,19 +88,19 @@
 
 <view class="list_title_info" style="margin-top:15rpx;">基本面分析</view>
   <view class="flex-wrp">
-    <view class="flex-item">
+    <view id="16" data-name="看盘培训" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_17.png"></image>
       <view>看盘培训</view>
     </view>
-    <view class="flex-item">
+    <view id="17" data-name="操盘攻略" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_18.png"></image>
       <view>操盘攻略</view>
     </view>
-    <view class="flex-item">
+    <view id="18" data-name="主力研判" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_19.png"></image>
       <view>主力研判</view>
     </view>
-    <view class="flex-item">
+    <view id="19" data-name="股林密集" bindtap="onItemClick" class="flex-item">
       <image class="flex-item-img" src="../../images/icon_class_btn_20.png"></image>
       <view>股林密集</view>
     </view>

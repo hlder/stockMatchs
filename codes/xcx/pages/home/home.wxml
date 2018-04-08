@@ -20,7 +20,7 @@
   <block wx:for="{{matchInfo.leaders}}">
     <view id="{{index}}" class="flex-btn-item" bindtap="onButtonItemClick">
       <image class='btn_img' src='{{item.head_url}}'></image>
-       <view class="btn_text" style="">{{item.account_name}}</view> 
+       <view class="btn_text" style="">{{item.account_name}}</view>
     </view>
   </block>
 </view>
@@ -50,18 +50,18 @@
 </view>
 <view class="flex-wrp" style="margin-top: 10px;">
   <view class="flex-text-item">
-    <view class="stock_num_lable">{{matchInfo.allIncomeRate}}</view>
-    <view class="stock_num_text_min">{{matchInfo.allIncome}}</view>
+    <view class="stock_num_lable" style="color:#{{matchInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{matchInfo.allIncomeRate}}</view>
+    <view class="stock_num_text_min" style="color:#{{matchInfo.allIncome>=0?'ff5722':'00bfa5'}}">{{matchInfo.allIncome}}</view>
     <view class="stock_num_text">总收益</view>
   </view>
   <view class="flex-text-item">
-    <view class="stock_num_lable">{{matchInfo.incomeRateMonth}}</view>
-    <view class="stock_num_text_min">{{matchInfo.incomeMonth}}</view>
+    <view class="stock_num_lable" style="color:#{{matchInfo.incomeMonth>=0?'ff5722':'00bfa5'}}">{{matchInfo.incomeRateMonth}}</view>
+    <view class="stock_num_text_min" style="color:#{{matchInfo.incomeMonth>=0?'ff5722':'00bfa5'}}">{{matchInfo.incomeMonth}}</view>
     <view class="stock_num_text">本月收益</view>
   </view>
   <view class="flex-text-item">
-    <view class="stock_num_lable">{{matchInfo.incomeRateWeek}}</view>
-    <view class="stock_num_text_min">{{matchInfo.incomeWeek}}</view>
+    <view class="stock_num_lable" style="color:#{{matchInfo.incomeWeek>=0?'ff5722':'00bfa5'}}">{{matchInfo.incomeRateWeek}}</view>
+    <view class="stock_num_text_min" style="color:#{{matchInfo.incomeWeek>=0?'ff5722':'00bfa5'}}">{{matchInfo.incomeWeek}}</view>
     <view class="stock_num_text">本周收益</view>
   </view>
 </view>

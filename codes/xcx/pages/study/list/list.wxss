@@ -1,0 +1,18 @@
+/* pages/study/list/list.wxss */
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    padding:20rpx;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    background-color: #ffffff;
+}
+
+.img_icon{
+  width: 25rpx;
+  height: 40rpx;
+}
+
+view{
+  font-size: 30rpx;
+}
