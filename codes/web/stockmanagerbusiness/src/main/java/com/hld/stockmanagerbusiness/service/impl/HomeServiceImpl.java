@@ -42,10 +42,10 @@ public class HomeServiceImpl implements HomeService {
         String myLeaderIds=accountInfo.getLeader();
         String leaderIds=matchInfo.getLeader();
         if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
-            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
             map.put("leaders",listLeader);
         }else if(leaderIds!=null&&!"".equals(leaderIds)){
-            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(leaderIds);
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(leaderIds);
             map.put("leaders",listLeader);
         }
 
@@ -119,15 +119,37 @@ public class HomeServiceImpl implements HomeService {
         String myLeaderIds=accountInfo.getLeader();
         String leaderIds=matchInfo.getLeader();
         if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
-            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
             map.put("myLeaders",listLeader);
         }
         if(leaderIds!=null&&!"".equals(leaderIds)){
-            List<AccountInfo> listLeader=accountMapper.queryAccountInIds(leaderIds);
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(leaderIds);
             map.put("matchLeaders",listLeader);
         }else{}
 
         return map;
+    }
+
+    public Map<String,Object> queryMyLeaderById(String accountId,String leaderAccountId){
+        Map<String,Object> rMap=new HashMap<>();
+
+        String myLeaders=accountMapper.queryMyLeaders(accountId);
+        String [] arr=myLeaders.split(",");
+        boolean isFollow=false;
+        for(int i=0;i<arr.length;i++){
+            String item=arr[i];
+            if(item.equals(leaderAccountId)){//有关注此人
+                isFollow=true;
+            }
+        }
+        Map<String,String> leaderInfo=accountMapper.queryLeaderInfoByAccountId(leaderAccountId);
+        rMap.put("isFollow",isFollow);
+        rMap.put("leaderInfo",leaderInfo);
+        if(isFollow){//已关注
+            rMap.put("entrust",entrustMapper.queryMyEntrustById20(leaderAccountId));
+            rMap.put("entrustHis",entrustMapper.queryMyEntrustHistoryById20(leaderAccountId));
+        }
+        return rMap;
     }
 
 

@@ -4,6 +4,7 @@ import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AccountMapper {
@@ -13,8 +14,14 @@ public interface AccountMapper {
 
 //    @Select("select * from user_info_account where id in (${ids})")
     @Select("select ua.*,ui.head_url head_url from user_info ui RIGHT JOIN (select * from user_info_account where id in (${ids})) ua on ui.id=ua.user_id")
-    List<AccountInfo> queryAccountInIds(@Param("ids") String ids);
+    List<Map<String,String>> queryAccountInIds(@Param("ids") String ids);
 
+    @Select("select ua.*,ui.head_url head_url from user_info ui RIGHT JOIN (select * from user_info_account where id=#{accountId}) ua on ui.id=ua.user_id")
+    Map<String,String> queryLeaderInfoByAccountId(@Param("accountId") String accountId);
+
+
+    @Select("select leader from user_info_account where id=#{accountId}")
+    String queryMyLeaders(@Param("accountId") String accountId);
 
     @Select("select * from user_info_account where id=#{id}")
     AccountInfo queryAccountById(@Param("id") String id);

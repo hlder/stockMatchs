@@ -14,8 +14,7 @@ Page({
   data: {
     banners: null,
     buttons:null,
-    matchInfo:null,
-    leaders:null
+    matchInfo:null
   },
   skip:function(skipType,value){
     console.log("skipType:", skipType,"    value:",value);

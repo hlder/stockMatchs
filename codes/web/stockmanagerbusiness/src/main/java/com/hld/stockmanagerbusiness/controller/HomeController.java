@@ -14,6 +14,7 @@ public class HomeController extends BaseController {
     @Autowired
     HomeService homeService;
 
+    //查询主页信息
     @RequestMapping(value="/queryHomeInfo",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> queryHomeInfo(String token,String userId,String matchId,String accountId){
@@ -28,6 +29,8 @@ public class HomeController extends BaseController {
         return getSuccessMap(map);
     }
 
+
+    //查询我的leader，和比赛的leaders
     @RequestMapping(value="/queryMyLeaders",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> queryMyLeaders(String token,String userId,String matchId,String accountId){
@@ -41,6 +44,22 @@ public class HomeController extends BaseController {
         }
         return getSuccessMap(map);
     }
+
+    //根据id查询leader的详细信息
+    @RequestMapping(value="/queryMyLeaderById",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> queryMyLeaderById(String token,String userId,String accountId,String leaderAccountId){
+        Map<String,Object> map=checkToken(token,userId+"");
+        if(map!=null){
+            return map;
+        }
+        map=homeService.queryMyLeaderById(accountId,leaderAccountId);
+        if(map==null){
+            return getErrorMap(ERROR_CODE_OTHER,"请先您关注!");
+        }
+        return getSuccessMap(map);
+    }
+
 
 
 }
