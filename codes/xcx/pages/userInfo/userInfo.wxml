@@ -1,0 +1,124 @@
+<scroll-view scroll-y="true" style="width: 100%;height: 100%;background: #ffffff;">
+<view class="top_view">
+  <image class="img_photo" src="{{userInfo.head_url}}"></image>
+  <view class="view_name">{{userInfo.nicke_name}}</view>
+  <view class="flex-container">
+    <view class="flex-container-item">
+      <view style="color:#9e9e9e;">资金账号</view>
+      <view class="flex-container-item-text-size" style="color:#ffffff;">{{account.id}}</view>
+    </view>
+    <view class="flex-container-item">
+      <view style="color:#9e9e9e;">比赛排名</view>
+      <view class="flex-container-item-text-size" style="color:#ff5722;">{{account.rank}}</view>
+    </view>
+    <view class="flex-container-item">
+      <view style="color:#9e9e9e;">参赛时间</view>
+      <view class="flex-container-item-text-size" style="color:#ffffff;">{{account.create_time}}</view>
+    </view>
+  </view>
+</view>
+<view style="text-align: center;">
+  <view class="flex-container">
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.total_income_rate}}</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">总收益</view>
+    </view>
+    <view class="view_line_h"></view>
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.month_income_rate}}</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">月收益</view>
+    </view>
+    <view class="view_line_h"></view>
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.week_income_rate}}</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">周收益</view>
+    </view>
+  </view>
+</view>
+
+<view style="text-align: center;margin-top:-20rpx;">
+  <view class="flex-container">
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.total_vol_count}}次</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">总交易次数</view>
+    </view>
+    <view class="view_line_h"></view>
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.month_vol_count}}次</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">月交易次数</view>
+    </view>
+    <view class="view_line_h"></view>
+    <view class="flex-container-item">
+      <view style="color:#424242;">{{account.week_vol_count}}次</view>
+      <view class="flex-container-item-text-size" style="color:#9e9e9e;">周交易次数</view>
+    </view>
+  </view>
+</view>
+<view class="view_line_w"></view>
+<view class="title_bg" style="padding:20rpx;">
+  <text style="font-weight: bold;">收益走势</text>
+  <text style="font-size:28rpx;color:#9e9e9e;"> (仅供参考)</text>
+</view>
+<view class="view_line_w"></view>
+<canvas style="width:100%;height:200px;margin-top:10rpx;" canvas-id="monthchart" class="canvas"/>
+
+
+<view class="view_line_w"></view>
+<view class="title_bg" style="padding:20rpx;">
+  <text style="font-weight: bold;">正在委托</text>
+</view>
+<view class="view_line_w"></view>
+<view wx:for="{{listEntrust}}">
+  <view class="flex-container">
+    <view class="flex-container-item-list">
+      <view>{{item.stock_name}}</view>
+      <view>{{item.stock_code_str}}</view>
+    </view>
+    <view class="flex-container-item-list">
+      <view>{{item.entrust_num}}</view>
+      <view>委托股数</view>
+    </view>
+    <view class="flex-container-item-list">
+      <view>{{item.entrust_price}}</view>
+      <view>委托价</view>
+    </view>
+    <view class="flex-container-item-list" style="margin-top:20rpx;">{{item.type==1?"委托买入":"委托卖出"}}</view>
+  </view>
+  <view class="view_line_w"></view>
+</view>
+
+
+<view style="padding:20rpx;" class="title_bg">
+  <text style="font-weight: bold;">历史交易</text>
+</view>
+<view class="view_line_w"></view>
+<view wx:for="{{listEntrustHis}}">
+  <view class="flex-container" style="padding-right:25rpx;">
+    <view class="flex-container-item-list">
+      <view>{{item.stock_name}}</view>
+      <view>{{item.stock_code_str}}</view>
+    </view>
+    <view class="flex-container-item-list">
+      <view>{{item.vol_num}}</view>
+      <view>股数</view>
+    </view>
+    <view class="flex-container-item-list">
+      <view>{{item.vol_price}}</view>
+      <view>成交价</view>
+    </view>
+    <view class="{{item.type==1?'circle-red':'circle-green'}}">
+      <view style="margin-top:15rpx;text-align:center;color:#ffffff;">{{item.type==1?'买入':'卖出'}}</view>
+    </view>
+  </view>
+  <view style="text-align:right;padding-right:25rpx;padding-bottom:10rpx;">
+    {{item.vol_time}}
+  </view>
+  <view class="view_line_w"></view>
+</view>
+
+<view style="text-align:center;padding:20rpx;">最多显示20条历史</view>
+
+
+
+
+</scroll-view>

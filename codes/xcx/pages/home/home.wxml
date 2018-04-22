@@ -23,7 +23,7 @@
 <view wx:if="{{matchInfo.leaders!=null}}" class="view_line" ></view>
 <view wx:if="{{matchInfo.leaders!=null}}" class="flex-wrp" style='padding-top: 25rpx;padding-bottom: 5rpx;background-color:#ffffff;'>
   <block wx:for="{{matchInfo.leaders}}">
-    <view id="{{index}}" class="flex-btn-item" bindtap="onButtonItemClick">
+    <view id="{{item.id}}" class="flex-btn-item" bindtap="onUserItemClick">
       <image class='btn_img' src='{{item.head_url}}'></image>
       <view class="btn_text">{{item.account_name}}</view>
     </view>

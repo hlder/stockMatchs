@@ -27,6 +27,52 @@ public class AccountInfo {
     private float month_income;
     private float month_income_rate;
 
+    private int month_vol_count;
+    private int total_vol_count;
+    private int week_vol_count;
+    private String create_time;
+    private int rank;
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getMonth_vol_count() {
+        return month_vol_count;
+    }
+
+    public void setMonth_vol_count(int month_vol_count) {
+        this.month_vol_count = month_vol_count;
+    }
+
+    public int getTotal_vol_count() {
+        return total_vol_count;
+    }
+
+    public void setTotal_vol_count(int total_vol_count) {
+        this.total_vol_count = total_vol_count;
+    }
+
+    public int getWeek_vol_count() {
+        return week_vol_count;
+    }
+
+    public void setWeek_vol_count(int week_vol_count) {
+        this.week_vol_count = week_vol_count;
+    }
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+
     public String getLeader() {
         return leader;
     }

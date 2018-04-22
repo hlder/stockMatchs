@@ -8,6 +8,7 @@ import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.EntrustStockInfo;
 import com.hld.stockmanagerbusiness.bean.HolderInfo;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
+import com.hld.stockmanagerbusiness.mapper.MathMapper;
 import com.hld.stockmanagerbusiness.mapper.StockInfoMapper;
 import com.hld.stockmanagerbusiness.service.AccountService;
 import com.hld.stockmanagerbusiness.utils.HttpUtil;
@@ -38,6 +39,8 @@ public class ScheduledUpdateUserInfo {
     StockInfoMapper stockInfoMapper;
     @Autowired
     AccountMapper accountMapper;
+    @Autowired
+    MathMapper matchMapper;
 
     private boolean todayIsRest=true;//是否休息，默认休息
 
@@ -52,6 +55,12 @@ public class ScheduledUpdateUserInfo {
         //更新我的收益，收益率(验算一遍)
         List<Long> listAllId = stockInfoMapper.queryAllAccountId();
         for(long itemId:listAllId){
+
+            int count7=accountMapper.queryVolCount(itemId+"",7);
+            int count30=accountMapper.queryVolCount(itemId+"",30);
+            int countAll=accountMapper.queryVolAllCount(itemId+"");
+            accountMapper.updateAccountVolCount(count7+"",count30+"",countAll+"");
+
             AccountInfo info=accountMapper.queryAccountById(itemId+"");
             float allMarketVal=0;
             //总市值
@@ -66,6 +75,7 @@ public class ScheduledUpdateUserInfo {
 
             float canUse=0;//可用资金
             float initTotalAssets=0;//初始化总资产
+
 
             try{total7=Float.parseFloat(""+total7Str);}catch (NumberFormatException e){}
             try{total30=Float.parseFloat(""+total30Str);}catch (NumberFormatException e){}
@@ -98,6 +108,17 @@ public class ScheduledUpdateUserInfo {
             }
         }
         System.out.println("执行完成:更新完成收益率!");
+        //更新所有比赛内用户排名
+        List<Long> listMatchIds=matchMapper.queryAllMatchId();
+        for(Long matchId:listMatchIds){
+            List<Integer> listUserIds= accountMapper.queryRanking(""+matchId);
+            for(int i=0;i<listUserIds.size();i++){
+                int accountId=listUserIds.get(i);
+                accountMapper.updateUserRanking(""+accountId,""+(i+1));
+            }
+        }
+        System.out.println("执行完成:更新完成用户排名!");
+
         //将今天的账户添加进去
         accountService.addAccountToHis();
         System.out.println("执行完成:将今天的账户添加进历史!");

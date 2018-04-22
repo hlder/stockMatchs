@@ -5,6 +5,7 @@ const appParams = require('../../utils/appParams.js')
 const app = getApp()
 var that;
 var accountId;
+var matchId;
 
 Page({
 
@@ -33,18 +34,27 @@ Page({
     console.log(e.currentTarget.id);
     var item = that.data.buttons[parseInt(e.currentTarget.id)];
     that.skip(item.type, item.skip);
+    console.log("item", item);
+    
+  },
+  onUserItemClick:function(e){
+    // leaderAccountId=14 & matchId=1 & accountId=13
+    wx.navigateTo({
+      url: '/pages/userInfo/userInfo?matchId=' + matchId+'&accountId=' + accountId+'&leaderAccountId=' + e.currentTarget.id
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     that=this;
-    accountId = options.accountId
+    accountId = options.accountId;
+    matchId = options.matchId;
     httpUtil.doPost({
       app: app,
       url: appParams.queryHomeInfo,
       data: {
-        matchId:"1",
+        matchId: "" + matchId,
         accountId: "" + options.accountId
       },
       success: function (res) {

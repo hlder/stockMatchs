@@ -34,7 +34,11 @@ public interface EntrustMapper {
     List<EntrustStockInfo> queryMyEntrustById20(@Param("accountId") String accountId);
 
 
-//    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>='2018-02-03 16:43:26' and entrust_time<='2018-02-03 16:43:26' limit #{page},20")
+    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and vol_type!=0 limit 0,20")
+    List<EntrustStockInfoHistory> queryMyEntrustHistory20(@Param("accountId") String accountId);
+
+
+    //    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>='2018-02-03 16:43:26' and entrust_time<='2018-02-03 16:43:26' limit #{page},20")
     @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>=#{startDate} and entrust_time<=#{endDate} order by id desc limit #{page},20")
     List<EntrustStockInfoHistory> queryMyEntrustHistoryById(@Param("accountId") String accountId, @Param("startDate") String startDate, @Param("endDate") String endDate, @Param("page") int page);
     @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and entrust_time>=#{startDate} and entrust_time<=#{endDate} and vol_type=#{vol_type} order by id desc limit #{page},20")

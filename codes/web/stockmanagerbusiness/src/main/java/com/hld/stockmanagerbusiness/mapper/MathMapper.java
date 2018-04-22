@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -14,5 +15,9 @@ public interface MathMapper {
     @Select("select * from match_info where id=#{matchId}")
     MatchInfo queryApplyMatchInfo(@Param("matchId") String matchId);
 
+
+
+    @Select("select id from match_info")
+    List<Long> queryAllMatchId();
 
 }

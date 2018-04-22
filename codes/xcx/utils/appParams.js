@@ -27,6 +27,8 @@ const sendAuthSmsCode = AppIp +"sendAuthSmsCode";//发送验证码
 
 const queryClassListByMold = AppIp +"queryClassListByMold";//查询课堂列表
 const queryClassInfoById = AppIp + "queryClassInfoById";//查询课堂详情
+const queryUserInfo = AppIp +"queryUserInfo";//查询用户信息
+const queryUserIncomeArr = AppIp + "queryUserIncomeArr";//查询用户的收益曲线
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -48,6 +50,8 @@ module.exports = {
   sendAuthSmsCode: sendAuthSmsCode,
   queryClassListByMold: queryClassListByMold,
   queryClassInfoById: queryClassInfoById,
+  queryUserInfo: queryUserInfo,
+  queryUserIncomeArr: queryUserIncomeArr,
 
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode

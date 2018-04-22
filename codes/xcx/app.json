@@ -14,7 +14,8 @@
     "pages/h5/h5",
     "pages/study/classList",
     "pages/study/list/list",
-    "pages/study/info/info"
+    "pages/study/info/info",
+    "pages/userInfo/userInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

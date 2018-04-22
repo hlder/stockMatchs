@@ -26,7 +26,7 @@ public interface AccountMapper {
     @Select("select * from user_info_account where id=#{id}")
     AccountInfo queryAccountById(@Param("id") String id);
 
-    @Insert("insert into user_info_account (user_id,match_id,account_name,phone_num,profession,stu_class,stu_num,total_assets,init_total_assets,can_use_assets) values(#{userId},#{matchId},#{name},#{phoneNum},#{profession},#{stuClass},#{stuNum},#{total_assets},#{init_total_assets},#{can_use_assets})")
+    @Insert("insert into user_info_account (user_id,match_id,account_name,phone_num,profession,stu_class,stu_num,total_assets,init_total_assets,can_use_assets,create_time) values(#{userId},#{matchId},#{name},#{phoneNum},#{profession},#{stuClass},#{stuNum},#{total_assets},#{init_total_assets},#{can_use_assets},now())")
     void insertAccount(@Param("userId") String userId,@Param("matchId") String matchId,@Param("name") String name,@Param("phoneNum") String phoneNum,@Param("profession") String profession,@Param("stuClass") String stuClass,@Param("stuNum") String stuNum,@Param("total_assets") String total_assets,@Param("init_total_assets") String init_total_assets,@Param("can_use_assets") String can_use_assets);
 
     //修改账户的剩余的钱
@@ -59,4 +59,19 @@ public interface AccountMapper {
     //更新所有人的交易数量
     @Update("update user_info_account ua set ua.deal_count=(select count(1) from user_entrust_stock_his where account_id=ua.id and vol_type=1)")
     void updateAllDealNum();
+
+    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and and vol_type=1 and DATEDIFF(now(),vol_time)<=#{days}")
+    int queryVolCount(@Param("accountId") String accountId,@Param("days") int days);
+    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and and vol_type=1")
+    int queryVolAllCount(@Param("accountId") String accountId);
+
+    @Update("update user_info_account set week_vol_count=${week_vol_count},month_vol_count=${month_vol_count},total_vol_count=${total_vol_count}")
+    void updateAccountVolCount(@Param("week_vol_count") String week_vol_count,@Param("month_vol_count") String month_vol_count,@Param("total_vol_count") String total_vol_count);
+
+
+    @Select("select id from user_info_account where match_id=#{matchId} order by total_assets desc")
+    List<Integer> queryRanking(@Param("matchId") String matchId);
+
+    @Update("update user_info_account set rank=#{rank} where id=#{accountId}")
+    void updateUserRanking(@Param("accountId") String accountId,@Param("rank") String rank);
 }

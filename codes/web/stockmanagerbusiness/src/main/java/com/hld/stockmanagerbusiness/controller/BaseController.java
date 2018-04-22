@@ -37,7 +37,7 @@ public class BaseController  {
         return null;
     }
 
-    private String getCodeMsg(long code){
+    private static String getCodeMsg(long code){
         if(code==ERROR_CODE_SUCCESS){
             return "成功";
         }
@@ -75,7 +75,7 @@ public class BaseController  {
 
     }
 
-    public Map<String,Object> getNoDataMap(long code){
+    public static Map<String,Object> getNoDataMap(long code){
         String msg=getCodeMsg(code);
         if(code==ERROR_CODE_SUCCESS){//成功
             msg="成功";
@@ -93,7 +93,13 @@ public class BaseController  {
         map.put("data",dataObj);
         return map;
     }
-    public Map<String,Object> getErrorMap(long errorCode,String message){
+    public static Map<String,Object> getErrorMap(long errorCode){
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",errorCode);
+        map.put("msg",getErrorMap(errorCode));
+        return map;
+    }
+    public static Map<String,Object> getErrorMap(long errorCode,String message){
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",errorCode);
         map.put("msg",message);

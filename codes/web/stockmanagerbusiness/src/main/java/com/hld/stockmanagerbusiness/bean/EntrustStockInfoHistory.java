@@ -14,7 +14,7 @@ public class EntrustStockInfoHistory {
     private Date entrust_time;
     private long user_id;
     private long account_id;
-    private Date vol_time;
+    private String vol_time;
     private String vol_price;
     private long vol_type;
 
@@ -114,11 +114,11 @@ public class EntrustStockInfoHistory {
         this.account_id = account_id;
     }
 
-    public Date getVol_time() {
+    public String getVol_time() {
         return vol_time;
     }
 
-    public void setVol_time(Date vol_time) {
+    public void setVol_time(String vol_time) {
         this.vol_time = vol_time;
     }
 
