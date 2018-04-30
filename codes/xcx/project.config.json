@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
-	"appid": "wx5f000e25686cf609",
-	"projectname": "xcx2",
+	"appid": "wxd49ef38ac045d40a",
+	"projectname": "%E6%A8%A1%E6%8B%9F%E6%8A%95%E8%B5%84%E6%AF%94%E8%B5%9B",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -120,7 +120,7 @@
 					"id": 14,
 					"name": "userInfo",
 					"pathName": "pages/userInfo/userInfo",
-					"query": "userId=20&leaderAccountId=14&matchId=1&accountId=13"
+					"query": "userId=20&leaderAccountId=12&matchId=1&accountId=12"
 				}
 			]
 		}

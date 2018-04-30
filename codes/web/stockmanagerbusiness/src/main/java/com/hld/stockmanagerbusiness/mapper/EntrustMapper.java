@@ -34,7 +34,7 @@ public interface EntrustMapper {
     List<EntrustStockInfo> queryMyEntrustById20(@Param("accountId") String accountId);
 
 
-    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and vol_type!=0 limit 0,20")
+    @Select("SELECT * FROM user_entrust_stock_his where account_id=#{accountId} and vol_type=1 limit 0,20")
     List<EntrustStockInfoHistory> queryMyEntrustHistory20(@Param("accountId") String accountId);
 
 
