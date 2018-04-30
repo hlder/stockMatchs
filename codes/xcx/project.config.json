@@ -42,7 +42,7 @@
 					"id": 1,
 					"name": "主页",
 					"pathName": "pages/home/home",
-					"query": "accountId=12&matchId=1"
+					"query": "accountId=15&matchId=1"
 				},
 				{
 					"id": -1,
