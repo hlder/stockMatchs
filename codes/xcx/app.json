@@ -15,7 +15,8 @@
     "pages/study/classList",
     "pages/study/list/list",
     "pages/study/info/info",
-    "pages/userInfo/userInfo"
+    "pages/userInfo/userInfo",
+    "pages/leaderList/leaderList"
   ],
   "window": {
     "backgroundTextStyle": "light",

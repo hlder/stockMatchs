@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 15,
 			"list": [
 				{
 					"id": 0,
@@ -121,6 +121,12 @@
 					"name": "userInfo",
 					"pathName": "pages/userInfo/userInfo",
 					"query": "userId=20&leaderAccountId=12&matchId=1&accountId=12"
+				},
+				{
+					"id": 15,
+					"name": "leaderList",
+					"pathName": "pages/leaderList/leaderList",
+					"query": "matchId=1&accountId=12"
 				}
 			]
 		}

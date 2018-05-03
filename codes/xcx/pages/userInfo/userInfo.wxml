@@ -1,7 +1,7 @@
 <view scroll-y="true" style="width: 100%;height: 100%;background: #ffffff;color:#424242;">
 <view class="top_view">
   <image class="img_photo" src="{{userInfo.head_url}}"></image>
-  <view class="view_name">{{userInfo.nicke_name}}</view>
+  <view class="view_name">{{account.account_name}}</view>
   <view class="flex-container">
     <view class="flex-container-item">
       <view style="color:#9e9e9e;">资金账号</view>

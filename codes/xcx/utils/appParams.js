@@ -1,4 +1,5 @@
-const AppIp = "https://www.qdcash.xyz/";
+// const AppIp = "https://www.qdcash.xyz/";
+const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://47.100.180.170:8088/";
 // const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://192.168.1.175:8088/";
@@ -30,6 +31,7 @@ const queryClassListByMold = AppIp +"queryClassListByMold";//查询课堂列表
 const queryClassInfoById = AppIp + "queryClassInfoById";//查询课堂详情
 const queryUserInfo = AppIp +"queryUserInfo";//查询用户信息
 const queryUserIncomeArr = AppIp + "queryUserIncomeArr";//查询用户的收益曲线
+const queryMyLeaders = AppIp + "queryMyLeaders";//查询我的leaders
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -53,7 +55,7 @@ module.exports = {
   queryClassInfoById: queryClassInfoById,
   queryUserInfo: queryUserInfo,
   queryUserIncomeArr: queryUserIncomeArr,
-
+  queryMyLeaders:queryMyLeaders,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

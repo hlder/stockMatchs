@@ -16,6 +16,7 @@ public interface AccountMapper {
     @Select("select ua.*,ui.head_url head_url from user_info ui RIGHT JOIN (select * from user_info_account where id in (${ids})) ua on ui.id=ua.user_id")
     List<Map<String,String>> queryAccountInIds(@Param("ids") String ids);
 
+
     @Select("select ua.*,ui.head_url head_url from user_info ui RIGHT JOIN (select * from user_info_account where id=#{accountId}) ua on ui.id=ua.user_id")
     Map<String,String> queryLeaderInfoByAccountId(@Param("accountId") String accountId);
 

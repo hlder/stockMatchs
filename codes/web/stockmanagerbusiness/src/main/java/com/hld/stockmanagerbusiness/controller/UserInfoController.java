@@ -32,4 +32,20 @@ public class UserInfoController extends BaseController{
         return userInfoService.queryUserIncomeArr(request);
     }
 
+    //查询我的leaders
+    //参数:accountId,matchId
+    @RequestMapping(value="/queryMyLeaders")
+    @ResponseBody
+    public Map<String,Object> queryMyLeaders(HttpServletRequest request){
+        return userInfoService.queryMyLeaders(request);
+    }
+
+    //查询比赛用户
+    //参数:matchId
+    @RequestMapping(value="/queryMatchUsers")
+    @ResponseBody
+    public Map<String,Object> queryMatchUsers(HttpServletRequest request){
+        return userInfoService.queryMatchUsers(request);
+    }
+
 }

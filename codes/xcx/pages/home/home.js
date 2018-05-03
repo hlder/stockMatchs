@@ -1,6 +1,7 @@
 // pages/applyMatch/applyMatch.js
 const httpUtil = require('../../utils/httpUtil.js')
 const appParams = require('../../utils/appParams.js')
+const category = require('../../utils/category.js')
 
 const app = getApp()
 var that;
@@ -59,10 +60,16 @@ Page({
       },
       success: function (res) {
         console.log("返回:", res.data)
+        var data = res.data.data;
+        // data.leaders
+        for (var i = 0; i < data.leaders.length;i++){
+          var text = data.leaders[i].total_income_rate;
+          data.leaders[i].total_income_rate = category.transformPercent(text);
+        }
         that.setData({
           banners: JSON.parse(res.data.data.banners),
           buttons: JSON.parse(res.data.data.buttons),
-          matchInfo: res.data.data
+          matchInfo: data
         });
       }
     });

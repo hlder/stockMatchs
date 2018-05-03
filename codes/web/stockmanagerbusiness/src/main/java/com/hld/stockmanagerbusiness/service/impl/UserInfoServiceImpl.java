@@ -29,6 +29,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     StockInfoMapper stockInfoMapper;
 
     @Override
+    public Map<String, Object> queryMatchUsers(HttpServletRequest request) {
+        String matchId=request.getParameter("matchId");
+        int page=Integer.parseInt(request.getParameter("page"));
+        int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+        page=page*pageSize;
+
+        List<Map<String,String>> list=userInfoMapper.queryMatchUsers(matchId,page+"",pageSize+"");
+        return BaseController.getSuccessMap(list);
+    }
+
+    @Override
     public Map<String,Object> queryUserInfo(HttpServletRequest request) {
         Map<String,Object> mapData=new HashMap<>();
 
@@ -84,4 +95,35 @@ public class UserInfoServiceImpl implements UserInfoService {
         mapData.put("list",listMap);
         return BaseController.getSuccessMap(mapData);
     }
+
+    @Override
+    public Map<String, Object> queryMyLeaders(HttpServletRequest request) {
+        String accountId=request.getParameter("accountId");
+        String matchId=request.getParameter("matchId");
+        //查询我的账户信息
+        AccountInfo accountInfo=accountMapper.queryAccountById(accountId);
+        //查询比赛的信息，banners，buttons
+        MatchInfo matchInfo=mathMapper.queryApplyMatchInfo(matchId);
+        if(matchInfo==null){
+            return BaseController.getErrorMap(BaseController.ERROR_CODE_NO_THIS_MATCH);
+        }
+        if(accountInfo==null){
+            return BaseController.getErrorMap(BaseController.ERROR_CODE_NO_THIS_ACCOUNT);
+        }
+        Map<String,Object> mapData= new HashMap<>();
+
+        String myLeaderIds=accountInfo.getLeader();//我关注的leader
+        String matchLeaderIds=matchInfo.getLeader();//比赛的leader
+
+        if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(myLeaderIds);
+            mapData.put("myLeaders",listLeader);
+        }
+        if(matchLeaderIds!=null&&!"".equals(matchLeaderIds)){
+            List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(matchLeaderIds);
+            mapData.put("otherLeaders",listLeader);
+        }
+        return BaseController.getSuccessMap(mapData);
+    }
+
 }

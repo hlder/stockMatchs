@@ -1,0 +1,43 @@
+<!--pages/leaderList/leaderList.wxml-->
+<view class="view_item_title" style="background-color:#ffffff;">
+    <view class="view_line_h view_item_title_left"></view>
+    <view class="view_item_title_text">我的高手</view>
+</view>
+<view class="view_line"></view>
+
+<view wx:for="{{data.myLeaders}}">
+  <view class="item_layout" id="{{item.id}}" bindtap="onUserItemClick">
+    <view class="item_left item_layout">
+      <image class='btn_img' src='{{item.head_url}}'></image>
+      <view style="padding-left:20rpx;padding-top:20rpx;font-size: 40rpx;">
+        {{item.account_name}}
+      </view>
+    </view>
+    <view class="item_right">
+      <view style="color:#{{item.total_income>=0?'ff5722':'00bfa5'}}">{{item.total_income_rate}}</view>
+    </view>
+  </view>
+  <view class="view_line"></view>
+</view>
+
+
+<view class="view_item_title" style="background-color:#ffffff;margin-top:15rpx;">
+    <view class="view_line_h view_item_title_left"></view>
+    <view class="view_item_title_text">其他高手</view>
+</view>
+<view class="view_line"></view>
+
+<view wx:for="{{data.otherLeaders}}">
+  <view class="item_layout" id="{{item.id}}" bindtap="onUserItemClick">
+    <view class="item_left item_layout">
+      <image class='btn_img' src='{{item.head_url}}'></image>
+      <view style="padding-left:20rpx;padding-top:20rpx;font-size: 40rpx;">
+        {{item.account_name}}
+      </view>
+    </view>
+    <view class="item_right">
+      <view style="color:#{{item.total_income>=0?'ff5722':'00bfa5'}}">{{item.total_income_rate}}</view>
+    </view>
+  </view>
+  <view class="view_line"></view>
+</view>
