@@ -65,9 +65,9 @@ public interface AccountMapper {
     @Update("update user_info_account ua set ua.deal_count=(select count(1) from user_entrust_stock_his where account_id=ua.id and vol_type=1)")
     void updateAllDealNum();
 
-    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and and vol_type=1 and DATEDIFF(now(),vol_time)<=#{days}")
+    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and vol_type=1 and DATEDIFF(now(),vol_time)<=#{days}")
     int queryVolCount(@Param("accountId") String accountId,@Param("days") int days);
-    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and and vol_type=1")
+    @Select("select count(*) from user_entrust_stock_his where account_id=#{accountId} and vol_type=1")
     int queryVolAllCount(@Param("accountId") String accountId);
 
     @Update("update user_info_account set week_vol_count=${week_vol_count},month_vol_count=${month_vol_count},total_vol_count=${total_vol_count}")

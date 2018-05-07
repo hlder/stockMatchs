@@ -1,5 +1,5 @@
-// const AppIp = "https://www.qdcash.xyz/";
-const AppIp = "http://127.0.0.1:8088/";
+const AppIp = "https://www.qdcash.xyz/";
+// const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://47.100.180.170:8088/";
 // const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://192.168.1.175:8088/";
