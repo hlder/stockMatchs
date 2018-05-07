@@ -13,5 +13,8 @@ public interface UserInfoService {
     Map<String,Object> queryMyLeaders(HttpServletRequest request);
     //查询比赛中用户
     Map<String,Object> queryMatchUsers(HttpServletRequest request);
+    //关注某人
+    Map<String,Object> attenUser(HttpServletRequest request);
+
 
 }

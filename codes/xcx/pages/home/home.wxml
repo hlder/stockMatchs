@@ -21,7 +21,7 @@
       <view class="view_line_h view_item_title_left"></view>
       <view class="view_item_title_text">比赛高手</view>
     </view>
-    <view class="view_title_potions_lay"><image class="view_title_points" src="/images/icon_title_points.png"></image></view>
+    <view class="view_title_potions_lay" bindtap="onMoreLeaderBtnClick"><image class="view_title_points" src="/images/icon_title_points.png"></image></view>
 </view>
 <view wx:if="{{matchInfo.leaders!=null}}" class="view_line" ></view>
 <view wx:if="{{matchInfo.leaders!=null}}" class="flex-wrp" style='padding-top: 25rpx;padding-bottom: 5rpx;background-color:#ffffff;'>

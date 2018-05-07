@@ -20,9 +20,16 @@ Page({
   },
   skip:function(skipType,value){
     console.log("skipType:", skipType,"    value:",value);
-    if (skipType==3){//跳转html解析
+    if (skipType == 3) {//跳转html解析
+      console.log("跳转3");
       wx.navigateTo({
         url: '/pages/h5/h5?value=' + value
+      });
+    }
+    if (skipType==2){//跳转功能
+      console.log("跳转2");
+      wx.navigateTo({
+        url: '' + value
       });
     }
   },
@@ -36,7 +43,11 @@ Page({
     var item = that.data.buttons[parseInt(e.currentTarget.id)];
     that.skip(item.type, item.skip);
     console.log("item", item);
-    
+  },
+  onMoreLeaderBtnClick:function(e){//更多的leader
+    wx.navigateTo({
+      url: '/pages/leaderList/leaderList?matchId=' + matchId + '&accountId=' + accountId
+    });
   },
   onUserItemClick:function(e){
     // leaderAccountId=14 & matchId=1 & accountId=13

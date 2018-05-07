@@ -21,6 +21,10 @@ public interface AccountMapper {
     Map<String,String> queryLeaderInfoByAccountId(@Param("accountId") String accountId);
 
 
+    @Update("update user_info_account set leader=#{leaders} where id=#{accountId}")
+    void attenUser(@Param("leaders") String leaders,@Param("accountId") String accountId);
+
+
     @Select("select leader from user_info_account where id=#{accountId}")
     String queryMyLeaders(@Param("accountId") String accountId);
 

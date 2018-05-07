@@ -28,6 +28,30 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     StockInfoMapper stockInfoMapper;
 
+    //关注用户
+    @Override
+    public Map<String, Object> attenUser(HttpServletRequest request) {
+        String accountId=request.getParameter("accountId");//我的账号ID
+        String leaderAccountId=request.getParameter("leaderAccountId");//需要关注的账号ID
+        AccountInfo info=accountMapper.queryAccountById(""+accountId);
+        if(info.getLeader().contains(",")){//证明有多个leader
+            if(info.getLeader().contains(","+leaderAccountId)||info.getLeader().contains(leaderAccountId+",")){//存在,已经是我的leader,不需要再关注
+                return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER,"已关注!");
+            }
+        }else if(info.getLeader().contains(""+leaderAccountId)){//存在,已经是我的leader,不需要再关注
+            return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER,"已关注!");
+        }
+
+        String leaders=info.getLeader()+"";
+        if("".equals(leaders)){
+            leaders=leaderAccountId+"";
+        }else{
+            leaders=leaders+","+leaderAccountId;
+        }
+        accountMapper.attenUser(leaders,accountId+"");
+        return BaseController.getSuccessMap("success");
+    }
+
     @Override
     public Map<String, Object> queryMatchUsers(HttpServletRequest request) {
         String matchId=request.getParameter("matchId");
@@ -38,6 +62,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         List<Map<String,String>> list=userInfoMapper.queryMatchUsers(matchId,page+"",pageSize+"");
         return BaseController.getSuccessMap(list);
     }
+
 
     @Override
     public Map<String,Object> queryUserInfo(HttpServletRequest request) {
@@ -114,6 +139,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         String myLeaderIds=accountInfo.getLeader();//我关注的leader
         String matchLeaderIds=matchInfo.getLeader();//比赛的leader
+
 
         if(myLeaderIds!=null&&!"".equals(myLeaderIds)){
             List<Map<String,String>> listLeader=accountMapper.queryAccountInIds(myLeaderIds);

@@ -126,7 +126,7 @@
 					"id": 15,
 					"name": "leaderList",
 					"pathName": "pages/leaderList/leaderList",
-					"query": "matchId=1&accountId=12"
+					"query": "matchId=1&accountId=15"
 				}
 			]
 		}

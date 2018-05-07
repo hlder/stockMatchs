@@ -70,3 +70,11 @@
   height: 40px; 
   background: #00bfa7;
 }
+
+.btn_pay_entrust{
+  background: #ff5722;
+  padding: 20rpx;
+  text-align: center;
+  margin-top: -80rpx;
+  color: white;
+}

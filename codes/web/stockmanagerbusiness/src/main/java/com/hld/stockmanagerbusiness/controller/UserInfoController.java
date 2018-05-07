@@ -48,4 +48,11 @@ public class UserInfoController extends BaseController{
         return userInfoService.queryMatchUsers(request);
     }
 
+    //关注某人
+    @RequestMapping(value="/attenUser")
+    @ResponseBody
+    public Map<String,Object> attenUser(HttpServletRequest request){
+        return userInfoService.attenUser(request);
+    }
+
 }

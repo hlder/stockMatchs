@@ -63,65 +63,78 @@
 <canvas style="width:100%;height:200px;margin-top:10rpx;" canvas-id="monthchart" class="canvas"/>
 
 
-<view class="view_line_w"></view>
-<view class="title_bg" style="padding:20rpx;">
-  <text style="font-weight: bold;">正在委托</text>
-</view>
-<view class="view_line_w"></view>
-<view wx:if="{{listEntrust==null||listEntrust.length==0}}" style="padding:20rpx;text-align: center;">没有委托</view>
-<view wx:if="{{listEntrust==null||listEntrust.length==0}}" class="view_line_w"></view>
 
-<view wx:for="{{listEntrust}}">
-  <view class="flex-container">
-    <view class="flex-container-item-list">
-      <view>{{item.stock_name}}</view>
-      <view>{{item.stock_code_str}}</view>
-    </view>
-    <view class="flex-container-item-list">
-      <view>{{item.entrust_num}}</view>
-      <view>委托股数</view>
-    </view>
-    <view class="flex-container-item-list">
-      <view>{{item.entrust_price}}</view>
-      <view>委托价</view>
-    </view>
-    <view class="flex-container-item-list" style="margin-top:20rpx;">{{item.type==1?"委托买入":"委托卖出"}}</view>
+
+
+
+
+
+
+
+<view wx:if="{{isILeader}}">
+  <view class="view_line_w"></view>
+  <view class="title_bg" style="padding:20rpx;">
+    <text style="font-weight: bold;">正在委托</text>
   </view>
   <view class="view_line_w"></view>
-</view>
+  <view wx:if="{{listEntrust==null||listEntrust.length==0}}" style="padding:20rpx;text-align: center;">没有委托</view>
+  <view wx:if="{{listEntrust==null||listEntrust.length==0}}" class="view_line_w"></view>
 
-
-<view style="padding:20rpx;" class="title_bg">
-  <text style="font-weight: bold;">历史交易</text>
-</view>
-<view class="view_line_w"></view>
-<view wx:for="{{listEntrustHis}}">
-  <view class="flex-container" style="padding-right:25rpx;">
-    <view class="flex-container-item-list">
-      <view>{{item.stock_name}}</view>
-      <view>{{item.stock_code_str}}</view>
+  <view wx:for="{{listEntrust}}">
+    <view class="flex-container">
+      <view class="flex-container-item-list">
+        <view>{{item.stock_name}}</view>
+        <view>{{item.stock_code_str}}</view>
+      </view>
+      <view class="flex-container-item-list">
+        <view>{{item.entrust_num}}</view>
+        <view>委托股数</view>
+      </view>
+      <view class="flex-container-item-list">
+        <view>{{item.entrust_price}}</view>
+        <view>委托价</view>
+      </view>
+      <view class="flex-container-item-list" style="margin-top:20rpx;">{{item.type==1?"委托买入":"委托卖出"}}</view>
     </view>
-    <view class="flex-container-item-list">
-      <view>{{item.vol_num}}</view>
-      <view>股数</view>
-    </view>
-    <view class="flex-container-item-list">
-      <view>{{item.vol_price}}</view>
-      <view>成交价</view>
-    </view>
-    <view class="{{item.type==1?'circle-red':'circle-green'}}">
-      <view style="margin-top:15rpx;text-align:center;color:#ffffff;">{{item.type==1?'买入':'卖出'}}</view>
-    </view>
+    <view class="view_line_w"></view>
   </view>
-  <view style="text-align:right;padding-right:25rpx;padding-bottom:10rpx;margin-top:-20rpx;">
-    {{item.vol_time}}
+
+
+  <view style="padding:20rpx;" class="title_bg">
+    <text style="font-weight: bold;">历史交易</text>
   </view>
   <view class="view_line_w"></view>
+  <view wx:for="{{listEntrustHis}}">
+    <view class="flex-container" style="padding-right:25rpx;">
+      <view class="flex-container-item-list">
+        <view>{{item.stock_name}}</view>
+        <view>{{item.stock_code_str}}</view>
+      </view>
+      <view class="flex-container-item-list">
+        <view>{{item.vol_num}}</view>
+        <view>股数</view>
+      </view>
+      <view class="flex-container-item-list">
+        <view>{{item.vol_price}}</view>
+        <view>成交价</view>
+      </view>
+      <view class="{{item.type==1?'circle-red':'circle-green'}}">
+        <view style="margin-top:15rpx;text-align:center;color:#ffffff;">{{item.type==1?'买入':'卖出'}}</view>
+      </view>
+    </view>
+    <view style="text-align:right;padding-right:25rpx;padding-bottom:10rpx;margin-top:-20rpx;">
+      {{item.vol_time}}
+    </view>
+    <view class="view_line_w"></view>
+  </view>
+
+  <view style="text-align:center;padding:20rpx;">最多显示20条历史</view>
+
+
+
+
+  </view>
 </view>
-
-<view style="text-align:center;padding:20rpx;">最多显示20条历史</view>
-
-
-
-
+<view class="btn_pay_entrust" wx:if="{{!isILeader}}" bindtap='onPayBtnClick'>
+  10元付费查看实时委托！
 </view>

@@ -114,6 +114,7 @@ view_item_title_left{
 .view_title_potions_lay{
   width: 40%;
   text-align: right;
+  margin-top: -10rpx;
 }
 .view_title_potions_lay_left{
   width: 60%;

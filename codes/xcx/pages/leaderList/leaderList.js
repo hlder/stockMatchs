@@ -27,12 +27,19 @@ Page({
     accountId = options.accountId;
     matchId = options.matchId;
 
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
     httpUtil.doPost({
       app: app,
       url: appParams.queryMyLeaders,
       data: {
-        accountId:15,
-        matchId:1
+        accountId: 15,
+        matchId: 1
       },
       fail: function (e) {
         console.log("登录失败:-------------------------------------")
@@ -41,14 +48,14 @@ Page({
       success: function (res) {
         console.log("登录成功:", res.data)
         var reqData = res.data.data;
-        if (reqData.myLeaders!=null){
-          for (var i = 0; i < reqData.myLeaders.length;i++){
+        if (reqData.myLeaders != null) {
+          for (var i = 0; i < reqData.myLeaders.length; i++) {
             reqData.myLeaders[i].total_income_rate = category.transformPercent(reqData.myLeaders[i].total_income_rate);
           }
         }
         if (reqData.otherLeaders != null) {
           for (var i = 0; i < reqData.otherLeaders.length; i++) {
-            reqData.otherLeaders[i].total_income_rate = category.transformPercent(reqData.myLeaders[i].total_income_rate);
+            reqData.otherLeaders[i].total_income_rate = category.transformPercent(reqData.otherLeaders[i].total_income_rate);
           }
         }
         that.setData({
@@ -57,7 +64,6 @@ Page({
       }
     });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -65,12 +71,6 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

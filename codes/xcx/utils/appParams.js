@@ -32,6 +32,7 @@ const queryClassInfoById = AppIp + "queryClassInfoById";//查询课堂详情
 const queryUserInfo = AppIp +"queryUserInfo";//查询用户信息
 const queryUserIncomeArr = AppIp + "queryUserIncomeArr";//查询用户的收益曲线
 const queryMyLeaders = AppIp + "queryMyLeaders";//查询我的leaders
+const attenUser = AppIp +"attenUser";//关注某人
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -56,6 +57,7 @@ module.exports = {
   queryUserInfo: queryUserInfo,
   queryUserIncomeArr: queryUserIncomeArr,
   queryMyLeaders:queryMyLeaders,
+  attenUser: attenUser,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }
