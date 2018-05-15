@@ -52,6 +52,9 @@ public class ScheduledUpdateUserInfo {
     //每日的23:10将账户添加进历史
     @Scheduled(cron="0 10 23 ? * *")
     public void addAccountToHis() {
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("跑批开始时间:"+sdf.format(new Date()));
         //更新我的收益，收益率(验算一遍)
         List<Long> listAllId = stockInfoMapper.queryAllAccountId();
         for(long itemId:listAllId){
@@ -126,6 +129,7 @@ public class ScheduledUpdateUserInfo {
         //更新所有人的交易次数
         accountMapper.updateAllDealNum();
         System.out.println("执行完成:更新所有人的交易次数!");
+        System.out.println("执行结束时间:"+sdf.format(new Date()));
     }
 
     //每日凌晨1:10分进行更新所有人的信息

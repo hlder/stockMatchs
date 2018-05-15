@@ -1,5 +1,8 @@
-<scroll-view style="background-color: #f5f5f5;">
+  <form report-submit="true" bindsubmit="onGetWeChatFormId">
+   <button formType="submit"></button> 
+  </form>
 
+ <!-- <scroll-view style="background-color: #f5f5f5;">  -->
 <swiper wx:if="{{banners!=null}}" indicator-dots="true"  autoplay="true" interval="5000" duration="200">  
   <block wx:for="{{banners}}">  
   <swiper-item>
@@ -103,4 +106,6 @@
   </view>
   
 </view>
-</scroll-view>
+ <!-- </scroll-view>  -->
+
+

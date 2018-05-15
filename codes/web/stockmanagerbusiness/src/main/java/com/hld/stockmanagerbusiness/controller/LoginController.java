@@ -3,6 +3,7 @@ package com.hld.stockmanagerbusiness.controller;
 import com.hld.stockmanagerbusiness.bean.UserInfo;
 import com.hld.stockmanagerbusiness.service.LoginService;
 import com.hld.stockmanagerbusiness.service.SMSService;
+import com.hld.stockmanagerbusiness.service.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,8 @@ public class LoginController extends BaseController{
     LoginService loginService;
     @Autowired
     SMSService smsService;
+    @Autowired
+    WeChatService weChatService;
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
@@ -38,6 +41,15 @@ public class LoginController extends BaseController{
         }
         return getSuccessMap(userInfo);
     }
+
+
+
+    @RequestMapping(value="/uploadWeChatFormId",method = RequestMethod.POST)
+    @ResponseBody
+    public Object uploadWeChatFormId(HttpServletRequest request){
+        return weChatService.uploadWeChatFormId(request);
+    }
+
 
     //发送验证码
 

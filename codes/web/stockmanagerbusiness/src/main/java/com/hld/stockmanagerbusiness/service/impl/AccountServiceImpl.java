@@ -67,7 +67,9 @@ public class AccountServiceImpl implements AccountService {
         }
 
         AccountInfo accountInfo=accountMapper.queryAccountById(accountId);
-
+        if(accountInfo==null){
+            return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER);
+        }
 
         float allHolderAssets=0;//总持有市值
         float canUseAssets = 0;//可用资产

@@ -46,10 +46,10 @@ public interface AccountMapper {
     @Insert("insert into user_info_account_his (account_id,user_id,total_assets,can_use_assets,deal_count) select id,user_id,total_assets,can_use_assets,deal_count from user_info_account")
     void addAccountToHis();
 
-    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval 1 day))=TO_DAYS(create_time) and account_id=#{accountId}")
+    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval 1 day))=TO_DAYS(create_time) and account_id=#{accountId} limit 0,1")
     String queryYestodayTotalAssets(@Param("accountId") String accountId);
 
-    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval #{days} day))=TO_DAYS(create_time) and account_id=#{accountId}")
+    @Select("SELECT total_assets FROM user_info_account_his where TO_DAYS(date_sub(curdate(),interval #{days} day))=TO_DAYS(create_time) and account_id=#{accountId} limit 0,1")
     String queryHisTotalAssets(@Param("accountId") String accountId,@Param("days") String days);
 
     //更新用户的总资产

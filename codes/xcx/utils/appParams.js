@@ -33,6 +33,7 @@ const queryUserInfo = AppIp +"queryUserInfo";//查询用户信息
 const queryUserIncomeArr = AppIp + "queryUserIncomeArr";//查询用户的收益曲线
 const queryMyLeaders = AppIp + "queryMyLeaders";//查询我的leaders
 const attenUser = AppIp +"attenUser";//关注某人
+const uploadWeChatFormId = AppIp +"uploadWeChatFormId";
 
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
@@ -58,6 +59,7 @@ module.exports = {
   queryUserIncomeArr: queryUserIncomeArr,
   queryMyLeaders:queryMyLeaders,
   attenUser: attenUser,
+  uploadWeChatFormId: uploadWeChatFormId,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

@@ -62,18 +62,36 @@ Page({
     that=this;
     accountId = options.accountId;
     matchId = options.matchId;
+  },
+  //收集用户的formId
+  onGetWeChatFormId: function (e) {
+    console.log("点击了:" + e.detail.formId);
+    if ("the formId is a mock one"==e.detail.formId){
+      return;
+    }
+    // this.setData({ temp: "" + e.detail.formId });
+    httpUtil.doPost({
+      app: app,
+      url: appParams.uploadWeChatFormId,
+      data: {
+        formId: "" + e.detail.formId
+      },
+      success: function (res) {}
+    });
+  },
+  loadHomeData:function(){
     httpUtil.doPost({
       app: app,
       url: appParams.queryHomeInfo,
       data: {
         matchId: "" + matchId,
-        accountId: "" + options.accountId
+        accountId: "" + accountId
       },
       success: function (res) {
         console.log("返回:", res.data)
         var data = res.data.data;
         // data.leaders
-        for (var i = 0; i < data.leaders.length;i++){
+        for (var i = 0; i < data.leaders.length; i++) {
           var text = data.leaders[i].total_income_rate;
           data.leaders[i].total_income_rate = category.transformPercent(text);
         }
@@ -84,6 +102,13 @@ Page({
         });
       }
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    that.loadHomeData();
   },
   onBuyClick:function(){
     // pages / actions / buy / buy
@@ -119,12 +144,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

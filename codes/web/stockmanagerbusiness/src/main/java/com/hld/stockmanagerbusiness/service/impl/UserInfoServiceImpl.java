@@ -115,7 +115,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         String matchId=request.getParameter("matchId");
         //比赛信息
         MatchInfo matchInfo=mathMapper.queryApplyMatchInfo(matchId);
-        long initTotalAssets = Long.parseLong(matchInfo.getInit_total_assets());
+        if(matchInfo==null){
+            return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER);
+        }
+        String initTotalAssets =""+matchInfo.getInit_total_assets();
+
         List<Map<String,String>> listMap=userInfoMapper.queryIncomeArr(leaderAccountId,initTotalAssets+"");
         mapData.put("list",listMap);
         return BaseController.getSuccessMap(mapData);

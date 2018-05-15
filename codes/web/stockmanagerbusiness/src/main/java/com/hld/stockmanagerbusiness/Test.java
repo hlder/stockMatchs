@@ -1,7 +1,58 @@
 package com.hld.stockmanagerbusiness;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.hld.stockmanagerbusiness.utils.HttpUtil;
+
 public class Test {
     public static void main(String [] args){
-        String testView="<text>pages/test/test.wxml</text>";
+        while(true){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            checkNNRoom();
+            checkMjRoom();
+        }
     }
+
+    public static void checkNNRoom(){
+        String queryNNRoomList="https://admin.lhyone.com/ttpoker/gold/queryNNRoomList";
+        String req=HttpUtil.sendPost(queryNNRoomList,"userId=10000&token=HV5jhhvZA2TGSBGcnxXg5jQ%2BkE6Atxh0k96EP0S%2FzxHF752LjLZZbqxtx67lUFuh2u9AiUZVz3t4GRJIcyVrZgmJQTTee7ri8tH5ImkEKLJGqdBjBGVBDxvyxAy7x8mRNyKI67YngF7mYpGvKXgSa3eBZVh9IsBBkYG3xDQhIUw%3D");
+        JSONObject jo= JSON.parseObject(req);
+        JSONArray ja= jo.getJSONArray("data");
+        if(ja==null||ja.size()<2){
+            createNNRoom();
+        }
+    }
+    public static void checkMjRoom(){
+        String queryNNRoomList="https://admin.lhyone.com/ttpoker/gold/queryMjRoomList";
+        String req=HttpUtil.sendPost(queryNNRoomList,"userId=10000&token=HV5jhhvZA2TGSBGcnxXg5jQ%2BkE6Atxh0k96EP0S%2FzxHF752LjLZZbqxtx67lUFuh2u9AiUZVz3t4GRJIcyVrZgmJQTTee7ri8tH5ImkEKLJGqdBjBGVBDxvyxAy7x8mRNyKI67YngF7mYpGvKXgSa3eBZVh9IsBBkYG3xDQhIUw%3D");
+        JSONObject jo= JSON.parseObject(req);
+        JSONArray ja= jo.getJSONArray("data");
+        if(ja==null||ja.size()<2){
+            createMjRoom();
+        }
+    }
+
+
+
+
+    //创建一个牛牛房间
+    public static void createNNRoom(){
+        System.out.println("创建一个牛牛房间");
+        String url="https://admin.lhyone.com/ttpoker/auth/nn/createRoom";
+        HttpUtil.sendPost(url,"serverId=1&baseGold=50&inLimitGold=1500&outLimitGold=1500&roomDoubleRule=14,15,17,&isShow=1&" +
+                "userId=10000&token=o4jftkISctd525E3qZkIaTyt5dfxWpBo4NpjYxXTVxDkandQ%252F%252FLZvlzNfUB0zbhK2u9AiUZVz3t4GRJIcyVrZiLeWueKjYQ%252BnWbcqOlSqnPOVaiAxPVCPHNuEhYN9V8YrCAesi7JULFMzkzWV5fKhXeBZVh9IsBBkYG3xDQhIUw%253D&oq=o4jftkISctd525E3qZkIaTyt5dfxWpBo4NpjYxXTVxDkandQ%252F%252FLZvlzNfUB0zbhK2u9AiUZVz3t4GRJIcyVrZiLeWueKjYQ%252BnWbcqOlSqnPOVaiAxPVCPHNuEhYN9V8YrCAesi7JULFMzkzWV5fKhXeBZVh9IsBBkYG3xDQhIUw%253D");
+    }
+    //创建一个焖鸡房间
+    public static void createMjRoom(){
+        System.out.println("创建一个焖鸡房间");
+        String url="https://admin.lhyone.com/ttpoker/auth/jf/createRoom";
+        HttpUtil.sendPost(url,"isShow=1&serverId=3&baseGold=50&inLimitGold=500&outLimitGold=250&gameRule=1&gameType=2&" +
+                "userId=10000&token=o4jftkISctd525E3qZkIaTyt5dfxWpBo4NpjYxXTVxDkandQ%252F%252FLZvlzNfUB0zbhK2u9AiUZVz3t4GRJIcyVrZiLeWueKjYQ%252BnWbcqOlSqnPOVaiAxPVCPHNuEhYN9V8YrCAesi7JULFMzkzWV5fKhXeBZVh9IsBBkYG3xDQhIUw%253D&oq=o4jftkISctd525E3qZkIaTyt5dfxWpBo4NpjYxXTVxDkandQ%252F%252FLZvlzNfUB0zbhK2u9AiUZVz3t4GRJIcyVrZiLeWueKjYQ%252BnWbcqOlSqnPOVaiAxPVCPHNuEhYN9V8YrCAesi7JULFMzkzWV5fKhXeBZVh9IsBBkYG3xDQhIUw%253D");
+
+    }
+
 }

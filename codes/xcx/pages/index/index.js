@@ -18,6 +18,9 @@ Page({
   onLoad: function (options) {
     that = this;
     matchId = options.matchId;
+    if (matchId==null){
+      matchId=1;
+    }
     this.getUserInfo();
   },
   getUserInfo:function(){

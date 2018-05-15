@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public UserInfo doLogin(String openid, String nickname, String sex, String province, String city, String headimgurl, String unionid, String privilege) {
-        unionid=openid;
+//        unionid=openid;
         if(StringUtils.isEmpty(openid)||StringUtils.isEmpty(unionid)){
             return null;
         }
