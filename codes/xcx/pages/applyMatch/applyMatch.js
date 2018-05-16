@@ -159,7 +159,7 @@ Page({
             duration: 2000,
             success:function(){//弹框结束了
               wx.redirectTo({
-                url: '/pages/home/home?accountId=' + res.data.data.id
+                url: '/pages/home/home?accountId=' + res.data.data.id+"&matchId="+matchId
               });
             }
           })
