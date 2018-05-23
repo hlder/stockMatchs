@@ -60,8 +60,9 @@ Page({
    */
   onLoad: function (options) {
     that=this;
-    accountId = options.accountId;
-    matchId = options.matchId;
+    accountId = "" + wx.getStorageSync("accountId");
+    matchId = "" + wx.getStorageSync("matchId");
+    console.log("accountId:",accountId,"  matchId:",matchId);
   },
   //收集用户的formId
   onGetWeChatFormId: function (e) {

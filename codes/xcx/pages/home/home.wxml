@@ -1,6 +1,6 @@
-  <form report-submit="true" bindsubmit="onGetWeChatFormId">
+  <!-- <form report-submit="true" bindsubmit="onGetWeChatFormId">
    <button formType="submit"></button> 
-  </form>
+  </form> -->
 
  <!-- <scroll-view style="background-color: #f5f5f5;">  -->
 <swiper wx:if="{{banners!=null}}" indicator-dots="true"  autoplay="true" interval="5000" duration="200">  

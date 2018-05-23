@@ -18,6 +18,7 @@ Page({
   onLoad: function (options) {
     that = this;
     matchId = options.matchId;
+    wx.setStorageSync("matchId", "" + matchId);
     if (matchId==null){
       matchId=1;
     }
@@ -64,8 +65,13 @@ Page({
 
         app.globalData.tokenUser = reqData;
         if (reqData.def_account_id>0){//有默认的比赛，直接进入默认比赛首页
-          wx.redirectTo({
-            url: '/pages/home/home?accountId=' + reqData.def_account_id + '&matchId=' + matchId
+          wx.setStorageSync("accountId",  "" + reqData.def_account_id);
+
+          wx.setStorageSync("matchId", "" + matchId);
+          
+          wx.switchTab({
+            // url: '/pages/home/home?accountId=' + reqData.def_account_id + '&matchId=' + matchId
+            url: '/pages/home/home'
           });
         }else{//没有默认的比赛，跳转报名页面
           wx.redirectTo({

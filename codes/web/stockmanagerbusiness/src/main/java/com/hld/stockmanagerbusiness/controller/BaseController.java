@@ -107,7 +107,7 @@ public class BaseController  {
     public static Map<String,Object> getErrorMap(long errorCode){
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code",""+errorCode);
-        map.put("msg",""+getErrorMap(errorCode));
+        map.put("msg",""+getErrorMap(errorCode,""));
         return map;
     }
     public static Map<String,Object> getErrorMap(long errorCode,String message){

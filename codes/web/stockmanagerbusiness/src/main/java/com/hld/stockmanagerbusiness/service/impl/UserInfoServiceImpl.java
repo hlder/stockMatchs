@@ -34,15 +34,19 @@ public class UserInfoServiceImpl implements UserInfoService {
         String accountId=request.getParameter("accountId");//我的账号ID
         String leaderAccountId=request.getParameter("leaderAccountId");//需要关注的账号ID
         AccountInfo info=accountMapper.queryAccountById(""+accountId);
-        if(info.getLeader().contains(",")){//证明有多个leader
-            if(info.getLeader().contains(","+leaderAccountId)||info.getLeader().contains(leaderAccountId+",")){//存在,已经是我的leader,不需要再关注
+
+        String leaders="";
+        if(info!=null&&info.getLeader()!=null){
+            if(info.getLeader().contains(",")){//证明有多个leader
+                if(info.getLeader().contains(","+leaderAccountId)||info.getLeader().contains(leaderAccountId+",")){//存在,已经是我的leader,不需要再关注
+                    return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER,"已关注!");
+                }
+            }else if(info.getLeader().contains(""+leaderAccountId)){//存在,已经是我的leader,不需要再关注
                 return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER,"已关注!");
             }
-        }else if(info.getLeader().contains(""+leaderAccountId)){//存在,已经是我的leader,不需要再关注
-            return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER,"已关注!");
+            leaders=info.getLeader()+"";
         }
 
-        String leaders=info.getLeader()+"";
         if("".equals(leaders)){
             leaders=leaderAccountId+"";
         }else{

@@ -38,8 +38,8 @@ Page({
       app: app,
       url: appParams.queryMyLeaders,
       data: {
-        accountId: 15,
-        matchId: 1
+        accountId: accountId,
+        matchId: matchId
       },
       fail: function (e) {
         console.log("登录失败:-------------------------------------")
@@ -53,9 +53,9 @@ Page({
             reqData.myLeaders[i].total_income_rate = category.transformPercent(reqData.myLeaders[i].total_income_rate);
           }
         }
-        if (reqData.otherLeaders != null) {
-          for (var i = 0; i < reqData.otherLeaders.length; i++) {
-            reqData.otherLeaders[i].total_income_rate = category.transformPercent(reqData.otherLeaders[i].total_income_rate);
+        if (reqData.matchLeaders != null) {
+          for (var i = 0; i < reqData.matchLeaders.length; i++) {
+            reqData.matchLeaders[i].total_income_rate = category.transformPercent(reqData.matchLeaders[i].total_income_rate);
           }
         }
         that.setData({

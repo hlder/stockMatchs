@@ -1,0 +1,49 @@
+/* pages/mine/mine.wxss */
+
+.photo_img{
+  border-radius:75rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.arraw_righ{
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid #000000;
+  border-right: 2px solid #000000;
+  transform: rotate(45deg);
+}
+
+view{
+  background: white;
+}
+
+
+.view_my_info_text{
+  margin-left: 15rpx;
+}
+.text_right{
+  margin-left: 15rpx;
+}
+
+.view_my_info{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.view_item{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}

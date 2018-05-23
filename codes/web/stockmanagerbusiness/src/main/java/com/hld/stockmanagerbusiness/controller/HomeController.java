@@ -30,20 +30,20 @@ public class HomeController extends BaseController {
     }
 
 
-    //查询我的leader，和比赛的leaders
-//    @RequestMapping(value="/queryMyLeaders",method = RequestMethod.POST)
-//    @ResponseBody
-//    public Map<String,Object> queryMyLeaders(String token,String userId,String matchId,String accountId){
-//        Map<String,Object> map=checkToken(token,userId+"");
-//        if(map!=null){
-//            return map;
-//        }
-//        map=homeService.queryMyLeaders(matchId,accountId);
-//        if(map==null){
-//            return getErrorMap(ERROR_CODE_OTHER,"查询失败!");
-//        }
-//        return getSuccessMap(map);
-//    }
+//    查询我的leader，和比赛的leaders
+    @RequestMapping(value="/queryMyLeaders",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> queryMyLeaders(String token,String userId,String matchId,String accountId){
+        Map<String,Object> map=checkToken(token,userId+"");
+        if(map!=null){
+            return map;
+        }
+        map=homeService.queryMyLeaders(matchId,accountId);
+        if(map==null){
+            return getErrorMap(ERROR_CODE_OTHER,"查询失败!");
+        }
+        return getSuccessMap(map);
+    }
 
     //根据id查询leader的详细信息
     @RequestMapping(value="/queryMyLeaderById",method = RequestMethod.POST)

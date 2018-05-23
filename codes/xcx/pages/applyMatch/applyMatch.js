@@ -158,8 +158,10 @@ Page({
             icon: 'none',
             duration: 2000,
             success:function(){//弹框结束了
-              wx.redirectTo({
-                url: '/pages/home/home?accountId=' + res.data.data.id+"&matchId="+matchId
+              wx.setStorageSync("matchId", "" + matchId);
+              wx.setStorageSync("accountId", "" + res.data.data.id);
+              wx.switchTab({
+                url: '/pages/home/home'
               });
             }
           })

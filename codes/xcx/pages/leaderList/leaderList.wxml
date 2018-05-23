@@ -27,7 +27,7 @@
 </view>
 <view class="view_line"></view>
 
-<view wx:for="{{data.otherLeaders}}">
+<view wx:for="{{data.matchLeaders}}">
   <view class="item_layout" id="{{item.id}}" bindtap="onUserItemClick">
     <view class="item_left item_layout">
       <image class='btn_img' src='{{item.head_url}}'></image>

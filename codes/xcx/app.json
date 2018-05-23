@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/index/index",
+    "pages/home/home",
     "pages/logs/logs",
     "pages/applyMatch/applyMatch",
-    "pages/home/home",
     "pages/holder/holder",
     "pages/stockDetail/stockDetail",
     "pages/entrustList/entrustList",
@@ -23,5 +24,30 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#ff4040",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "模拟比赛",
+        "iconPath": "images/tabBar1.png",
+        "selectedIconPath": "images/tabBar1_eff.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "行情",
+        "iconPath": "images/tabBar2.png",
+        "selectedIconPath": "images/tabBar2_eff.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我",
+        "iconPath": "images/tabBar3.png",
+        "selectedIconPath": "images/tabBar3_eff.png"
+      }
+    ]
   }
 }

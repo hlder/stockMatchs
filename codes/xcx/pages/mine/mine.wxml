@@ -1,0 +1,25 @@
+<view class="view_my_info">
+  <image class="photo_img" src="{{myInfo.photo}}"></image>
+  <view class="view_my_info_text">
+    <view style="font-size: 34rpx;font-weight: bold;margin-top:20rpx;">
+      {{myInfo.name}}
+    </view>
+    <view style="margin-top:5rpx;">当前比赛:{{myInfo.school}}</view>
+  </view>
+</view>
+
+
+<view class="view_item" style="margin-top:20rpx;padding:20rpx;">
+  <view>我参与的比赛</view>
+  <view class="arraw_righ" style="margin-top:16rpx;"></view>
+</view>
+<view class="bottomLine">
+  <view wx:for="{{arr}}" class="topLine">
+aa
+  </view>
+</view>
+
+<view class="view_item" style="margin-top:20rpx;padding:20rpx;">
+  <view>我的比赛历史</view>
+  <view class="arraw_righ" style="margin-top:16rpx;"></view>
+</view>
