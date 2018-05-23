@@ -1,5 +1,16 @@
 /* pages/mine/mine.wxss */
 
+.button_cut {
+    background-color: #ff5722; 
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .photo_img{
   border-radius:75rpx;
   width: 150rpx;
@@ -12,6 +23,19 @@
   border-top: 2px solid #000000;
   border-right: 2px solid #000000;
   transform: rotate(45deg);
+}
+.arraw_bottom{
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  transform: rotate(45deg);
+}
+
+.match_logo_img{
+  /* border-radius:75rpx; */
+  width: 100rpx;
+  height: 100rpx;
 }
 
 view{

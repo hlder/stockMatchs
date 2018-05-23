@@ -65,8 +65,9 @@ Page({
 
         app.globalData.tokenUser = reqData;
         if (reqData.def_account_id>0){//有默认的比赛，直接进入默认比赛首页
-          wx.setStorageSync("accountId",  "" + reqData.def_account_id);
 
+          wx.setStorageSync("userId", "" + reqData.id);
+          wx.setStorageSync("accountId",  "" + reqData.def_account_id);
           wx.setStorageSync("matchId", "" + matchId);
           
           wx.switchTab({

@@ -30,7 +30,10 @@ function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+//获取剩余多少天
+function getTimestampDays(timestamp){
+  return parseInt(timestamp/60/60/24);
+}
 // 时间戳-->时间
 function transformTimestamp (timestamp){
   var time = arguments[0] || 0;
@@ -326,5 +329,6 @@ module.exports = {
     // 判断是否为空对象
     isEmptyObject:isEmptyObject,
 
-    drawMycard_bottom:drawMycard_bottom
+    drawMycard_bottom:drawMycard_bottom,
+    getTimestampDays: getTimestampDays
 }

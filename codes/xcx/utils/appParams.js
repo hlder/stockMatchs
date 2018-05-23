@@ -1,5 +1,5 @@
-const AppIp = "https://www.qdcash.xyz/";
-// const AppIp = "http://127.0.0.1:8088/";
+// const AppIp = "https://www.qdcash.xyz/";
+const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://47.100.180.170:8088/";
 // const AppIp = "http://127.0.0.1:8088/";
 // const AppIp = "http://192.168.1.175:8088/";
@@ -34,7 +34,8 @@ const queryUserIncomeArr = AppIp + "queryUserIncomeArr";//查询用户的收益�
 const queryMyLeaders = AppIp + "queryMyLeaders";//查询我的leaders
 const attenUser = AppIp +"attenUser";//关注某人
 const uploadWeChatFormId = AppIp +"uploadWeChatFormId";
-
+const queryMinAllInfo = AppIp +"queryMinAllInfo";
+const checkMatch = AppIp +"checkMatch";
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
 
@@ -60,6 +61,8 @@ module.exports = {
   queryMyLeaders:queryMyLeaders,
   attenUser: attenUser,
   uploadWeChatFormId: uploadWeChatFormId,
+  queryMinAllInfo: queryMinAllInfo,
+  checkMatch: checkMatch,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

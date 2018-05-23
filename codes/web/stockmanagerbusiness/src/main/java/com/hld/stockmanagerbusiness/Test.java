@@ -7,17 +7,18 @@ import com.hld.stockmanagerbusiness.utils.HttpUtil;
 
 public class Test {
 
-    private static String baseUrl="https://admin.lhyone.com";
+//    private static String baseUrl="https://admin.lhyone.com";
+    private static String baseUrl="http://192.168.1.249:8099";
+
     public static void main(String [] args){
-//        while(true){
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//            }
+        while(true){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
 //            checkNNRoom();
-//            checkMjRoom();
-//        }
-        createMjRoom();
+            checkMjRoom();
+        }
     }
 
     public static void checkNNRoom(){
@@ -34,7 +35,7 @@ public class Test {
         String req=HttpUtil.sendPost(queryNNRoomList,"userId=10000&token=HV5jhhvZA2TGSBGcnxXg5jQ%2BkE6Atxh0k96EP0S%2FzxHF752LjLZZbqxtx67lUFuh2u9AiUZVz3t4GRJIcyVrZgmJQTTee7ri8tH5ImkEKLJGqdBjBGVBDxvyxAy7x8mRNyKI67YngF7mYpGvKXgSa3eBZVh9IsBBkYG3xDQhIUw%3D");
         JSONObject jo= JSON.parseObject(req);
         JSONArray ja= jo.getJSONArray("data");
-        if(ja==null||ja.size()<2){
+        if(ja==null||ja.size()<1){
             createMjRoom();
         }
     }

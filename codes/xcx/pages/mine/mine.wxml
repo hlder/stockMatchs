@@ -1,25 +1,54 @@
 <view class="view_my_info">
-  <image class="photo_img" src="{{myInfo.photo}}"></image>
+  <image class="photo_img" src="{{info.userInfo.head_url}}"></image>
   <view class="view_my_info_text">
     <view style="font-size: 34rpx;font-weight: bold;margin-top:20rpx;">
-      {{myInfo.name}}
+      {{info.userInfo.nicke_name}}
     </view>
-    <view style="margin-top:5rpx;">当前比赛:{{myInfo.school}}</view>
+    <view style="margin-top:5rpx;">当前比赛:{{info.joinMathcs[0].match_name}}</view>
   </view>
 </view>
 
 
-<view class="view_item" style="margin-top:20rpx;padding:20rpx;">
+<view class="view_item" bindtap='onJoinBtnClick' style="margin-top:20rpx;padding:20rpx;">
   <view>我参与的比赛</view>
-  <view class="arraw_righ" style="margin-top:16rpx;"></view>
+  <view class="{{openJoin?'arraw_bottom':'arraw_righ'}}"  style="margin-top:16rpx;"></view>
 </view>
-<view class="bottomLine">
-  <view wx:for="{{arr}}" class="topLine">
-aa
+<view wx:if="{{openJoin}}" class="bottomLine">
+  <view wx:for="{{info.joinMathcs}}" class="topLine view_my_info">
+    <image class="match_logo_img" src="{{item.logo}}"></image>
+    <view style="width:60%;padding-left:10rpx;">
+      <view>{{item.match_name}}</view>
+      <view>{{item.end_date}}</view>
+    </view>
+    <view style="width:30%;text-align:right;margin-top:10rpx;">
+      <!-- <view>{{item.total_income}}</view>
+      <view>{{item.total_income_rate}}</view> -->
+      <block wx:if="{{item.selected}}">
+        <view style="padding-top:15rpx;">已选</view>
+      </block>
+      <block wx:else> 
+        <view class="button_cut" id="{{item.account_id}}" bindtap='cutMatch'>切换</view>
+      </block>
+    </view>
   </view>
 </view>
 
-<view class="view_item" style="margin-top:20rpx;padding:20rpx;">
+<view class="view_item" bindtap='onHisBtnClick' style="margin-top:20rpx;padding:20rpx;">
   <view>我的比赛历史</view>
-  <view class="arraw_righ" style="margin-top:16rpx;"></view>
+  <view class="{{openHis?'arraw_bottom':'arraw_righ'}}"   style="margin-top:16rpx;"></view>
+</view>
+
+<view wx:if="{{openHis}}" class="bottomLine">
+  <view wx:for="{{info.hisMatchs}}" class="topLine view_my_info">
+    <image class="match_logo_img" src="{{item.logo}}"></image>
+    <view style="width:60%;padding-left:10rpx;">
+      <view>{{item.match_name}}</view>
+      <view>{{item.end_date}}</view>
+    </view>
+    <view style="width:30%;text-align:right;margin-top:10rpx;">
+      <!-- <block wx:if="{{item.selected}}"> -->
+        <view wx:if="{{item.selected}}" style="padding-top:15rpx;">已选</view>
+        <view wx:else id="{{item.account_id}}" class="button_cut" bindtap='cutMatch'>切换</view>
+    </view>
+  </view>
 </view>

@@ -1,6 +1,5 @@
 package com.hld.stockmanagerbusiness.service.impl;
 
-import com.hld.stockmanagerbusiness.bean.UserInfo;
 import com.hld.stockmanagerbusiness.controller.BaseController;
 import com.hld.stockmanagerbusiness.mapper.MineMapper;
 import com.hld.stockmanagerbusiness.service.MineService;
@@ -20,9 +19,24 @@ public class MineServiceImpl implements MineService {
     @Override
     public Map<String, Object> queryMinAllInfo(HttpServletRequest request) {
         String userId=request.getParameter("userId");//我的用户ID
-        UserInfo userInfo = mineMapper.queryMineInfo(userId);
+        Map<String,Object> userInfo = mineMapper.queryMineInfo(userId);
         List<Map<String,Object>> joinMathcs= mineMapper.queryJoinMatchs(userId);
         List<Map<String,Object>> hisMatchs=mineMapper.queryHisMatchs(userId);
+
+        if(joinMathcs!=null){
+            Map<String,Object> temItem=null;
+            for(Map<String,Object> item:joinMathcs){
+                String account_id= ""+item.get("account_id");
+                if(account_id.equals(userInfo.get("def_account_id")+"")){//
+                    temItem=item;
+                    joinMathcs.remove(item);
+                    break;
+                }
+            }
+            if(temItem!=null){
+                joinMathcs.add(temItem);
+            }
+        }
 
         Map<String,Object> map=new HashMap<>();
         map.put("userInfo",userInfo);
@@ -34,14 +48,31 @@ public class MineServiceImpl implements MineService {
     @Override
     public Map<String, Object> queryMineInfo(HttpServletRequest request) {
         String userId=request.getParameter("userId");//我的用户ID
-        UserInfo userInfo = mineMapper.queryMineInfo(userId);
+        Map<String,Object> userInfo = mineMapper.queryMineInfo(userId);
         return BaseController.getSuccessMap(userInfo);
     }
 
     @Override
     public Map<String, Object> queryJoinMatchs(HttpServletRequest request) {
         String userId=request.getParameter("userId");//我的用户ID
-        return BaseController.getSuccessMap(mineMapper.queryJoinMatchs(userId));
+        Map<String,Object> userInfo = mineMapper.queryMineInfo(userId);
+
+        List<Map<String,Object>> joinMathcs2= mineMapper.queryJoinMatchs(userId);
+        if(joinMathcs2!=null){
+            ;
+            Map<String,Object> temItem=null;
+            for(Map<String,Object> item:joinMathcs2){
+                String account_id= ""+item.get("account_id");
+                if(account_id.equals(userInfo.get("def_account_id")+"")){//
+                    temItem=item;
+                    joinMathcs2.remove(item);
+                }
+            }
+            if(temItem!=null){
+                joinMathcs2.add(temItem);
+            }
+        }
+        return BaseController.getSuccessMap(joinMathcs2);
     }
 
     @Override
