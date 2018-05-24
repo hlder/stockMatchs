@@ -36,7 +36,7 @@
     </view>
   </block>
 </view>
-<view wx:if="{{matchInfo.leaders!=null}}" class="view_item_title" style="background-color:#ffffff;margin-top: 10px;">
+<view class="view_item_title" style="background-color:#ffffff;margin-top: 10px;">
     <view class="view_line_h view_item_title_left"></view>
     <view class="view_item_title_text">模拟交易</view>
 </view>

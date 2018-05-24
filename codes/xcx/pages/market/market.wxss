@@ -1,0 +1,26 @@
+/* pages/market/market.wxss */
+view{
+  background: white;
+}
+.view_index_item{
+  background: red;
+  width: 33%;
+}
+.view_top{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.view_top_item{
+  width: 33%;
+  text-align: center;
+}
+
+.view_item_title{
+  padding-left: 40rpx;
+  padding-right: 20rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  background: #f8f8f8;
+}

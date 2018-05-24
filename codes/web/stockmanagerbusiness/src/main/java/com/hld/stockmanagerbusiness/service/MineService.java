@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public interface MineService {
+    //查询比赛排名
+    Map<String,Object> queryMatchRanking(HttpServletRequest request);
+
     Map<String,Object> queryMinAllInfo(HttpServletRequest request);
     //查询我的信息
     Map<String,Object> queryMineInfo(HttpServletRequest request);

@@ -1,0 +1,57 @@
+<template name="zhishu">
+  <view data-='{{object}}' style="padding-top:10rpx;padding-bottom:10rpx;text-align: center;">
+    <view style="font-size:38rpx;">{{name}}</view>
+    <view style="font-size:34rpx;color:#{{income>=0?'ff5722':'00bfa5'}}">{{price}}</view>
+    <view style="font-size:22rpx;">{{income}}  {{incomeRate}}</view>
+  </view>
+</template>
+<template name="list_item">
+  <view class="view_top" id="{{symbol}}">
+    <view style="padding-left:40rpx;padding-top:10rpx;padding-bottom:10rpx;">
+      <view style="font-size:34rpx;">{{name}}</view>
+      <view style="font-size:28rpx;">{{code}}</view>
+    </view>
+    <view class="view_top_item" style="padding-top:20rpx;font-size:34rpx;color:#{{changepercent>=0?'ff5722':'00bfa5'}}">{{trade}}</view>
+    <view style="padding-right:40rpx;padding-top:20rpx;font-size:34rpx;color:#{{changepercent>=0?'ff5722':'00bfa5'}}">{{changepercent>=0?'+':''}}{{changepercent}}%</view>
+  </view>
+  <view class="horizontalLine"></view>
+</template>
+
+
+<view class="view_top">
+  <view class="view_index_item" id='{{0}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[0]}}"></template>
+  </view>
+  <view class="view_index_item" id='{{1}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[1]}}"></template>
+  </view>
+  <view class="view_index_item" id='{{2}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[2]}}"></template>
+  </view>
+</view>
+<view class="horizontalLine"></view>
+<view class="view_top">
+  <view class="view_index_item" id='{{3}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[3]}}"></template>
+  </view>
+  <view class="view_index_item" id='{{4}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[4]}}"></template>
+  </view>
+  <view class="view_index_item" id='{{5}}' bindtap='onIndexClick'>
+    <template is="zhishu" data="{{...stockIndexs[5]}}"></template>
+  </view>
+</view>
+
+<view class="view_item_title">涨幅榜</view>
+<view wx:for="{{stockUpRank}}" >
+  <view bindtap='onUpItemClick' id="{{index}}" >
+    <template is="list_item" data="{{...item}}"></template>
+  </view>
+  
+</view>
+<view class="view_item_title">跌幅榜</view>
+<view wx:for="{{stockDownRank}}">
+  <view bindtap='onDownItemClick' id="{{index}}" >
+    <template is="list_item" id="{{index}}" data="{{...item}}"></template>
+  </view>
+</view>

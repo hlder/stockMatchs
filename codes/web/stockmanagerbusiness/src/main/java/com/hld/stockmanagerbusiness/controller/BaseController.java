@@ -21,6 +21,7 @@ public class BaseController  {
     public static final int ERROR_SEND_SMS_AUTH_CODE=100007;//发送验证码失败
     public static final int ERROR_SEND_SMS_AUTH_CODE_OVER=100008;//超出发送验证码限制
     public static final int ERROR_SEND_SMS_AUTH_CODE_PHONE=100009;//手机号错误
+    public static final int ERROR_CODE_JOINED_MATCH=1000091;//已经加入比赛
 
     public static final int ERROR_CODE_NO_THIS_MATCH=100010;//没有此比赛
     public static final int ERROR_CODE_NO_THIS_ACCOUNT=100011;//没有此帐户

@@ -22,6 +22,15 @@ public class MineController extends BaseController{
         return mineService.queryMinAllInfo(request);
     }
 
+    //查询某个比赛的排名
+    //matchId
+    //accountId
+    @RequestMapping(value="/queryMatchRanking",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> queryMatchRanking(HttpServletRequest request){
+        return mineService.queryMatchRanking(request);
+    }
+
     //查询我的基本信息
     @RequestMapping(value="/queryMineInfo",method = RequestMethod.POST)
     @ResponseBody

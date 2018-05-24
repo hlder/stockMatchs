@@ -10,6 +10,12 @@ import java.util.Map;
 
 @Mapper
 public interface MineMapper {
+    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account where match_id=#{matchId} order by rank limit #{page},#{pageSize}")
+    List<Map<String,Object>> queryMatchRanking(@Param("matchId") String matchId,@Param("page") int page,@Param("pageSize") int pageSize);
+
+    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account id=#{accountId}")
+    Map<String,Object> queryMatchAccount(@Param("accountId") String accountId);
+
     @Select("select id,nicke_name,head_url,def_account_id from user_info where id=#{userId}")
     Map<String,Object> queryMineInfo(@Param("userId") String userId);
 

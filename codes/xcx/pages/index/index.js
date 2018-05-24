@@ -64,12 +64,12 @@ Page({
         var reqData = res.data.data;
 
         app.globalData.tokenUser = reqData;
-        if (reqData.def_account_id>0){//有默认的比赛，直接进入默认比赛首页
-
+        
+        if (reqData.def_account_id > 0 && (reqData.def_match_id == matchId)){//有默认的比赛，直接进入默认比赛首页
           wx.setStorageSync("userId", "" + reqData.id);
-          wx.setStorageSync("accountId",  "" + reqData.def_account_id);
+          wx.setStorageSync("accountId", "" + reqData.def_account_id);
           wx.setStorageSync("matchId", "" + matchId);
-          
+
           wx.switchTab({
             // url: '/pages/home/home?accountId=' + reqData.def_account_id + '&matchId=' + matchId
             url: '/pages/home/home'

@@ -6,12 +6,15 @@ import com.hld.stockmanagerbusiness.bean.MatchInfo;
 import com.hld.stockmanagerbusiness.controller.BaseController;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
 import com.hld.stockmanagerbusiness.mapper.MathMapper;
+import com.hld.stockmanagerbusiness.mapper.MineMapper;
 import com.hld.stockmanagerbusiness.mapper.SMSMapper;
 import com.hld.stockmanagerbusiness.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MatchServiceImpl implements MatchService{
@@ -21,6 +24,8 @@ public class MatchServiceImpl implements MatchService{
     MathMapper mathMapper;
     @Autowired
     SMSMapper smsMapper;
+    @Autowired
+    MineMapper mineMapper;
 
 
     @Override
@@ -55,9 +60,17 @@ public class MatchServiceImpl implements MatchService{
         return mathMapper.queryApplyMatchInfo(matchId);
     }
 
+    @Override
+    public List<AccountInfo> queryAcountByMatchAndUser(String userId,String matchId){
+        return accountMapper.queryAccountByUserId(userId,matchId);
+    }
 
 
-
+    @Override
+    public boolean checkMatch(String userId,String accountId) {
+        mineMapper.checkMyMatch(userId,accountId);
+        return true;
+    }
 
     //校验验证码
     private boolean verifyAuthCode(String phoneNum,String authCode){

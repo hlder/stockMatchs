@@ -1,6 +1,6 @@
 
 function doPost(params) {
-  // console.log("tokenUser:", params.app.globalData.tokenUser);
+  console.log("tokenUser:", params.app.globalData.tokenUser);
   if (params.app.globalData.tokenUser!=null){
     params.data.userId = params.app.globalData.tokenUser.id;
     params.data.token = params.app.globalData.tokenUser.token;

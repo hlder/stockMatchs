@@ -300,13 +300,18 @@ form{
 /**水平线**/
 .horizontalLine {
   background-color: #dcdcdc;
-  height: 0.5px;
+  height: 1px;
+  z-index: 1;
+}
+.horizontalLineMin {
+  background-color: #dcdcdc;
+  height: 1rpx;
   z-index: 1;
 }
 /**垂直线**/
 .verticalLine {
   background-color: #dcdcdc;
-  width: 0.5px;
+  width: 1px;
   z-index: 1;
 }
 /**顶边线**/

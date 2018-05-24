@@ -87,10 +87,10 @@
     
 
 </view>
-<!--<block wx:if="{{notShareStock}}">-->
+<block wx:if="{{!isIndex}}">
     <view class="horizontal_layout topLine" style="height:8vh;background-color:#ffffff;" wx:if="{{!isIndex}}">
         <view bindtap="buyAction" class="bottom_btn fontSize15" style="border-right: 1px solid #dcdcdc;color:#ff5722;">买入</view>
         <view bindtap="sellAction" class="bottom_btn fontSize15" style="color:#424242;">卖出</view>
     </view>
     <view class="horizontal_layout" style="height:8vh;background-color:#ffffff;" wx:else></view>
-<!--</block>-->
+</block>

@@ -51,7 +51,10 @@ Page({
         if (item.account_id == defAccountId){
           item.selected=true;
         }
-        item.end_date = "结束倒计时:"+category.getTimestampDays((item.end_date - item.start_date)/1000)+"天";
+        var nowTime = new Date().getTime();
+        item.endDay = "结束倒计时:" + category.getTimestampDays((item.end_date - nowTime)/1000)+"天";
+
+        item.end_date = category.transformTimestamp(item.end_date/1000);
         item.total_income = category.transformUnitChart(item.total_income, 2);
         item.total_income_rate = category.transformPercent(item.total_income_rate);
       }
@@ -69,16 +72,28 @@ Page({
   },
   //切换比赛
   cutMatch:function(e){
+    wx.showLoading({
+      title: '加载中',
+    })
     console.log(e);
+    // info.joinMathcs[e.currentTarget.id].account_id
+    var item = that.data.info.joinMathcs[e.currentTarget.id];
     httpUtil.doPost({
       app: app,
       url: appParams.checkMatch,
       data: {
         userId: "" + userId,
-        accountId: "" + e.currentTarget.id
+        accountId: "" + item.account_id
       },
       success: function (res) {
+        wx.hideLoading()
         that.onLoadMineInfo(userId);
+        wx.setStorageSync("accountId", "" + item.account_id);
+        wx.setStorageSync("matchId", "" + item.match_id);
+
+      },
+      fail:function(e){
+        wx.hideLoading()
       }
     });
   },

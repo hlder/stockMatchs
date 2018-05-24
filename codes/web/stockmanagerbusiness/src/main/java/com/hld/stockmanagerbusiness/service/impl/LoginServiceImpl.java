@@ -2,7 +2,9 @@ package com.hld.stockmanagerbusiness.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hld.stockmanagerbusiness.bean.AccountInfo;
 import com.hld.stockmanagerbusiness.bean.UserInfo;
+import com.hld.stockmanagerbusiness.mapper.AccountMapper;
 import com.hld.stockmanagerbusiness.mapper.UserMapper;
 import com.hld.stockmanagerbusiness.service.LoginService;
 import com.hld.stockmanagerbusiness.service.RedisService;
@@ -20,6 +22,8 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    AccountMapper accountMapper;
 
     @Override
     public UserInfo doLogin(String openid, String nickname, String sex, String province, String city, String headimgurl, String unionid, String privilege) {
@@ -40,6 +44,13 @@ public class LoginServiceImpl implements LoginService {
         //生成token
         String token=MD5Util.getMD5(userInfo.getId()+""+userInfo.getWx_union_id()+"");
         userInfo.setToken(token);
+
+        if(userInfo.getDef_account_id()>0){//有默认账户
+            AccountInfo ai=accountMapper.queryAccountById(""+userInfo.getDef_account_id());
+            if(ai!=null){
+                userInfo.setDef_match_id(""+ai.getId());
+            }
+        }
 
         redisService.set("loginTokenUserId"+userInfo.getId(),token+"");//将token存在redis
         return userInfo;

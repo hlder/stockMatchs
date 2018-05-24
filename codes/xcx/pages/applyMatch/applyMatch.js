@@ -39,29 +39,38 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        that.setData({
-          matchInfo: res.data.data
-        });
-        var bl = parseFloat(res.data.data.apply_banner_height) / parseFloat(res.data.data.apply_banner_width);
-        var isShowProfession = false, isShowClass = false, isShowStuNum = false;
+        if (res.data.data.join){
+          wx.setStorageSync("matchId", "" + matchId);
+          wx.setStorageSync("accountId", "" + res.data.data.id);
+          wx.switchTab({
+            url: '/pages/home/home'
+          });
+        }else{
+          that.setData({
+            matchInfo: res.data.data
+          });
+          var bl = parseFloat(res.data.data.apply_banner_height) / parseFloat(res.data.data.apply_banner_width);
+          var isShowProfession = false, isShowClass = false, isShowStuNum = false;
 
-        if (res.data.data.is_need_profession == 0) {
-          isShowProfession = true;
-        } else {
-          isShowProfession = false;
-        }
-        if (res.data.data.is_need_stu_class == 0) {
-          isShowClass = true;
-        } else {
-          isShowClass = false;
-        }
-        if (res.data.data.is_need_stu_num == 0) {
-          isShowStuNum = true;
-        } else {
-          isShowStuNum = false;
-        }
-        that.chanageBanner(parseFloat(bl), res.data.data.apply_banner, isShowProfession, isShowClass, isShowStuNum);
+          if (res.data.data.is_need_profession == 0) {
+            isShowProfession = true;
+          } else {
+            isShowProfession = false;
+          }
+          if (res.data.data.is_need_stu_class == 0) {
+            isShowClass = true;
+          } else {
+            isShowClass = false;
+          }
+          if (res.data.data.is_need_stu_num == 0) {
+            isShowStuNum = true;
+          } else {
+            isShowStuNum = false;
+          }
+          that.chanageBanner(parseFloat(bl), res.data.data.apply_banner, isShowProfession, isShowClass, isShowStuNum);
 
+        }
+        
       }
     });
     

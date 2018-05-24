@@ -81,6 +81,10 @@ Page({
     });
   },
   loadHomeData:function(){
+    wx.showLoading({
+      title: '加载中',
+    })
+
     httpUtil.doPost({
       app: app,
       url: appParams.queryHomeInfo,
@@ -88,14 +92,21 @@ Page({
         matchId: "" + matchId,
         accountId: "" + accountId
       },
+      fail: function (e) {
+        wx.hideLoading()
+      },
       success: function (res) {
+        wx.hideLoading()
         console.log("返回:", res.data)
         var data = res.data.data;
         // data.leaders
-        for (var i = 0; i < data.leaders.length; i++) {
-          var text = data.leaders[i].total_income_rate;
-          data.leaders[i].total_income_rate = category.transformPercent(text);
+        if (data.leaders!=null){
+          for (var i = 0; i < data.leaders.length; i++) {
+            var text = data.leaders[i].total_income_rate;
+            data.leaders[i].total_income_rate = category.transformPercent(text);
+          }
         }
+        
         that.setData({
           banners: JSON.parse(res.data.data.banners),
           buttons: JSON.parse(res.data.data.buttons),
@@ -109,6 +120,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    accountId = "" + wx.getStorageSync("accountId");
+    matchId = "" + wx.getStorageSync("matchId");
+    console.log("accountId:", accountId, "  matchId:", matchId);
     that.loadHomeData();
   },
   onBuyClick:function(){

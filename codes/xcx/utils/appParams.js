@@ -7,6 +7,15 @@ const AppIp = "http://127.0.0.1:8088/";
 const stockIp = "https://qdcash.xyz/";
 // const stockIp = "http://47.100.180.170:8080/";
 
+//sina查询股票指数列表的接口
+const urlSinaStockIndexList ="https://hq.sinajs.cn/list=sh000001,sz399001,sz399006,sz399300,sh000016,sz399905";
+//sina涨幅榜
+const urlSinaStockUpRanking = "http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=10&sort=changepercent&asc=0&node=hs_a&symbol=&_s_r_a=init#";
+//sina跌幅榜
+const urlSinaStockDownRanking = "http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=10&sort=changepercent&asc=1&node=hs_a&symbol=&_s_r_a=sort#";
+
+
+
 
 // stockServer/queryStockInfoByCode?stockCode=sz002471
 
@@ -63,6 +72,9 @@ module.exports = {
   uploadWeChatFormId: uploadWeChatFormId,
   queryMinAllInfo: queryMinAllInfo,
   checkMatch: checkMatch,
+  urlSinaStockIndexList: urlSinaStockIndexList,
+  urlSinaStockUpRanking: urlSinaStockUpRanking,
+  urlSinaStockDownRanking: urlSinaStockDownRanking,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }

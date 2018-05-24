@@ -12,6 +12,15 @@ public class UserInfo {
     private String city;
     private String privilege;
     private String token;
+    private String def_match_id;
+
+    public String getDef_match_id() {
+        return def_match_id;
+    }
+
+    public void setDef_match_id(String def_match_id) {
+        this.def_match_id = def_match_id;
+    }
 
     public String getToken() {
         return token;

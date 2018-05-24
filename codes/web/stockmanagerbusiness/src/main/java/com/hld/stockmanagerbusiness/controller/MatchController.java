@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -59,7 +61,7 @@ public class MatchController extends BaseController {
         }else if(code==ERROR_CODE_PARAMS){//参数错误
             return getErrorMap(ERROR_CODE_ALERADY,"您输入的参数有误!");
         }else if(code!=ERROR_CODE_SUCCESS){
-            return getNoDataMap(code);
+            return getErrorMap(code);
         }
 
         //报名成功,获取默认的账户信息
@@ -72,7 +74,18 @@ public class MatchController extends BaseController {
     //查询报名的信息
     @RequestMapping(value="/queryApplyMatchInfo",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> queryApplyMatchInfo(String matchCode){
+    public Map<String,Object> queryApplyMatchInfo(String userId,String matchCode){
+        List<AccountInfo> list=matchService.queryAcountByMatchAndUser(userId,matchCode);
+        if(list!=null&&list.size()>0){//已经报名此比赛,自动切换比赛
+            AccountInfo item=list.get(0);
+            Map<String,Object> map=new HashMap<>();
+            map.put("join",true);
+            map.put("id",item.getId()+"");
+
+            matchService.checkMatch(userId,item.getId()+"");
+            return getSuccessMap(map);
+        }
+
         MatchInfo matchInfo= matchService.queryApplyMatchInfo(matchCode);
         if(matchInfo!=null){
             return getSuccessMap(matchInfo);

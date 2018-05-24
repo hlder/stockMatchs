@@ -18,6 +18,15 @@ public class MatchInfo {
     private int apply_banner_height;
     private String init_total_assets;
     private String logo;
+    private boolean isJoin;
+
+    public boolean isJoin() {
+        return isJoin;
+    }
+
+    public void setJoin(boolean join) {
+        isJoin = join;
+    }
 
     public String getLeader() {
         return leader;

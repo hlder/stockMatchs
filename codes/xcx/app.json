@@ -17,7 +17,8 @@
     "pages/study/list/list",
     "pages/study/info/info",
     "pages/userInfo/userInfo",
-    "pages/leaderList/leaderList"
+    "pages/leaderList/leaderList",
+    "pages/market/market"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,7 +38,7 @@
         "selectedIconPath": "images/tabBar1_eff.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/market/market",
         "text": "行情",
         "iconPath": "images/tabBar2.png",
         "selectedIconPath": "images/tabBar2_eff.png"

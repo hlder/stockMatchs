@@ -36,8 +36,10 @@ public class SecureCheckFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String token=httpServletRequest.getParameter("token");
         String userId=httpServletRequest.getParameter("userId");
-
-        if(checkToken(token, userId)){//用户已登录
+        String path=httpServletRequest.getServletPath();
+        if("/login".equals(path)||"/loginWx".equals(path)){
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+        }else if(checkToken(token, userId)){//用户已登录
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         }else{
             try {
@@ -55,14 +57,16 @@ public class SecureCheckFilter extends OncePerRequestFilter {
 
 
     public boolean checkToken(String token,String userId){
-//        String reqtoken=redisService.get("loginTokenUserId"+userId);
-//        System.out.println("请求用户:userId:"+userId+"    reqtoken:"+reqtoken);
-//        if(reqtoken==null){//token有问题,重新登录
+        String reqtoken=redisService.get("loginTokenUserId"+userId);
+        System.out.println("请求用户:userId:"+userId+"    reqtoken:"+reqtoken);
+        if(reqtoken==null){//token有问题,重新登录
+            return false;
 //            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"您的账户验证出错，需要重新登录!");
-//        }
-//        if(!reqtoken.equals(token)){//token有问题,重新登录
+        }
+        if(!reqtoken.equals(token)){//token有问题,重新登录
+            return false;
 //            return getErrorMap(ErrorCodeUtil.ERROR_CODE_TOKEN,"你的账号已再其他地方登录！");
-//        }
+        }
         return true;
     }
 

@@ -30,13 +30,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 17,
 			"list": [
 				{
 					"id": 0,
 					"name": "报名",
 					"pathName": "pages/applyMatch/applyMatch",
-					"query": "matchId=1"
+					"query": "matchId=2"
 				},
 				{
 					"id": 1,
@@ -93,7 +93,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 10,
 					"name": "index",
 					"pathName": "pages/index/index",
 					"query": "matchId=1"
@@ -132,6 +132,12 @@
 					"id": 16,
 					"name": "logs",
 					"pathName": "pages/logs/logs",
+					"query": ""
+				},
+				{
+					"id": 17,
+					"name": "market",
+					"pathName": "pages/market/market",
 					"query": ""
 				}
 			]

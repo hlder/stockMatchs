@@ -17,6 +17,22 @@ public class MineServiceImpl implements MineService {
     MineMapper mineMapper;
 
     @Override
+    public Map<String, Object> queryMatchRanking(HttpServletRequest request) {
+        String accountId=request.getParameter("accountId");//我的用户ID
+        String matchId=request.getParameter("matchId");//我的用户ID
+        int page=Integer.parseInt(request.getParameter("page"));//我的用户ID
+        int pageSize=Integer.parseInt(request.getParameter("pageSize"));//我的用户ID
+
+        List<Map<String,Object>> ranking=mineMapper.queryMatchRanking(matchId,page*pageSize,pageSize);
+        Map<String,Object> myAccount=mineMapper.queryMatchAccount(accountId);
+        Map<String,Object> map=new HashMap<>();
+        map.put("ranking",ranking);
+        map.put("myAccount",myAccount);
+
+        return BaseController.getSuccessMap(map);
+    }
+
+    @Override
     public Map<String, Object> queryMinAllInfo(HttpServletRequest request) {
         String userId=request.getParameter("userId");//我的用户ID
         Map<String,Object> userInfo = mineMapper.queryMineInfo(userId);
@@ -34,7 +50,7 @@ public class MineServiceImpl implements MineService {
                 }
             }
             if(temItem!=null){
-                joinMathcs.add(temItem);
+                joinMathcs.add(0,temItem);
             }
         }
 
@@ -69,7 +85,7 @@ public class MineServiceImpl implements MineService {
                 }
             }
             if(temItem!=null){
-                joinMathcs2.add(temItem);
+                joinMathcs2.add(0,temItem);
             }
         }
         return BaseController.getSuccessMap(joinMathcs2);

@@ -18,7 +18,7 @@
     <image class="match_logo_img" src="{{item.logo}}"></image>
     <view style="width:60%;padding-left:10rpx;">
       <view>{{item.match_name}}</view>
-      <view>{{item.end_date}}</view>
+      <view>{{item.endDay}}</view>
     </view>
     <view style="width:30%;text-align:right;margin-top:10rpx;">
       <!-- <view>{{item.total_income}}</view>
@@ -27,7 +27,7 @@
         <view style="padding-top:15rpx;">已选</view>
       </block>
       <block wx:else> 
-        <view class="button_cut" id="{{item.account_id}}" bindtap='cutMatch'>切换</view>
+        <view class="button_cut" id="{{index}}" bindtap='cutMatch'>切换</view>
       </block>
     </view>
   </view>
@@ -43,12 +43,12 @@
     <image class="match_logo_img" src="{{item.logo}}"></image>
     <view style="width:60%;padding-left:10rpx;">
       <view>{{item.match_name}}</view>
-      <view>{{item.end_date}}</view>
+      <view>结束:{{item.end_date}}</view>
     </view>
     <view style="width:30%;text-align:right;margin-top:10rpx;">
       <!-- <block wx:if="{{item.selected}}"> -->
-        <view wx:if="{{item.selected}}" style="padding-top:15rpx;">已选</view>
-        <view wx:else id="{{item.account_id}}" class="button_cut" bindtap='cutMatch'>切换</view>
+        <view style="padding-top:15rpx;">已结束</view>
+        
     </view>
   </view>
 </view>

@@ -128,7 +128,18 @@ Page({
     })
     // 是否是分享 1为分享
     var channel = 1;
-
+    console.log("options.isIndex:", options.isIndex);
+    if (options.isIndex){
+      console.log("------------------------------------------------------------------------");
+      that.setData({
+        urlStr : "index",
+        isIndex:true
+      })
+      point = 1;
+    }else{
+      point = 0.6;
+    }
+    
 
     // 获取当前账户信息
     // that.data.accountCode = category.transformNull(options.accountCode);
