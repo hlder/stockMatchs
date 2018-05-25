@@ -22,6 +22,21 @@ function doPost(params) {
         if (params.success != null) {
           params.success(res);
         }
+      } else if (!res.data.hasOwnProperty("code") || res.data.code == 10001){//未登录
+        wx.showModal({
+          title: '提示',
+          content: '用户未登录,请先去登录!',
+          confirmText:"去登录",
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/index/index'
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       } else if (res.data.hasOwnProperty("msg")){//抱错
         wx.showToast({
           title: '' + res.data.msg,

@@ -94,3 +94,6 @@
     </view>
     <view class="horizontal_layout" style="height:8vh;background-color:#ffffff;" wx:else></view>
 </block>
+<block wx:esle>
+  <view style="height:8vh;background-color:#ffffff;"></view>
+</block>

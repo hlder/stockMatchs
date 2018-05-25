@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
         if(userInfo.getDef_account_id()>0){//有默认账户
             AccountInfo ai=accountMapper.queryAccountById(""+userInfo.getDef_account_id());
             if(ai!=null){
-                userInfo.setDef_match_id(""+ai.getId());
+                userInfo.setDef_match_id(""+ai.getMatch_id());
             }
         }
 

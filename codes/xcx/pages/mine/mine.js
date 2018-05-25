@@ -16,14 +16,18 @@ Page({
     openJoin:true,
     openHis:false
   },
-
+  /**
+     * 生命周期函数--监听页面显示
+     */
+  onShow: function () {
+    that.onLoadMineInfo(userId);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     that=this;
     userId= wx.getStorageSync("userId");
-    that.onLoadMineInfo(userId);
   },
   onLoadMineInfo: function (userId){
     httpUtil.doPost({
@@ -104,12 +108,7 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
