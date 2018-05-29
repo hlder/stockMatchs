@@ -2,9 +2,15 @@
   <image class="photo_img" src="{{info.userInfo.head_url}}"></image>
   <view class="view_my_info_text">
     <view style="font-size: 34rpx;font-weight: bold;margin-top:20rpx;">
-      {{info.userInfo.nicke_name}}
+      <!-- {{info.userInfo.nicke_name}} -->
+      {{info.joinMathcs[0].account_name}}
     </view>
-    <view style="margin-top:5rpx;">当前比赛:{{info.joinMathcs[0].match_name}}</view>
+    <!-- <view style="margin-top:5rpx;">当前比赛:{{info.joinMathcs[0].match_name}}</view> -->
+    <view wx:if="{{info.joinMathcs!=null&&info.joinMathcs.length>0}}" style="margin-top:5rpx;">
+      总收益:<text style="margin-left:5rpx;color:#{{info.joinMathcs[0].total_income>=0?'ff5722':'00bfa5'}}">{{info.joinMathcs[0].total_income}}</text>
+      <text style="margin-left:30rpx;color:#{{info.joinMathcs[0].total_income>=0?'ff5722':'00bfa5'}}">{{info.joinMathcs[0].total_income_rate}}</text>
+    </view>
+    <view wx:else style="margin-top:5rpx;">请选择比赛</view>
   </view>
 </view>
 
@@ -17,8 +23,15 @@
   <view wx:for="{{info.joinMathcs}}" class="topLine view_my_info">
     <image class="match_logo_img" src="{{item.logo}}"></image>
     <view style="width:60%;padding-left:10rpx;">
+
+    <!-- wx:if="{{item.match_id!=1}}"  -->
+    <block wx:if="{{item.match_id!=1}}">
       <view>{{item.match_name}}</view>
       <view>{{item.endDay}}</view>
+    </block>
+    <block wx:else>
+      <view style="padding-top:25rpx;">{{item.match_name}}</view>
+    </block>
     </view>
     <view style="width:30%;text-align:right;margin-top:10rpx;">
       <!-- <view>{{item.total_income}}</view>

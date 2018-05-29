@@ -14,3 +14,16 @@ public class StockmanagerbusinessApplication {
 		SpringApplication.run(StockmanagerbusinessApplication.class, args);
 	}
 }
+
+
+//清理数据库
+//		delete from wechat_formIds;
+//		delete from user_shop_his;
+//		delete from user_info_account_his;
+//		delete from user_info_account;
+//		delete from user_info;
+//		delete from user_holder_stock;
+//		delete from user_entrust_stock_his;
+//		delete from user_entrust_stock;
+//		delete from auth_code_his;
+//		delete from auth_code;

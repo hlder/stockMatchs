@@ -12,7 +12,11 @@ public class HttpUtil {
     public static String sendPost(String url) {
         return sendPost(url,null);
     }
+
     public static String sendPost(String url, String param) {
+        return sendPost(url,param,"utf-8");
+    }
+    public static String sendPost(String url, String param,String charSet) {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = "";
@@ -38,7 +42,8 @@ public class HttpUtil {
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应
             in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
+                    new InputStreamReader(conn.getInputStream(),charSet));
+
             String line;
             while ((line = in.readLine()) != null) {
                 result += line;

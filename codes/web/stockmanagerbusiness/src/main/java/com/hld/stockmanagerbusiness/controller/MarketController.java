@@ -18,8 +18,26 @@ public class MarketController {
     //查询股指
     @RequestMapping(value="/loadMarketIndex",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> loadMarketIndex(HttpServletRequest request){
+    public String loadMarketIndex(HttpServletRequest request){
         return marketService.loadMarketIndex(request);
+    }
+
+    @RequestMapping(value="/queryStockRankDown",method = RequestMethod.POST)
+    @ResponseBody
+    public String queryStockRankDown(HttpServletRequest request){
+        return marketService.queryStockRankDown(request);
+    }
+
+    @RequestMapping(value="/queryStockRankUp",method = RequestMethod.POST)
+    @ResponseBody
+    public String queryStockRankUp(HttpServletRequest request){
+        return marketService.queryStockRankUp(request);
+    }
+
+    @RequestMapping(value="/queryStockNameByCodes",method = RequestMethod.POST)
+    @ResponseBody
+    public String queryStockNameByCodes(HttpServletRequest request){
+        return marketService.queryStockNameByCodes(request);
     }
 
 }

@@ -3,8 +3,11 @@ package com.hld.stockmanagerbusiness.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hld.stockmanagerbusiness.bean.AccountInfo;
+import com.hld.stockmanagerbusiness.bean.MatchInfo;
 import com.hld.stockmanagerbusiness.bean.UserInfo;
 import com.hld.stockmanagerbusiness.mapper.AccountMapper;
+import com.hld.stockmanagerbusiness.mapper.MathMapper;
+import com.hld.stockmanagerbusiness.mapper.MineMapper;
 import com.hld.stockmanagerbusiness.mapper.UserMapper;
 import com.hld.stockmanagerbusiness.service.LoginService;
 import com.hld.stockmanagerbusiness.service.RedisService;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 @Service
 public class LoginServiceImpl implements LoginService {
     @Autowired
@@ -24,6 +29,10 @@ public class LoginServiceImpl implements LoginService {
     UserMapper userMapper;
     @Autowired
     AccountMapper accountMapper;
+    @Autowired
+    MathMapper mathMapper;
+    @Autowired
+    MineMapper mineMapper;
 
     @Override
     public UserInfo doLogin(String openid, String nickname, String sex, String province, String city, String headimgurl, String unionid, String privilege) {
@@ -36,6 +45,20 @@ public class LoginServiceImpl implements LoginService {
         if(userInfo==null){//表示不存在,需要注册
             userMapper.registerUser(""+nickname,""+headimgurl,""+unionid,""+openid,""+sex,""+province,""+city,""+privilege);
             userInfo = userMapper.queryUserByUnionId(unionid);
+
+            //注册时直接加入默认比赛
+            MatchInfo matchInfo=mathMapper.queryApplyMatchInfo("1");
+            accountMapper.insertAccount( userInfo.getId()+"", matchInfo.getId()+"",  userInfo.getNicke_name(),  "",  "",  "",
+                    "",matchInfo.getInit_total_assets(),matchInfo.getInit_total_assets(),matchInfo.getInit_total_assets());
+            List<AccountInfo> listAccount= accountMapper.queryAccountByUserId(userInfo.getId()+"",matchInfo.getId()+"");
+            if(listAccount!=null&&listAccount.size()>0){
+                long accountId=listAccount.get(0).getId();
+                userInfo.setDef_match_id(matchInfo.getId()+"");
+                userInfo.setDef_account_id(accountId);
+                mineMapper.checkMyMatch(userInfo.getId()+"",""+accountId);
+            }
+            //注册时直接加入默认比赛
+
         }else{//已经存在，执行登录
             //更新用户信息
             userMapper.updateUserInfo(""+nickname,""+headimgurl,""+unionid,""+openid,""+sex,""+province,""+city,""+privilege);

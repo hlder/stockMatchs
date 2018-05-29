@@ -13,7 +13,10 @@ function doPost(params) {
     method: 'POST',
     data: params.data,
     header: {
-      'content-type': 'application/x-www-form-urlencoded' // 默认值
+      'content-type': 'application/x-www-form-urlencoded;' // 默认值
+      // 'content-type': 'text/json;charset=gbk'
+      // 'pageEncoding':'gbk'
+      
     },
     // success: params.success,
     success: function (res){

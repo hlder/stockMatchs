@@ -2,6 +2,7 @@
 const httpUtil = require('../../utils/httpUtil.js')
 const appParams = require('../../utils/appParams.js')
 const category = require('../../utils/category.js')
+// const encoding = require('../../utils/encoding.js')
 
 const app = getApp()
 var that;
@@ -47,6 +48,7 @@ Page({
       url: '/pages/stockDetail/stockDetail?stockCode=' + temObj.code + '&stockCodeStr=' + temObj.symbol + '&&stockName=' + temObj.name
     })
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
@@ -121,11 +123,6 @@ Page({
     console.log(reArr);
     return reArr;
   },
-  //跌幅榜
-  // http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=20&sort=changepercent&asc=1&node=hs_a&symbol=&_s_r_a=sort#
-  //涨幅榜
-  // http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=20&sort=changepercent&asc=0&node=hs_a&symbol=&_s_r_a=init#
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成

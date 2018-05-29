@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/study/classList",
     "pages/index/index",
     "pages/mine/mine",
     "pages/home/home",
@@ -13,7 +14,6 @@
     "pages/actions/buy/buy",
     "pages/actions/searchStock/searchStock",
     "pages/h5/h5",
-    "pages/study/classList",
     "pages/study/list/list",
     "pages/study/info/info",
     "pages/userInfo/userInfo",

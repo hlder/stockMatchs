@@ -21,7 +21,7 @@ public interface MineMapper {
 
 //    @Select("select * from match_info where id in (select match_id from user_info_account where user_id =#{userId}) and status=1")
     @Select("select mi.logo logo,mi.id match_id,mi.match_name match_name,mi.start_date start_date,mi.end_date end_date," +
-            "ua.id account_id,ua.total_income total_income,ua.total_income_rate total_income_rate " +
+            "ua.id account_id,ua.total_income total_income,ua.total_income_rate total_income_rate,ua.account_name account_name " +
             "from match_info mi INNER join user_info_account ua on mi.id=ua.match_id and ua.user_id=#{userId} and mi.status=1")
     List<Map<String,Object>> queryJoinMatchs(@Param("userId") String userId);
 

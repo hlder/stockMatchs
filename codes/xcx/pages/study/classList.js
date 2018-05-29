@@ -79,21 +79,9 @@ Page({
     })
   },
   getUserInfo: function () {
-    wx.login({
-      success: function (resLogin) {
-        wx.getUserInfo({
-          withCredentials: true,
-          success: res => {
-            app.globalData.userInfo = res.userInfo
-            that.onLoadUserSuccess(res, resLogin.code);
-            that.setData({
-              userInfo: res.userInfo,
-              hasUserInfo: true
-            })
-          }
-        })
-      }
-    })
+    wx.redirectTo({
+      url: '/pages/index/index'
+    });
   },
   onLoadUserSuccess: function (detail, code) {
     console.log("code:" + code);

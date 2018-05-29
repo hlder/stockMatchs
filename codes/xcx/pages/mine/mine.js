@@ -3,6 +3,7 @@ const httpUtil = require('../../utils/httpUtil.js')
 const appParams = require('../../utils/appParams.js')
 const category = require('../../utils/category.js')
 
+
 const app = getApp()
 var that;
 var userId;
@@ -38,6 +39,8 @@ Page({
       },
       success: function (res) {
         var data = res.data.data;
+
+
 
         that.onChanageMatchs(data.joinMathcs, data.userInfo.def_account_id);
         that.onChanageMatchs(data.hisMatchs, data.userInfo.def_account_id);

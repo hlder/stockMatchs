@@ -5,6 +5,7 @@ view{
 .view_index_item{
   background: red;
   width: 33%;
+  
 }
 .view_top{
   display: -webkit-flex;

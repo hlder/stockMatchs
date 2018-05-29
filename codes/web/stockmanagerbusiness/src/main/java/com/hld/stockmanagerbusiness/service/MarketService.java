@@ -4,5 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public interface MarketService {
-    Map<String,Object> loadMarketIndex(HttpServletRequest request);
+    String loadMarketIndex(HttpServletRequest request);
+    String queryStockNameByCodes(HttpServletRequest request);
+    String queryStockRankUp(HttpServletRequest request);
+    String queryStockRankDown(HttpServletRequest request);
 }

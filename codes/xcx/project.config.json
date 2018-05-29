@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "2.0.0",
 	"appid": "wxd49ef38ac045d40a",
 	"projectname": "%E6%A8%A1%E6%8B%9F%E6%8A%95%E8%B5%84%E6%AF%94%E8%B5%9B",
 	"isGameTourist": false,
@@ -96,7 +96,7 @@
 					"id": 10,
 					"name": "index",
 					"pathName": "pages/index/index",
-					"query": "matchId=1"
+					"query": "matchId=2"
 				},
 				{
 					"id": 11,
@@ -138,6 +138,12 @@
 					"id": 17,
 					"name": "market",
 					"pathName": "pages/market/market",
+					"query": ""
+				},
+				{
+					"id": 18,
+					"name": "mine",
+					"pathName": "pages/mine/mine",
 					"query": ""
 				}
 			]
