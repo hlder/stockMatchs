@@ -1,5 +1,5 @@
 <view style="padding-bottom:20rpx;">
-   <image src="../../images/banner_regist.png" bindtap="getUserInfo" class="img-top-banner"></image> 
+   <!-- <image src="../../images/banner_regist.png" bindtap="getUserInfo" class="img-top-banner"></image>  -->
   <view class="list_title_info">新手入门</view>
   <view class="flex-wrp">
     <view id="1" data-name="基础知识" bindtap="onItemClick" class="flex-item">

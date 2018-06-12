@@ -74,12 +74,18 @@ Page({
           wx.setStorageSync("accountId", "" + reqData.def_account_id);
           wx.setStorageSync("matchId", "" + matchId);
 
-          wx.switchTab({
-            url: '/pages/home/home'
+          // wx.switchTab({
+          //   url: '/pages/home/home'
+          // });
+          wx.redirectTo({
+            url: '/pages/study/classList'
           });
         }else{//没有默认的比赛，跳转报名页面
+          // wx.redirectTo({
+          //   url: '../applyMatch/applyMatch?matchId=' + matchId
+          // });
           wx.redirectTo({
-            url: '../applyMatch/applyMatch?matchId=' + matchId
+            url: '/pages/study/classList'
           });
         }
       }
