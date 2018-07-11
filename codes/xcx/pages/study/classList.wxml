@@ -20,7 +20,6 @@
     </view>
   </view>
 
-
   <view class="list_title_info" style="margin-top:15rpx;">基本面分析</view>
   <view class="flex-wrp">
     <view id="4" data-name="公司分析" bindtap="onItemClick" class="flex-item">
@@ -105,4 +104,6 @@
       <view>股林密集</view>
     </view>
   </view>
+
+
 </view>

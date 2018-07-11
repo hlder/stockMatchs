@@ -10,10 +10,13 @@ import java.util.Map;
 
 @Mapper
 public interface MineMapper {
-    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account where match_id=#{matchId} order by rank limit #{page},#{pageSize}")
+//    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account where match_id=#{matchId} order by rank limit #{page},#{pageSize}")
+    @Select("select ua.*,ui.head_url head_url from user_info ui right join " +
+            "(select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account where match_id=#{matchId} order by rank limit #{page},#{pageSize}) " +
+            "ua on ui.id=ua.user_id")
     List<Map<String,Object>> queryMatchRanking(@Param("matchId") String matchId,@Param("page") int page,@Param("pageSize") int pageSize);
 
-    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account id=#{accountId}")
+    @Select("select id account_id,user_id,account_name,total_income,total_income_rate,rank from user_info_account where id=#{accountId}")
     Map<String,Object> queryMatchAccount(@Param("accountId") String accountId);
 
     @Select("select id,nicke_name,head_url,def_account_id from user_info where id=#{userId}")
@@ -33,4 +36,7 @@ public interface MineMapper {
 
     @Update("update user_info set def_account_id=#{accountId} where id =#{userId}")
     void checkMyMatch(@Param("userId") String userId,@Param("accountId") String accountId);
+
+
+
 }

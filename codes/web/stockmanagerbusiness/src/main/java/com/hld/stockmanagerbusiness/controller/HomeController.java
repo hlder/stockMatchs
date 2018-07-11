@@ -45,6 +45,7 @@ public class HomeController extends BaseController {
         return getSuccessMap(map);
     }
 
+
     //根据id查询leader的详细信息
     @RequestMapping(value="/queryMyLeaderById",method = RequestMethod.POST)
     @ResponseBody

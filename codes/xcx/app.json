@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/study/classList",
     "pages/index/index",
+    "pages/study/classList",
     "pages/mine/mine",
     "pages/home/home",
     "pages/logs/logs",
@@ -18,7 +18,9 @@
     "pages/study/info/info",
     "pages/userInfo/userInfo",
     "pages/leaderList/leaderList",
-    "pages/market/market"
+    "pages/market/market",
+    "pages/study/class2/classOther",
+    "pages/ranking/ranking"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,14 +34,20 @@
     "borderStyle": "white",
     "list": [
       {
+        "pagePath": "pages/ranking/ranking",
+        "text": "排行",
+        "iconPath": "images/tabBar0.png",
+        "selectedIconPath": "images/tabBar0_eff.png"
+      },
+      {
         "pagePath": "pages/home/home",
-        "text": "模拟比赛",
+        "text": "模拟",
         "iconPath": "images/tabBar1.png",
         "selectedIconPath": "images/tabBar1_eff.png"
       },
       {
         "pagePath": "pages/market/market",
-        "text": "行情",
+        "text": "市场",
         "iconPath": "images/tabBar2.png",
         "selectedIconPath": "images/tabBar2_eff.png"
       },

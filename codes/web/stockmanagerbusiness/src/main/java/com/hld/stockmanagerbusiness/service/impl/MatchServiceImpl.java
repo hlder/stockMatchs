@@ -72,6 +72,18 @@ public class MatchServiceImpl implements MatchService{
         return true;
     }
 
+
+    public Map<String,Object> queryMatchRanking(HttpServletRequest request){
+        String matchId=request.getParameter("matchId");
+        if(matchId==null||"".equals(matchId)){
+            List<Map<String,Object>> listrank = mineMapper.queryMatchRanking(matchId,0,20);
+            return BaseController.getSuccessMap(listrank);
+        }
+        return BaseController.getErrorMap(BaseController.ERROR_CODE_OTHER);
+    }
+
+
+
     //校验验证码
     private boolean verifyAuthCode(String phoneNum,String authCode){
         AuthCodeInfo info=smsMapper.queryAuthCode(phoneNum,authCode);

@@ -74,19 +74,19 @@ Page({
           wx.setStorageSync("accountId", "" + reqData.def_account_id);
           wx.setStorageSync("matchId", "" + matchId);
 
-          // wx.switchTab({
-          //   url: '/pages/home/home'
-          // });
-          wx.redirectTo({
-            url: '/pages/study/classList'
+          wx.switchTab({
+            url: '/pages/ranking/ranking'
           });
-        }else{//没有默认的比赛，跳转报名页面
           // wx.redirectTo({
-          //   url: '../applyMatch/applyMatch?matchId=' + matchId
+          //   url: '/pages/study/class2/classOther'
           // });
+        }else{//没有默认的比赛，跳转报名页面
           wx.redirectTo({
-            url: '/pages/study/classList'
+            url: '../applyMatch/applyMatch?matchId=' + matchId
           });
+          // wx.redirectTo({
+          //   url: '/pages/study/class2/classOther'
+          // });
         }
       }
     });

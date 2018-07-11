@@ -1,0 +1,39 @@
+.list_title_info{
+  padding: 10rpx;
+  background-color: #78b7e2;
+  color: white;
+}
+.img-top-banner{
+  height: 200rpx;
+  width: 100%;
+}
+.flex-wrp{
+   display: -webkit-flex; 
+   display:flex; 
+  /* -webkit-justify-content: space-around;
+  justify-content: space-around; */
+   -webkit-justify-content: space-between;
+  justify-content: space-between; 
+  width: 94%;
+  margin-left: 3%;
+  margin-top: 15rpx;
+  
+}
+.flex-item-hidden{
+  width: 23%;
+  height:150rpx;
+}
+.flex-item{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  color: #4f5353;
+  width: 23%;
+  height:150rpx;
+  background-color: #e8ecef;
+  text-align: center;
+}
+.flex-item-img{
+  width: 100rpx;
+  height:100rpx;
+  text-align: center;
+}

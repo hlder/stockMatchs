@@ -16,7 +16,12 @@ public class HttpUtil {
     public static String sendPost(String url, String param) {
         return sendPost(url,param,"utf-8");
     }
+
     public static String sendPost(String url, String param,String charSet) {
+        return doHttp(url,param,charSet,"");
+    }
+
+    public static String doHttp(String url, String param,String charSet,String methed) {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = "";

@@ -53,6 +53,8 @@ const attenUser = AppIp +"attenUser";//关注某人
 const uploadWeChatFormId = AppIp +"uploadWeChatFormId";
 const queryMinAllInfo = AppIp +"queryMinAllInfo";
 const checkMatch = AppIp +"checkMatch";
+const queryMatchRanking = AppIp +"queryMatchRanking";
+
 //===================================================================================================
 const queryStockInfoByCode = stockIp +"stockServer/queryStockInfoByCode";
 
@@ -83,6 +85,7 @@ module.exports = {
   urlSinaStockIndexList: urlSinaStockIndexList,
   urlSinaStockUpRanking: urlSinaStockUpRanking,
   urlSinaStockDownRanking: urlSinaStockDownRanking,
+  queryMatchRanking: queryMatchRanking,
   //================================================================================================
   queryStockInfoByCode: queryStockInfoByCode
 }
