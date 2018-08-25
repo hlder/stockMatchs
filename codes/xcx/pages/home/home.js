@@ -106,10 +106,25 @@ Page({
             data.leaders[i].total_income_rate = category.transformPercent(text);
           }
         }
-        
+
+
+
+
+
+        var banJson = null;
+        var btnJson = null;
+
+        try {
+          banJson = JSON.parse(res.data.data.banners + "");
+        } catch (e) { }
+
+        try {
+          btnJson = JSON.parse(res.data.data.buttons + "");
+        } catch (e) { }
+
         that.setData({
-          banners: JSON.parse(res.data.data.banners),
-          buttons: JSON.parse(res.data.data.buttons),
+          banners: banJson,
+          buttons: btnJson,
           matchInfo: data
         });
       }

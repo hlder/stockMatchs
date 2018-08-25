@@ -43,7 +43,7 @@ Page({
           wx.setStorageSync("matchId", "" + matchId);
           wx.setStorageSync("accountId", "" + res.data.data.id);
           wx.switchTab({
-            url: '/pages/home/home'
+            url: '/pages/ranking/ranking'
           });
         }else{
           that.setData({
@@ -170,7 +170,7 @@ Page({
               wx.setStorageSync("matchId", "" + matchId);
               wx.setStorageSync("accountId", "" + res.data.data.id);
               wx.switchTab({
-                url: '/pages/home/home'
+                url: '/pages/ranking/ranking'
               });
             }
           })

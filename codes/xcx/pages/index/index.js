@@ -73,7 +73,6 @@ Page({
           wx.setStorageSync("userId", "" + reqData.id);
           wx.setStorageSync("accountId", "" + reqData.def_account_id);
           wx.setStorageSync("matchId", "" + matchId);
-
           wx.switchTab({
             url: '/pages/ranking/ranking'
           });

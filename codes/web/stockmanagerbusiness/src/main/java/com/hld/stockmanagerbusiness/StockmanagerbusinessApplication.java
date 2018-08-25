@@ -11,7 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class StockmanagerbusinessApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StockmanagerbusinessApplication.class, args);
+//		SpringApplication.run(StockmanagerbusinessApplication.class, args);
+		Test.doStart();
 	}
 }
 
